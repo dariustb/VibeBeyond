@@ -37,15 +37,15 @@
 2. [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
-
+ 
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Vibe Beyond Screen Shot][product-screenshot]](https://example.com)
+[![Vibe Beyond Screen Shot][product-screenshot]](https://github.com/dariustb/vibebeyond/)
 
-Vibe beyond is an app that'll probably make the anti-creative-AI crowd slightly upset. The application is used to emulate the function of those 24-hour "Lofi Hip-Hop Beats to Study/Chill to" while working with the component of a desktop app to use the user's storage to build (and remove) new songs to stream.
+Vibe beyond is an app that'll probably make the anti-creative-AI crowd upset. The application is used to emulate the function of those 24-hour "Lofi Hip-Hop Beats to Study/Chill to" while working with the component of a desktop app to use the user's storage to build (and remove) new songs to stream.
 
 _Please refer to the [documentation](#) for the full breakdown and logic explanation of the app_
 
