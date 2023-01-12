@@ -37,6 +37,7 @@
 2. [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
+    * [Run Locally](#run-locally)
  
 
 
@@ -103,6 +104,25 @@ Here are the instructions for setting up your project locally.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+
+### Run locally
+You can run the app either as a web-only Vue app, or as a web app and desktop app.
+
+**Note**: the web only app will not have access to the Rust backend and may be missing neccessary functionalities for the app to work
+
+* Run as web-only
+  ```sh
+  npm run dev
+  ```
+* Run as web and desktop
+  ```sh
+  npm run tauri dev
+  ```
+  **Note**: the tauri app will open on its own once it finishes loading. The web app will be served with a http://localhost:1420/ address to follow and view on your browser. Use `ctrl+C` to end the server. 
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
