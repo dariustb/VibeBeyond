@@ -17,7 +17,7 @@
   <p align="center">
     Tauri AI-generated lofi hip-hop radio
     <br />
-    <a href="https://dariustb.github.io/vibebeyond"><strong>Explore the docs »</strong></a>
+    <a href="https://dariustb.github.io/VibeBeyond/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://vibe-beyond.vercel.app/">View Demo</a>
@@ -129,7 +129,7 @@ You can run the app either as a web-only Vue app, or as a web app and desktop ap
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [app]: https://vibe-beyond.vercel.app/
-[docs]: https://dariustb.github.io/vibebeyond
+[docs]: https://dariustb.github.io/VibeBeyond/
 [forks-url]: https://github.com/dariustb/vibebeyond/network/members
 [stars-url]: https://github.com/dariustb/vibebeyond/stargazers
 [issues-url]: https://github.com/dariustb/vibebeyond/issues
