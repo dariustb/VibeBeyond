@@ -109,7 +109,7 @@ Here are the instructions for setting up your project locally.
 ### Run locally
 You can run the app either as a web-only Vue app, or as a web app and desktop app.
 
-**Note**: the web only app will not have access to the Rust backend and may be missing neccessary functionalities for the app to work
+**Note**: the web only app will not have access to the Rust backend and may be missing necessary functionalities for the app to work
 
 * Run as web-only
   ```sh
