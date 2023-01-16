@@ -5,8 +5,8 @@ matrix:
     mode: en
   dictionary:
     wordlists:
-    - tests/spellcheck/.wordlist.txt
-    output: tests/spellcheck/wordlist.dic
+    - test/spellcheck/.wordlist.txt
+    output: test/spellcheck/wordlist.dic
     encoding: utf-8
   pipeline:
   - pyspelling.filters.markdown:
