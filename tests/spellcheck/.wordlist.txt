@@ -18,6 +18,7 @@ Volar
 npm
 Npm
 NPM
+npx
 rustlang
 Rustlang
 
@@ -30,8 +31,11 @@ Nguyen
 
 LinkedIn
 Instagram
+github
 Github
 GitHub
+Github's
+vercel
 Vercel
 Vercel's
 
@@ -39,10 +43,20 @@ backend
 Backend
 dev
 dev's
-
+permalink
+nav
+fs
+io
+readme
 Http
 http
+https
+Https
 localhost
 Localhost
 repo
 Repo
+octocat
+gif
+integrations
+reviewable
