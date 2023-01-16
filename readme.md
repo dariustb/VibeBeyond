@@ -4,15 +4,14 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/dariustb/vibebeyond">
-    <img src="https://i1.sndcdn.com/artworks-nXTBoQMnJHSoNPbn-yX34xA-t500x500.jpg" alt="Logo" width="80" height="80">
+    <img src="https://i1.sndcdn.com/artworks-nXTBoQMnJHSoNPbn-yX34xA-t500x500.jpg" alt="Logo" width="100" height="100">
   </a>
 
-  <h2 align="center">Vibe Beyond</h2>
+  <h1 align="center">Vibe Beyond</h1>
 
   <p align="center">
     Tauri AI-generated lofi hip-hop radio
@@ -27,17 +26,6 @@
     <a href="https://github.com/dariustb/vibebeyond/issues">Request Feature</a>
   </p>
 </div>
-
-
-
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
-1. [About the Project](#about-the-project)
-    * [Built with](#built-with)
-2. [Getting Started](#getting-started)
-    * [Prerequisites](#prerequisites)
-    * [Installation](#installation)
-    * [Run Locally](#run-locally)
  
 
 
@@ -48,11 +36,9 @@
 
 Vibe beyond is an app that'll probably make the anti-creative-AI crowd upset. The application is used to emulate the function of those 24-hour "Lofi Hip-Hop Beats to Study/Chill to" while working with the component of a desktop app to use the user's storage to build (and remove) new songs to stream.
 
-_Please refer to the [documentation](#) for the full breakdown and logic explanation of the app_
+_Please [refer to the documentation][docs] for the full breakdown and logic explanation of the app._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -67,7 +53,7 @@ _Please refer to the [documentation](#) for the full breakdown and logic explana
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Here are the instructions for setting up your project locally.
+_This is the TL;DR version of the dev's "Getting Started" section. More details are included [in the documentation][docs]._
 
 ### Prerequisites
 
@@ -76,21 +62,10 @@ Here are the instructions for setting up your project locally.
     * [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) (v0.2.1 or greater)
     * [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) (v0.3.1361 or greater)
 * [Node](https://nodejs.org/en/) (v18.12.1 or greater)
-    ```sh
-    node -v
-    ```
 * [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (9.2.0 or greater)
-    ```sh
-    npm -v
-    ```
 * [Rustlang][Rust-url] (1.66.0 or greater)
-    ```sh
-    rustc -V
-    ```
-
 
 ### Installation
-
 
 1. Clone the repo
    ```sh
@@ -104,14 +79,9 @@ Here are the instructions for setting up your project locally.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 ### Run locally
-You can run the app either as a web-only Vue app, or as a web app and desktop app.
 
-**Note**: the web only app will not have access to the Rust backend and may be missing necessary functionalities for the app to work
-
-* Run as web-only
+* Run as web only
   ```sh
   npm run dev
   ```
