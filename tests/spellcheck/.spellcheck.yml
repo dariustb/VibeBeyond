@@ -23,5 +23,4 @@ matrix:
       - 'blockquote'
   sources:
   - 'readme.md'
-  - 'docs/*.md'
   - 'docs/**/*.md'
