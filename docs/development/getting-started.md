@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Getting Started
+nav_order: 1
 parent: Development
-nav_order: 2
 ---
 
 # Getting started

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+nav_order: 1
 description: "Vibe Beyond is a Tauri app to produce AI-generated lofi hip hop."
 permalink: /
 ---
