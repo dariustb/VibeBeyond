@@ -25,3 +25,4 @@ matrix:
   - 'readme.md'
   - 'docs/*.md'
   - 'docs/**/*.md'
+  
