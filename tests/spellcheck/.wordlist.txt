@@ -32,6 +32,8 @@ LinkedIn
 Instagram
 Github
 GitHub
+Vercel
+Vercel's
 
 backend
 Backend
