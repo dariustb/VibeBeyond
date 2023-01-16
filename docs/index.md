@@ -26,7 +26,7 @@ Browse the docs to learn more about how to use this application.
 
 ## Getting started
 {: .note }
-> This "Getting started" header is for users of the released Vibe Beyond application. Developer information for setting up will be included in the Developer section.
+This "Getting started" header is for users of the released Vibe Beyond application. Developer information for setting up will be included in the Developer section.
 
 You can set up your desktop application by installing the latest stable release of the application from my portfolio website, here. 
 
