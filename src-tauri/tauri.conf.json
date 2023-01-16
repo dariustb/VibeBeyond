@@ -61,8 +61,8 @@
       {
         "fullscreen": false,
         "height": 600,
-        "resizable": true,
-        "title": "vibebeyond",
+        "resizable": false,
+        "title": "Vibe Beyond",
         "width": 800
       }
     ]
