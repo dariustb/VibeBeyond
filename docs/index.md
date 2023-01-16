@@ -9,7 +9,7 @@ permalink: /
 # Listen to music created in real-time!
 {: .fs-9 }
 
-Vibe Beyond give a new twist to your lofi hip hop "beats to study/chill to" radio experience with AI-generated music made in realtime.
+Vibe Beyond give a new twist to your lofi hip hop "beats to study/chill to" radio experience with AI-generated music made in real-time.
 {: .fs-6 .fw-300 }
 
 [Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
@@ -34,7 +34,7 @@ You can set up your desktop application by installing the latest stable release 
 More information to be given soon.
 
 ## About the project
-Vibe Beyond is created by [Darius Brown][portfolio] and [Linh Nyguen]().
+Vibe Beyond is created by [Darius Brown][portfolio] and [Linh Nguyen]().
 
 ### Contributing
 Because this repository is private, you may need to reach out to send any contributions, as well as reporting bugs and issues. Please feel free to [send an email][email] detailing the name of this project and any contributions you'd like to add or issues you'd like resolved. 
