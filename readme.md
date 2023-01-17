@@ -45,6 +45,7 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 * [![Tauri][Tauri.io]][Tauri-url]
 * [![Vue][Vue.js]][Vue-url]
 * [![Rust][Rust.io]][Rust-url]
+* [![Tailwind][Tailwind.css]][Tailwind-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,3 +124,5 @@ _This is the TL;DR version of the dev's "Getting Started" section. More details 
 [Vue-url]: https://vuejs.org/
 [Rust.io]: https://img.shields.io/badge/Rust-f74b00?style=for-the-badge&logo=rust&logoColor=white
 [Rust-url]: https://www.rust-lang.org/
+[Tailwind.css]: https://img.shields.io/badge/Tailwind-ffffff?style=for-the-badge&logo=tailwindcss&logoColor=0bb6d4
+[Tailwind-url]: https://tailwindcss.com/
