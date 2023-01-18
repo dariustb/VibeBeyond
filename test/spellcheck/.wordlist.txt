@@ -39,6 +39,7 @@ Github's
 vercel
 Vercel
 Vercel's
+Figma
 
 backend
 Backend
@@ -61,3 +62,10 @@ octocat
 gif
 integrations
 reviewable
+Wireframe
+wireframe
+Frontend
+frontend
+todo
+Todo
+TODO

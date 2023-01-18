@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 
 <!-- PROJECT LOGO -->
@@ -96,6 +96,7 @@ _This is the TL;DR version of the dev's "Getting Started" section. More details 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
@@ -115,7 +116,7 @@ _This is the TL;DR version of the dev's "Getting Started" section. More details 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/dariustb
 
-[product-screenshot]: https://camo.githubusercontent.com/1daa0aed2ed1e7ff8aff0c5160d1bcee1706988a0dc05d0c89ff4d779f20fbd0/68747470733a2f2f70682d66696c65732e696d6769782e6e65742f61303331333566642d326465392d346532632d383730342d6334366233653438333339622e706e673f6175746f3d666f726d6174266175746f3d636f6d707265737326636f6465633d6d6f7a6a7065672663733d7374726970266669743d6d6178266470723d32
+[product-screenshot]: /docs/media/Wireframe%20-%20Start.png
 [web-app-snapshot]: https://vercel.com/ddfabdf2-b143-4a33-abe7-9e1856543739
 
 [Tauri.io]:https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF
