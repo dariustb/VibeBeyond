@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 
 <!-- PROJECT LOGO -->
@@ -94,6 +94,7 @@ _This is the TL;DR version of the dev's "Getting Started" section. More details 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
