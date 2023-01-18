@@ -10,25 +10,25 @@ nav_order: 1
 Here are some images from Figma illustrating the different screens used in the application. Figma file can be found here: [Vibe Beyond Wireframe](https://www.figma.com/file/66tZ8kdzd7ltYovCvs25tl/Vibe-Beyond-wireframe?t=qoi9xIYPsI596K1e-6).
 
 ## Start Screen
-![Start screen](/docs/assets/images/Wireframe%20-%20Start.png)
+![Start screen](./../assets/images/wf_start.png)
 * No opening transition. Start with this background and button already visible.
 * The text "vibe beyond" should have the text appear as if it is being typed in. 
     * Optional: The vertical bar to the right would blink after as if it were an editor cursor.
 
 ## Playing Screen
-![Playing screen](/docs/assets/images/Wireframe%20-%20Playing.png)
+![Playing screen](./../assets/images/wf_playing.png)
 * Transition from Start Screen by:
     * Fading whole screen to white (quickly), starting the music, and fading into playing screen (with white corners already included).
 * Have all text on the screen appear through the typing animation from before
 
 ## Play to Pause Screen
-![Play to pause](/docs/assets/images/Wireframe%20-%20Play%20to%20Pause.png)
+![Play to pause](./../assets/images/wf_playpause.png)
 * Splash the screen and show the pause character (2 uppercase letter I's in Montserrat) in the center of the screen
 
 ## Pause to Play
-![Pause to play](/docs/assets/images/Wireframe%20-%20Pause%20to%20Play.png)
+![Pause to play](./../assets/images/wf_pauseplay.png)
 * Same as above
 
 ## Toggle History
-![Toggle history](/docs/assets/images/Wireframe%20-%20Toggle%20History.png)
+![Toggle history](./../assets/images/wf_history.png)
 * Animate purple banner by flying in from the right to the left. Fade in and slightly fly down each text box/vertical bar in the banner.
