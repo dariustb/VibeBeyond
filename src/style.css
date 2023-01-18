@@ -19,6 +19,8 @@ html, body {
 
   background-repeat: no-repeat;
 
+  box-shadow: inset 0 0 0 1000px #d9d9d933;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -94,6 +96,14 @@ button {
 
 #greet-input {
   margin-right: 5px;
+}
+
+#play-button {
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  width: 150px;
+  height: 40px;
 }
 
 @media (prefers-color-scheme: dark) {
