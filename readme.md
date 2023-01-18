@@ -116,7 +116,7 @@ _This is the TL;DR version of the dev's "Getting Started" section. More details 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/dariustb
 
-[product-screenshot]: /docs/media/Wireframe%20-%20Start.png
+[product-screenshot]: /docs/assets/images/wf_start.png
 [web-app-snapshot]: https://vercel.com/ddfabdf2-b143-4a33-abe7-9e1856543739
 
 [Tauri.io]:https://img.shields.io/badge/tauri-%2324C8DB.svg?style=for-the-badge&logo=tauri&logoColor=%23FFFFFF
