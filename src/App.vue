@@ -4,7 +4,10 @@ export default {
         return {
             // Bool values for v-show in the template section below
             startPage: true,
-            playingPage: false
+            playingPage: false,
+
+            // NOTE: Just for dev, remove when ready for prod
+            buttonsForTesting: false
         }
     },
     methods: {
@@ -39,7 +42,8 @@ export default {
 
     <!-- Playing Page -->
     <div v-show="playingPage">
-        <button @click="togglePlayingPage()" class="absolute bottom-52 left-80">BLOOP</button>
+        <!-- NOTE: Delete for prod-->
+        <button v-show="buttonsForTesting" @click="togglePlayingPage()" class="absolute top-72 left-72">BACK TO START PAGE</button>
 
         <!-- White corners -->
         <div id="line-vert" class="absolute left-5 top-5"></div>
