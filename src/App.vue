@@ -39,10 +39,21 @@ export default {
 
     <!-- Playing Page -->
     <div v-show="playingPage">
-        <button @click="togglePlayingPage()">BLOOP</button>
+        <button @click="togglePlayingPage()" class="absolute bottom-52 left-80">BLOOP</button>
 
         <!-- White corners -->
+        <div id="line-vert" class="absolute left-5 top-5"></div>
+        <div id="line-horz" class="absolute left-5 top-5"></div>
 
+        <div id="line-vert" class="absolute right-5 top-5"></div>
+        <div id="line-horz" class="absolute right-5 top-5"></div>
+
+        <div id="line-vert" class="absolute left-5 bottom-5"></div>
+        <div id="line-horz" class="absolute left-5 bottom-5"></div>
+
+        <div id="line-vert" class="absolute right-5 bottom-5"></div>
+        <div id="line-horz" class="absolute right-5 bottom-5"></div>
+        
         <!-- TL: Play and Volume -->
 
         <!-- TR: Now Playing, Song title, Artist name -->

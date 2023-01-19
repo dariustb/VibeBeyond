@@ -104,6 +104,18 @@ button {
   height: 40px;
 }
 
+#line-vert {
+  height: 50px;
+  width: 2px;
+  background: white;
+}
+
+#line-horz {
+  height: 2px;
+  width: 50px;
+  background: white;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
