@@ -19,8 +19,6 @@ html, body {
 
   background-repeat: no-repeat;
 
-  box-shadow: inset 0 0 0 1000px #d9d9d933;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -104,6 +102,18 @@ button {
   padding: 20px;
   width: 150px;
   height: 40px;
+}
+
+#line-vert {
+  height: 30px;
+  width: 2px;
+  background: white;
+}
+
+#line-horz {
+  height: 2px;
+  width: 30px;
+  background: white;
 }
 
 @media (prefers-color-scheme: dark) {
