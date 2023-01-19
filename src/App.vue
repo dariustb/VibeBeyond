@@ -2,11 +2,14 @@
 export default {
     data() {
         return {
+            // Bool values for v-show in the template section below
             startPage: true,
             playingPage: false
         }
     },
     methods: {
+        // Makes start page hidden & play page visible
+        // Effectively transitioning content in the same page
         togglePlayingPage(){
             this.startPage = !this.startPage;
             this.playingPage = !this.playingPage;
@@ -17,7 +20,6 @@ export default {
 
 <template>
     <!-- Start Page -->
-    <!-- Main container -->
     <div v-show="startPage" class="flex items-center justify-center h-screen shadow-[inset_0_0px_0px_1000px_rgba(217,217,217,0.2)]">
         <!-- vibe beyond title -->
         <h1 class="text-[64px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
@@ -35,8 +37,20 @@ export default {
         </div>
     </div>
 
+    <!-- Playing Page -->
     <div v-show="playingPage">
         <button @click="togglePlayingPage()">BLOOP</button>
+
+        <!-- White corners -->
+
+        <!-- TL: Play and Volume -->
+
+        <!-- TR: Now Playing, Song title, Artist name -->
+
+        <!-- BL: Current Time & Date -->
+
+        <!-- BR: Time on song -->
+
     </div>
 </template>
 
