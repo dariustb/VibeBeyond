@@ -53,14 +53,29 @@ export default {
 
         <div id="line-vert" class="absolute right-5 bottom-5"></div>
         <div id="line-horz" class="absolute right-5 bottom-5"></div>
-        
+
         <!-- TL: Play and Volume -->
+        <div class="absolute left-9 top-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+            <p>PLAY ▶<br>VOL IIIIIIII</p>
+        </div>
 
         <!-- TR: Now Playing, Song title, Artist name -->
+        <div class="absolute right-9 top-9 text-right drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+            <p class="text-xs opacity-50 font-semibold">NOW PLAYING</p>
+            <p id="song-name" class="text-[22px]">Dancing Droplets</p>
+            <p id="artist-name" class="text-[22px] font-semibold">Leavv</p>
+        </div>
 
         <!-- BL: Current Time & Date -->
+        <div class="absolute left-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+            <p id="play-time">PM 7:07</p>
+            <p id="current-date">OCTOBER 06 1989</p>
+        </div>
 
         <!-- BR: Time on song -->
+        <div class="absolute right-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+            <p id="play-time">0:00 / 3:14</p>
+        </div>
 
     </div>
 </template>

@@ -105,14 +105,14 @@ button {
 }
 
 #line-vert {
-  height: 50px;
+  height: 30px;
   width: 2px;
   background: white;
 }
 
 #line-horz {
   height: 2px;
-  width: 50px;
+  width: 30px;
   background: white;
 }
 
