@@ -74,7 +74,7 @@ export default {
 
         <!-- BL: Current Time & Date -->
         <div class="absolute left-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <p id="play-time">PM 7:07</p>
+            <p id="current-time">PM 7:07</p>
             <p id="current-date">OCTOBER 06 1989</p>
         </div>
 
