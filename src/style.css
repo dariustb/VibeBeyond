@@ -137,3 +137,21 @@ button {
     background-color: #0f0f0f98;
   }
 }
+
+/* ------------------ */
+/* Animation CSS info */
+/* ------------------ */
+
+.fade-in {
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
