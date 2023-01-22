@@ -1,4 +1,5 @@
 <script>
+import DateTime from './components/DateTime.vue';
 export default {
     data() {
         return {
@@ -7,17 +8,18 @@ export default {
             playingPage: false,
 
             // NOTE: Just for dev, remove when ready for prod
-            buttonsForTesting: false
-        }
+            buttonsForTesting: true
+        };
     },
     methods: {
         // Makes start page hidden & play page visible
         // Effectively transitioning content in the same page
-        togglePlayingPage(){
+        togglePlayingPage() {
             this.startPage = !this.startPage;
             this.playingPage = !this.playingPage;
         }
-    }
+    },
+    components: { DateTime }
 };
 </script>
 
@@ -25,13 +27,15 @@ export default {
     <!-- Start Page -->
     <div v-show="startPage" class="flex items-center justify-center h-screen shadow-[inset_0_0px_0px_1000px_rgba(217,217,217,0.2)]">
         <!-- vibe beyond title -->
-        <h1 class="text-[64px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <b class="font-light">vibe </b><b>beyond.</b>
-        </h1>
+        <div class="fade-in">
+            <h1 class="text-[64px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+                <b class="font-light">vibe </b><b>beyond.</b>
+            </h1>
+        </div>
 
         <!-- play button + text -->
         <button @click="togglePlayingPage()" id="play-button" class="absolute bottom-52 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <p class="text-2xl text-[#4F3247] opacity-80 tracking-wider text-center relative bottom-4">play</p>            
+            <p class="text-2xl text-[#4F3247] opacity-80 tracking-wider text-center relative bottom-4">start</p>            
         </button>
 
         <!-- Darius / Linh -->
@@ -72,8 +76,7 @@ export default {
 
         <!-- BL: Current Time & Date -->
         <div class="absolute left-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <p id="play-time">PM 7:07</p>
-            <p id="current-date">OCTOBER 06 1989</p>
+            <DateTime></DateTime>
         </div>
 
         <!-- BR: Time on song -->
