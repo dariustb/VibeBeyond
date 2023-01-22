@@ -1,4 +1,5 @@
 <script>
+import DateTime from './components/DateTime.vue';
 export default {
     data() {
         return {
@@ -7,17 +8,18 @@ export default {
             playingPage: false,
 
             // NOTE: Just for dev, remove when ready for prod
-            buttonsForTesting: false
-        }
+            buttonsForTesting: true
+        };
     },
     methods: {
         // Makes start page hidden & play page visible
         // Effectively transitioning content in the same page
-        togglePlayingPage(){
+        togglePlayingPage() {
             this.startPage = !this.startPage;
             this.playingPage = !this.playingPage;
         }
-    }
+    },
+    components: { DateTime }
 };
 </script>
 
@@ -74,8 +76,7 @@ export default {
 
         <!-- BL: Current Time & Date -->
         <div class="absolute left-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <p id="current-time">PM 7:07</p>
-            <p id="current-date">OCTOBER 06 1989</p>
+            <DateTime></DateTime>
         </div>
 
         <!-- BR: Time on song -->
