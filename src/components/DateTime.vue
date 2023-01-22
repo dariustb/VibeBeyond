@@ -24,13 +24,13 @@
                     // Get the time and date from Moment.js
                     // https://momentjs.com/
                     time.currentDate = moment().format('MMMM D YYYY').toUpperCase();
-                    time.currentTime = moment().format('A h:mm:ss');
+                    time.currentTime = moment().format('A h:mm');
                 }, 1000);
             }
         },
         created (){
             this.currentDate = moment().format('MMMM D YYYY').toUpperCase();
-            this.currentTime = moment().format('A h:mm:ss');
+            this.currentTime = moment().format('A h:mm');
             this.getDateTime()
         }
     }
