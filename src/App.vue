@@ -35,7 +35,7 @@ export default {
 
         <!-- play button + text -->
         <button @click="togglePlayingPage()" id="play-button" class="absolute bottom-52 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-            <p class="text-2xl text-[#4F3247] opacity-80 tracking-wider text-center relative bottom-4">play</p>            
+            <p class="text-2xl text-[#4F3247] opacity-80 tracking-wider text-center relative bottom-4">start</p>            
         </button>
 
         <!-- Darius / Linh -->
