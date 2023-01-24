@@ -50,17 +50,19 @@ export default {
         <button v-show="buttonsForTesting" @click="togglePlayingPage()" class="absolute top-72 left-72">BACK TO START PAGE</button>
 
         <!-- White corners -->
-        <div id="line-vert" class="absolute left-5 top-5"></div>
-        <div id="line-horz" class="absolute left-5 top-5"></div>
+        <div>
+            <div id="line-vert" class="absolute left-5 top-5"></div>
+            <div id="line-horz" class="absolute left-5 top-5"></div>
 
-        <div id="line-vert" class="absolute right-5 top-5"></div>
-        <div id="line-horz" class="absolute right-5 top-5"></div>
+            <div id="line-vert" class="absolute right-5 top-5"></div>
+            <div id="line-horz" class="absolute right-5 top-5"></div>
 
-        <div id="line-vert" class="absolute left-5 bottom-5"></div>
-        <div id="line-horz" class="absolute left-5 bottom-5"></div>
+            <div id="line-vert" class="absolute left-5 bottom-5"></div>
+            <div id="line-horz" class="absolute left-5 bottom-5"></div>
 
-        <div id="line-vert" class="absolute right-5 bottom-5"></div>
-        <div id="line-horz" class="absolute right-5 bottom-5"></div>
+            <div id="line-vert" class="absolute right-5 bottom-5"></div>
+            <div id="line-horz" class="absolute right-5 bottom-5"></div>
+        </div>
 
         <!-- TL: Play and Volume -->
         <div class="absolute left-9 top-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
