@@ -14,7 +14,7 @@ Vibe Beyond give a new twist to your lofi hip hop "beats to study/chill to" radi
 
 [Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View it on GitHub][repo]{: .btn .fs-5 .mb-4 .mb-md-0 }
-[Buy me a coffee][coffee]{: .btn .fs-5 .mb-4 .mb-md-0 }
+
 
 ---
 
@@ -40,7 +40,11 @@ Vibe Beyond is created by [Darius Brown][portfolio] and [Linh Nguyen]().
 Because this repository is private, you may need to reach out to send any contributions, as well as reporting bugs and issues. Please feel free to [send an email][email] detailing the name of this project and any contributions you'd like to add or issues you'd like resolved. 
 
 ### Donating
-[![Buy me a coffee!](https://media2.giphy.com/media/513lZvPf6khjIQFibF/giphy.gif?cid=ecf05e47vwy7g0hk9jeguufi35a8apmvk9wrjbggyd7lcxh5&rid=giphy.gif&ct=s)][coffee]
+#### Darius Brown
+[Buy me a coffee!][coffee]{: .btn .fs-5 .mb-4 .mb-md-0 }
+
+#### Linh Nguyen
+TBD
 
 ----
 

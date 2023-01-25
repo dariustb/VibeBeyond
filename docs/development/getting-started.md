@@ -38,13 +38,6 @@ parent: Development
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Run locally
-
-* Run as web only
-  ```sh
-  npm run dev
-  ```
-  * Running on web will not allow the app to fully function (using Vue on web without Rust backend).
-* Run as web and desktop
   ```sh
   npm run tauri dev
   ```
