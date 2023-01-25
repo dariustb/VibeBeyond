@@ -19,8 +19,6 @@
     <a href="https://dariustb.github.io/VibeBeyond/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://vibe-beyond.vercel.app/">View Demo</a>
-    ·
     <a href="https://github.com/dariustb/vibebeyond/issues">Report Bug</a>
     ·
     <a href="https://github.com/dariustb/vibebeyond/issues">Request Feature</a>
@@ -81,17 +79,9 @@ _This is the TL;DR version of the dev's "Getting Started" section. More details 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Run locally
-
-* Run as web only
-  ```sh
-  npm run dev
-  ```
-* Run as web and desktop
   ```sh
   npm run tauri dev
   ```
-  **Note**: the tauri app will open on its own once it finishes loading. The web app will be served with a http://localhost:1420/ address to follow and view on your browser. Use `ctrl+C` to end the server. 
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
