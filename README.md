@@ -48,6 +48,8 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 * [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (9.2.0 or greater)
 * [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- GETTING STARTED -->
 ## Project Setup
 
