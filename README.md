@@ -44,9 +44,9 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 <!-- Prerequisites -->
 ## Prerequisites
 
-### [Node](https://nodejs.org/en/) (v18.12.1 or greater)
-### [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (9.2.0 or greater)
-### [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+* [Node](https://nodejs.org/en/) (v18.12.1 or greater)
+* [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (9.2.0 or greater)
+* [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
 <!-- GETTING STARTED -->
 ## Project Setup
