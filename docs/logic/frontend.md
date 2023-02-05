@@ -7,7 +7,7 @@ nav_order: 1
 
 # Frontend
 
-Here are some images from Figma illustrating the different screens used in the application. Figma file can be found here: [Vibe Beyond Wireframe](https://www.figma.com/file/66tZ8kdzd7ltYovCvs25tl/Vibe-Beyond-wireframe?t=qoi9xIYPsI596K1e-6).
+Here is a Figma prototype demonstrating the different screens used in the application. Figma file can be found here: [Vibe Beyond Prototype](https://www.figma.com/proto/xq9BHN9FgZP1IP13KOOU0J/Vibes-Beyond-Wireframe?node-id=321%3A179&scaling=contain&page-id=0%3A1&starting-point-node-id=319%3A33).
 
 ## Start Screen
 ![Start screen](./../assets/images/wf_start.png)
