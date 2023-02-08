@@ -12,4 +12,13 @@
 
 html, body {
     font-family: 'Montserrat', sans-serif;
-  }
+    color: #f6f6f6;
+}
+
+#play-button {
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    width: 150px;
+    height: 40px;
+}
