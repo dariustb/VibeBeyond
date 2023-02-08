@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+    /* Set Background image */
+    background-image: url(./assets/hotair.jpg);
+    background-repeat: no-repeat;
+}
