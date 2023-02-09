@@ -6,8 +6,13 @@
 
 :root{
     /* Set Background image */
+    /*
     background-image: url(./assets/japan.jpg);
     background-repeat: no-repeat;
+    */
+
+    /* Testing with a solid color */
+    background-color: #555eb2;
 }
 
 html, body {
