@@ -1,0 +1,20 @@
+name: Lint
+on:
+  pull_request:
+jobs:
+  linting:
+    name: ESlintrc # job name (unique id)
+    runs-on: ubuntu-latest # on which machine to run
+    steps:
+      - name: Install NodeJS
+        uses: actions/setup-node@v2
+      
+      - name: Code Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Code Linting
+        run: npm run lint
+        
