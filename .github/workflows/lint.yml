@@ -3,8 +3,8 @@ on:
   pull_request:
 jobs:
   linting:
-    name: ESlintrc # job name (unique id)
-    runs-on: ubuntu-latest # on which machine to run
+    name: ESlintrc
+    runs-on: ubuntu-latest
     steps:
       - name: Install NodeJS
         uses: actions/setup-node@v2
