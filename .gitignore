@@ -26,3 +26,6 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# Testing Howler JS player
+src/assets/gigi.mp3

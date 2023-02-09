@@ -11,14 +11,17 @@
 
     <!-- play button + text -->
     <button
-      @click="togglePlayingPage()"
+      @click="
+        togglePlayingPage();
+        playAudio();
+      "
       class="absolute bottom-52 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       id="play-button"
     >
       <p
         class="text-2xl text-[#4F3247] opacity-80 tracking-wider text-center relative bottom-4"
       >
-        play
+        start
       </p>
     </button>
 
@@ -38,6 +41,10 @@
     >
       <b>[ BACK TO START PAGE ]</b>
     </button>
+
+    <div class="absolute left-80 top-80">
+      <HowlerPlayer />
+    </div>
 
     <!-- White corners -->
     <div>
@@ -88,6 +95,7 @@
 
 <script>
 import DateTime from "./components/DateTime.vue";
+import { Howl } from "howler";
 export default {
   data() {
     return {
@@ -104,6 +112,14 @@ export default {
     togglePlayingPage() {
       this.startPage = !this.startPage;
       this.playingPage = !this.playingPage;
+    },
+
+    // Plays soundfile using howlerJS
+    playAudio: function () {
+      var sound = new Howl({
+        src: ["/src/assets/gigi.mp3"],
+      });
+      sound.play();
     },
   },
   components: { DateTime },
