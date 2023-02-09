@@ -6,8 +6,13 @@
 
 :root{
     /* Set Background image */
-    background-image: url(./assets/hotair.jpg);
+    /*
+    background-image: url(./assets/japan.jpg);
     background-repeat: no-repeat;
+    */
+
+    /* Testing with a solid color */
+    background-color: #555eb2;
 }
 
 html, body {
@@ -21,4 +26,16 @@ html, body {
     padding: 20px;
     width: 150px;
     height: 40px;
+}
+
+#line-vert {
+    height: 30px;
+    width: 2px;
+    background: white;
+}
+
+#line-horz {
+    height: 2px;
+    width: 30px;
+    background: white;
 }
