@@ -27,3 +27,15 @@ html, body {
     width: 150px;
     height: 40px;
 }
+
+#line-vert {
+    height: 30px;
+    width: 2px;
+    background: white;
+}
+
+#line-horz {
+    height: 2px;
+    width: 30px;
+    background: white;
+}
