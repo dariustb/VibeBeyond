@@ -39,6 +39,10 @@
       <b>[ BACK TO START PAGE ]</b>
     </button>
 
+    <div class="absolute left-80 top-80">
+      <HowlerPlayer />
+    </div>
+
     <!-- White corners -->
     <div>
       <div id="line-vert" class="absolute left-5 top-5"></div>
@@ -88,6 +92,7 @@
 
 <script>
 import DateTime from "./components/DateTime.vue";
+import HowlerPlayer from "./components/HowlerPlayer.vue";
 export default {
   data() {
     return {
@@ -106,7 +111,7 @@ export default {
       this.playingPage = !this.playingPage;
     },
   },
-  components: { DateTime },
+  components: { DateTime, HowlerPlayer },
 };
 </script>
 
