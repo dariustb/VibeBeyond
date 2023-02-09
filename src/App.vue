@@ -1,27 +1,3 @@
-<script>
-  import DateTime from './components/DateTime.vue';
-  export default {
-    data() {
-      return {
-        // Bool values for v-show in the template section below
-        startPage: true,
-        playingPage: false,
-        // NOTE: Just for dev, remove when ready for prod
-        buttonsForTesting: true
-      };
-    },
-    methods: {
-      // Makes start page hidden & play page visible
-      // Effectively transitioning content in the same page
-      togglePlayingPage() {
-        this.startPage = !this.startPage;
-        this.playingPage = !this.playingPage;
-      }
-    },
-    components: { DateTime }
-  };
-</script>
-
 <template>
   <!-- Start Page -->
   <div v-show="startPage" class="flex items-center justify-center h-screen shadow-[inset_0_0px_0px_1000px_rgba(217,217,217,0.2)]">
@@ -87,6 +63,30 @@
   </div>
   
 </template>
+
+<script>
+  import DateTime from './components/DateTime.vue';
+  export default {
+    data() {
+      return {
+        // Bool values for v-show in the template section below
+        startPage: true,
+        playingPage: false,
+        // NOTE: Just for dev, remove when ready for prod
+        buttonsForTesting: true
+      };
+    },
+    methods: {
+      // Makes start page hidden & play page visible
+      // Effectively transitioning content in the same page
+      togglePlayingPage() {
+        this.startPage = !this.startPage;
+        this.playingPage = !this.playingPage;
+      }
+    },
+    components: { DateTime }
+  };
+</script>
 
 <style>
 </style>
