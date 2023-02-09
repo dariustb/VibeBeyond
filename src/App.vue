@@ -44,7 +44,9 @@
   <!-- Playing Page -->
   <div v-show="playingPage">
     <!-- NOTE: Delete for prod-->
-    <button v-show="buttonsForTesting" @click="togglePlayingPage()" class="absolute top-72 left-72">BACK TO START PAGE</button>
+    <button v-show="buttonsForTesting" @click="togglePlayingPage()" class="absolute top-72 left-72">
+      <b>[ BACK TO START PAGE ]</b>
+    </button>
 
     <!-- White corners -->
     <div>
@@ -86,5 +88,5 @@
   
 </template>
 
-<style scoped>
+<style>
 </style>
