@@ -1,25 +1,24 @@
 <script>
+  import DateTime from './components/DateTime.vue';
   export default {
-      data() {
-          return {
-              // Bool values for v-show in the template section below
-              startPage: true,
-              playingPage: false,
-              // NOTE: Just for dev, remove when ready for prod
-              buttonsForTesting: true
-          };
-      },
-      methods: {
-          // Makes start page hidden & play page visible
-          // Effectively transitioning content in the same page
-          togglePlayingPage() {
-              this.startPage = !this.startPage;
-              this.playingPage = !this.playingPage;
-          }
-      },
-      components: {
-
+    data() {
+      return {
+        // Bool values for v-show in the template section below
+        startPage: true,
+        playingPage: false,
+        // NOTE: Just for dev, remove when ready for prod
+        buttonsForTesting: true
+      };
+    },
+    methods: {
+      // Makes start page hidden & play page visible
+      // Effectively transitioning content in the same page
+      togglePlayingPage() {
+        this.startPage = !this.startPage;
+        this.playingPage = !this.playingPage;
       }
+    },
+    components: { DateTime }
   };
 </script>
 
