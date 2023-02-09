@@ -8,21 +8,21 @@
 </template>
 
 <script>
-  import { Howl } from 'howler';
-  export default {
-    name: "HowlerPlayer",
-    data() {
-      return {};
+import { Howl } from "howler";
+export default {
+  name: "HowlerPlayer",
+  data() {
+    return {};
+  },
+  methods: {
+    playAudio: function () {
+      var sound = new Howl({
+        src: ["/src/assets/gigi.mp3"],
+      });
+      sound.play();
     },
-    methods: {
-      playAudio: function () {
-        var sound = new Howl({
-          src: ["/src/assets/gigi.mp3"]
-        });
-        sound.play();
-      }
-    }
-  };
+  },
+};
 </script>
 
 <style></style>
