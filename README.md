@@ -1,3 +1,6 @@
+<!-- Status Badges -->
+[![Lint][lint-status]][lint-url] [![Unit Test][unit-status]][unit-url] [![Github Pages][gh-page-status]][gh-page-url]
+
 # vibebeyond
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -39,3 +42,11 @@ npm run test
 ```sh
 npm run lint
 ```
+
+<!-- Markdown links -->
+[lint-status]: https://github.com/dariustb/VibeBeyond/actions/workflows/lint.yml/badge.svg
+[lint-url]: https://github.com/dariustb/VibeBeyond/actions/workflows/lint.yml
+[unit-status]: https://github.com/dariustb/VibeBeyond/actions/workflows/unitttest.yml/badge.svg
+[unit-url]: https://github.com/dariustb/VibeBeyond/actions/workflows/unitttest.yml
+[gh-page-status]: https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
+[gh-page-url]: https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment
