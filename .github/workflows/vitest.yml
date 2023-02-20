@@ -1,4 +1,4 @@
-name: Unit Test
+name: Vitest
 on:
   pull_request:
 jobs:
