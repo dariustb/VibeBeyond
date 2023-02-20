@@ -28,4 +28,4 @@ coverage
 *.sw?
 
 # Testing Howler JS player
-src/assets/gigi.mp3
+frontend/src/assets/gigi.mp3
