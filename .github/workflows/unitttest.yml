@@ -12,11 +12,10 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v2
 
-      - name: Enter frontend folder
-        uses: cd frontend
-
       - name: Install Dependencies
+        working-directory: ./frontend
         run: npm ci
 
       - name: Unit Testing
+        working-directory: ./frontend
         run: npm run test
