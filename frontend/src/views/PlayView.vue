@@ -4,8 +4,7 @@ import { Howl } from "howler";
 
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     // Plays soundfile using howlerJS
@@ -17,9 +16,9 @@ export default {
     },
   },
   components: {
-    DateTime
+    DateTime,
   },
-}
+};
 </script>
 
 <template>
@@ -38,14 +37,14 @@ export default {
       <div id="line-vert" class="absolute right-5 bottom-5"></div>
       <div id="line-horz" class="absolute right-5 bottom-5"></div>
     </div>
-  
+
     <!-- TL: Play and Volume -->
     <div
       class="absolute left-9 top-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
     >
       <p>PLAY ▶<br />VOL IIIIIIII</p>
     </div>
-  
+
     <!-- TR: Now Playing, Song title, Artist name -->
     <div
       class="absolute right-9 top-9 text-right drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
