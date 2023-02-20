@@ -26,7 +26,7 @@ def send_song():
         'name':'Dancing Droplets',
         'artist':'Leavv',
         'length':'3:14',
-        'path':'/queue/gigi.mp3'
+        'path':'/src/assets/gigi.mp3'
     }
     return jsonify(song_dict)
 

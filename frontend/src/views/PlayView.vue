@@ -1,12 +1,14 @@
 <script>
 import axios from "axios";
-import Howl from "howler";
+import { Howl } from "howler";
 import DateTime from "../components/DateTime.vue";
 
 export default {
   name: "PlayView",
   data() {
     return {
+      start_radio: false,
+      show_play_button: true,
       song_name: "",
       song_artist: "",
       song_length: "",
@@ -32,10 +34,14 @@ export default {
     },
     // Plays soundfile using howlerJS
     playAudio() {
-      var sound = new Howl({
-        src: [this.song_path],
-      });
-      sound.play();
+      console.log("playAudio() started.");
+      if (this.start_radio == false) {
+        this.start_radio = true;
+        var sound = new Howl({
+          src: [this.song_path],
+        });
+        sound.play();
+      }
     },
   },
   created() {
@@ -49,6 +55,22 @@ export default {
 
 <template>
   <main>
+    <!-- Play button -->
+    <div
+      class="flex items-center justify-center h-screen"
+      v-show="show_play_button"
+    >
+      <button
+        class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full"
+        @click="
+          playAudio();
+          show_play_button = false;
+        "
+      >
+        <h1 class="text-[64px]">&nbsp;▶&nbsp;</h1>
+      </button>
+    </div>
+
     <!-- White corners -->
     <div>
       <div id="line-vert" class="absolute left-5 top-5"></div>
