@@ -29,3 +29,6 @@ coverage
 
 # Testing Howler JS player
 frontend/src/assets/gigi.mp3
+
+venv/
+queue/
