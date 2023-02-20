@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import {Howl} from "howler";
+import { Howl } from "howler";
 import DateTime from "../components/DateTime.vue";
 
 export default {
@@ -34,8 +34,8 @@ export default {
     },
     // Plays soundfile using howlerJS
     playAudio() {
-      console.log('playAudio() started.')
-      if (this.start_radio == false){
+      console.log("playAudio() started.");
+      if (this.start_radio == false) {
         this.start_radio = true;
         var sound = new Howl({
           src: [this.song_path],
@@ -51,23 +51,25 @@ export default {
     DateTime,
   },
 };
-</script> 
+</script>
 
 <template>
   <main>
     <!-- Play button -->
     <div
-    class="flex items-center justify-center h-screen"
-    v-show="show_play_button"
+      class="flex items-center justify-center h-screen"
+      v-show="show_play_button"
     >
       <button
-      class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full"
-      @click=" playAudio(); show_play_button = false;"
+        class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full"
+        @click="
+          playAudio();
+          show_play_button = false;
+        "
       >
         <h1 class="text-[64px]">&nbsp;▶&nbsp;</h1>
       </button>
     </div>
-
 
     <!-- White corners -->
     <div>
@@ -115,6 +117,5 @@ export default {
     >
       <p id="play-time">0:00 / {{ song_length }}</p>
     </div>
-
   </main>
 </template>
