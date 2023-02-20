@@ -5,3 +5,9 @@ Flask-Cors==3.0.10
 # Testing / CI
 pytest
 pylint
+
+# MIDI Manipulation
+mido
+
+# Soundfont Loader
+sf2-loader
