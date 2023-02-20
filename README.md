@@ -1,5 +1,7 @@
 <!-- Status Badges -->
-[![Lint][lint-status]][lint-url] [![Unit Test][unit-status]][unit-url] [![Github Pages][gh-page-status]][gh-page-url]
+[![Unit Test](https://github.com/dariustb/VibeBeyond/actions/workflows/vitest.yml/badge.svg)](https://github.com/dariustb/VibeBeyond/actions/workflows/vitest.yml) [![Lint](https://github.com/dariustb/VibeBeyond/actions/workflows/eslint.yml/badge.svg)](https://github.com/dariustb/VibeBeyond/actions/workflows/eslint.yml)
+[![Unit Test](https://github.com/dariustb/VibeBeyond/actions/workflows/pytest.yml/badge.svg)](https://github.com/dariustb/VibeBeyond/actions/workflows/pytest.yml) [![Lint](https://github.com/dariustb/VibeBeyond/actions/workflows/pylint.yml/badge.svg)](https://github.com/dariustb/VibeBeyond/actions/workflows/pylint.yml)
+[![Github Pages][gh-page-status]][gh-page-url]
 
 # Vibe Beyond
 
@@ -69,9 +71,5 @@ pylint backend/
 ```
 
 <!-- Markdown links -->
-[lint-status]: https://github.com/dariustb/VibeBeyond/actions/workflows/lint.yml/badge.svg
-[lint-url]: https://github.com/dariustb/VibeBeyond/actions/workflows/lint.yml
-[unit-status]: https://github.com/dariustb/VibeBeyond/actions/workflows/unitttest.yml/badge.svg
-[unit-url]: https://github.com/dariustb/VibeBeyond/actions/workflows/unitttest.yml
 [gh-page-status]: https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
 [gh-page-url]: https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment
