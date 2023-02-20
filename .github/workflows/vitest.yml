@@ -1,9 +1,8 @@
-name: Unit Test
+name: Vitest
 on:
   pull_request:
 jobs:
-  linting:
-    name: Vitest
+  unit-test:
     runs-on: ubuntu-latest
     steps:
       - name: Install NodeJS

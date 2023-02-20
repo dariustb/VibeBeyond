@@ -1,9 +1,8 @@
-name: Lint
+name: Pylint
 on:
   pull_request:
 jobs:
-  linting:
-    name: PyLint
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout

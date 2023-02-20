@@ -1,9 +1,8 @@
-name: Lint
+name: ESLint
 on:
   pull_request:
 jobs:
-  linting:
-    name: ESLint
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Install NodeJS

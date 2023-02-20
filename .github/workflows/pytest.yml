@@ -1,9 +1,8 @@
-name: Unit Test
+name: Pytest
 on:
   pull_request:
 jobs:
-  linting:
-    name: PyTest
+  unit-test:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
