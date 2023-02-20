@@ -1,19 +1,45 @@
 <script>
+import axios from "axios";
+import Howl from "howler";
 import DateTime from "../components/DateTime.vue";
-import { Howl } from "howler";
 
 export default {
+  name: "PlayView",
   data() {
-    return {};
+    return {
+      song_name: "",
+      song_artist: "",
+      song_length: "",
+      song_path: "",
+    };
   },
   methods: {
+    // GETs message from Flask localhost
+    getMessage() {
+      const flask_path = "http://localhost:5000/song_gen";
+      axios
+        .get(flask_path)
+        .then((flask_response) => {
+          this.song_name = flask_response.data.name;
+          this.song_artist = flask_response.data.artist;
+          this.song_length = flask_response.data.length;
+          this.song_path = flask_response.data.path;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+    },
     // Plays soundfile using howlerJS
-    playAudio: function () {
+    playAudio() {
       var sound = new Howl({
-        src: ["/src/assets/gigi.mp3"],
+        src: [this.song_path],
       });
       sound.play();
     },
+  },
+  created() {
+    this.getMessage();
   },
   components: {
     DateTime,
@@ -50,8 +76,10 @@ export default {
       class="absolute right-9 top-9 text-right drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
     >
       <p class="text-xs opacity-50 font-semibold">NOW PLAYING</p>
-      <p id="song-name" class="text-[22px]">Dancing Droplets</p>
-      <p id="artist-name" class="text-[22px] font-semibold">Leavv</p>
+      <p id="song-name" class="text-[22px]">{{ song_name }}</p>
+      <p id="artist-name" class="text-[22px] font-semibold">
+        {{ song_artist }}
+      </p>
     </div>
 
     <!-- BL: Current Time & Date -->
@@ -65,7 +93,7 @@ export default {
     <div
       class="absolute right-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
     >
-      <p id="play-time">0:00 / 3:14</p>
+      <p id="play-time">0:00 / {{ song_length }}</p>
     </div>
   </main>
 </template>
