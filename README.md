@@ -1,7 +1,7 @@
 <!-- Status Badges -->
 [![Lint][lint-status]][lint-url] [![Unit Test][unit-status]][unit-url] [![Github Pages][gh-page-status]][gh-page-url]
 
-# vibebeyond
+# Vibe Beyond
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -13,9 +13,10 @@ This template should help get you started developing with Vue 3 in Vite.
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Project Setup
+## Project Setup - Vue
 
 ```sh
+cd frontend/
 npm install
 ```
 
@@ -41,6 +42,30 @@ npm run test
 
 ```sh
 npm run lint
+```
+
+## Project Setup - Flask
+*from outside the backend folder*
+```sh
+python -m venv venv
+source venv/Scripts/activate
+pip install -r backend/requirements.txt
+```
+
+### Compile and Hot-Reload for Development
+```sh
+python backend/app.py
+```
+
+### Run Unit Tests with [Pytest](https://docs.pytest.org/en/latest/)
+
+```sh
+pytest backend/
+```
+
+### Lint with [Pylint](https://pylint.readthedocs.io/en/latest/)
+```sh
+pylint backend/
 ```
 
 <!-- Markdown links -->
