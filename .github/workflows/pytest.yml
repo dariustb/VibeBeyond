@@ -3,7 +3,6 @@ on:
   pull_request:
 jobs:
   linting:
-    name: PyTest
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
