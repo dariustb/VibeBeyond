@@ -1,3 +1,4 @@
+''' app.py - Python driver for Flask server '''
 from flask import Flask, jsonify
 from flask_cors import CORS
 
@@ -17,8 +18,8 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 # song gen route
 @app.route('/song_gen', methods=['GET'])
 def send_song():
-    # Here's where we'd do a make_song function.
-    # The idea at this point is to make & send the song somewhere 
+    ''' Generate song and return the song info for frontend '''
+    # The idea at this point is to make & send the song somewhere
     # either in backend, or in a mutually accessible folder
     # and return the *path* to that song to get added to the queue
     song_dict = {
