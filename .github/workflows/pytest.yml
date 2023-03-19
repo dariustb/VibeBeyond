@@ -19,4 +19,4 @@ jobs:
           python -m pip install -r backend/requirements.txt
 
       - name: Run Pytest
-        run: pytest backend/
+        run: pytest
