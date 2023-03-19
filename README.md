@@ -1,6 +1,4 @@
 <!-- PROJECT SHIELDS -->
-[![ViTest][vitest]][vitest-url]
-[![ESLint][eslint]][eslint-url]
 [![PyTest][pytest]][pytest-url]
 [![PyLint][pylint]][pylint-url]
 [![GPages][gpages]][gpages-url]
@@ -32,38 +30,44 @@ Vibe beyond is an app that'll probably make the anti-creative-AI crowd upset. Th
 
 _Please [refer to the documentation][docs] for the full breakdown and logic explanation of the app._
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### Built With
-* ![NodeJS][node.js]
-* ![NPM][npm.io]
-* ![Vue][vue.js]
-* ![Tailwind][tailwind.css]
 * ![Python][python.io]
 * ![Flask][flask.io]
+* ![Tailwind][tailwind.css]
+* ![NPM][npm.io]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Prerequisites
 
-* [VS Code][vscode] + extensions:
-    * [Volar][volar]  (v0.3.1361 or greater)
-* [Node][node] (v18.12.1 or greater)
-* [npm][npm] (9.2.0 or greater)
+* [VS Code][vscode] (1.76.2 or greater)
 * [Python 3][python] (3.11.0 or greater)
+  * [pip 3][python] (versions 22.3 - 23.0.1)
+* [npm][npm] (9.2.0 or greater)
 
-## Customize configuration
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Terminal Commands - Vue / Flask
+## Setup
+#### Install Dependencies
+```sh
+# python libraries
+pip install -r requirements.txt
 
-| Vue Frontend | (run from 'frontend' folder) | Flask Backend | (run from project root) |
-|---|---|---|---|
-| Project Setup | `npm install` | Project setup (in venv) | `pip install -r backend/requirements.txt` |
-| Serve on Dev | `npm run dev` | Serve on Dev | `python backend/app.py` |
-| Compile/Minify for Prod | `npm run build` |  |  |
-| Unit Test - [Vitest](https://vitest.dev/) | `npm run test` | Unit Test - [Pytest](https://docs.pytest.org/en/latest/) | `pytest backend/` |
-| Lint - [ESLint](https://eslint.org/) | `npm run lint` | Lint - [Pylint](https://pylint.readthedocs.io/en/latest/) | `pylint backend/` |
+# npm packages
+npm install
+
+# tailwindCSS
+npm run tailwind
+```
+
+#### Run App
+`python src/app.py`
+
+## Testing
+#### Unit Test
+`pytest`
+
+#### Linting Test
+`pylint src/`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,13 +88,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 [product-screenshot]:   /docs/assets/images/wf_start.png
 
 <!-- CI Test badges -->
-[vitest]:   https://github.com/dariustb/VibeBeyond/actions/workflows/vitest.yml/badge.svg
-[eslint]:   https://github.com/dariustb/VibeBeyond/actions/workflows/eslint.yml/badge.svg
 [pytest]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pytest.yml/badge.svg
 [pylint]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pylint.yml/badge.svg
-[gpages]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
-[vitest-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/vitest.yml
-[eslint-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/eslint.yml
+[gpages]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg 
 [pytest-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pytest.yml
 [pylint-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pylint.yml
 [gpages-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment

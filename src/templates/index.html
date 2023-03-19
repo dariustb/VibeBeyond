@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main
+class="flex items-center justify-center h-screen shadow-[inset_0_0px_0px_1000px_rgba(217,217,217,0.2)]"
+>
+<!-- vibe beyond title -->
+<h1 class="text-[64px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+  <b class="font-light">vibe </b><b>beyond.</b>
+</h1>
+
+<!-- Play button -->
+<br>
+<div class="flex items-center justify-center h-screen">
+    <button onclick="location.href='play'" class="bg-blue-200 hover:bg-blue-400 text-white font-bold py-2 px-4">
+        <h1 class="text-[24px]">start</h1>
+    </button>
+    </div>
+
+<!-- Darius / Linh -->
+<div class="absolute right-5 bottom-3">
+  <p class="text-xs opacity-50 font-semibold">Darius Brown / Linh Nguyen</p>
+</div>
+</main>
+{% endblock %}

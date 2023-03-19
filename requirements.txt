@@ -1,6 +1,5 @@
-# Flask Server
+# Flask web framework
 Flask==2.2.3
-Flask-Cors==3.0.10
 
 # Testing / CI
 pytest
