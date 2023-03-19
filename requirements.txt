@@ -6,7 +6,7 @@ pytest
 pylint
 
 # MIDI Manipulation
-mido --use-pep517
+mido
 
 # Soundfont Loader
-sf2-loader --use-pep517
+sf2-loader
