@@ -24,7 +24,7 @@ class SongClass:
         self.artist :str = self.set_artist()
         self.len    :str = '03:42' #get_song_len()
         self.path   :str = queue.QUEUE_FOLDER_PATH + self.name.replace(' ','_') + file_ext
-    
+
     def set_name(self) -> str:
         ''' Returns a string with a mocked song name '''
         with open('backend/json/words.json', encoding="utf8") as words_file:
@@ -32,7 +32,7 @@ class SongClass:
             adj = random.choice(words['adjs'])
             noun = random.choice(words['nouns'])
         return f'{adj} {noun}'.title()
-    
+
     def set_artist(self) -> str:
         ''' Returns a string with a mocked artist name '''
         return ''.join(random.choices(string.ascii_letters, k=10)).title()
