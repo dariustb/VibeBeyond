@@ -40,8 +40,9 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 ### Prerequisites
 
 * [VS Code][vscode] (1.76.2 or greater)
-* [npm][npm] (9.2.0 or greater)
 * [Python 3][python] (3.11.0 or greater)
+  * [pip 3][python] (versions 22.3 - 23.0.1)
+* [npm][npm] (9.2.0 or greater)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -63,7 +64,7 @@ npm run tailwind
 
 ## Testing
 #### Unit Test
-`pytest src/`
+`pytest`
 
 #### Linting Test
 `pylint src/`
