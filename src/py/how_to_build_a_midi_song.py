@@ -14,7 +14,7 @@ def build_song(midi_song_name = 'song.mid'):
     ''' Creates a full midi melody (this case being a major scale pattern) '''
     # Set the values for the song
     instrument_name = 'Electric Piano'
-    tempo = mido.bpm2tempo(90)
+    beats_per_minute = 90
     key = 'C'
     key_note = 60 # Middle-C
     ma_scale = [key_note,
@@ -37,14 +37,12 @@ def build_song(midi_song_name = 'song.mid'):
 
     # Add a track to the MIDI file
     track = mido.MidiTrack()
-    mid.tracks.append(track)
 
     # Add MetaMessages to file
     track.append(mido.MetaMessage('track_name', name=instrument_name, time=0))
-    track.append(mido.MetaMessage('time_signature', numerator=4, denominator=4,
-                                  clocks_per_click=24, notated_32nd_notes_per_beat=8, time=0))
+    track.append(mido.MetaMessage('time_signature', numerator=4, denominator=4, time=0))
     track.append(mido.MetaMessage('key_signature', key=key, time=0))
-    track.append(mido.MetaMessage('set_tempo', tempo=tempo, time=0))
+    track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(beats_per_minute), time=0))
 
     # Not sure why yet, but MuseScore does this, and it allows the sound to play
     track.append(mido.Message('control_change', channel=0, control=121, value=0, time=0))
@@ -88,6 +86,7 @@ def build_song(midi_song_name = 'song.mid'):
     track.append(mido.MetaMessage('end_of_track', time=1))
 
     # Save the MIDI file
+    mid.tracks.append(track)
     mid.save('src/static/midi/' + midi_song_name)
 
 if __name__ == '__main__':
