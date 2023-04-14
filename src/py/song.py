@@ -4,8 +4,79 @@ import random
 import mido
 
 # Global Vars
-BPM_LOWER_BOUND = 75
-BPM_UPPER_BOUND = 120
+MIN_BPM = 75
+MAX_BPM = 120
+
+# https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
+VALID_KEYS = (
+    'A', 'Bb', 'B', 'C', 'Db', 'D',
+    'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
+    )
+VALID_TIME_SIGNATURES = (
+    (4,4),(6,8)
+    )
+VALID_CHORD_PROGRESSIONS = (
+    ('ii', 'V', 'I', 'IV'),
+    ('ii7', 'V', 'I7', 'I7'),
+    ('ii', 'V7', 'iii', 'vi'),
+
+    ('iii', 'vi', 'IV', 'I'),
+
+    ('IV', 'I', 'ii', 'vi'),
+    ('IV', 'I', 'iii', 'IV'),
+    ('IV', 'I', 'V', 'vi'),
+    ('IV', 'IV', 'I', 'V'),
+    ('IV', 'vi', 'I', 'V'),
+    ('IV', 'vi', 'iii', 'I'),
+
+    ('V', 'I', 'vi', 'V'),
+    ('V', 'IV', 'vi', 'I'),
+    ('V', 'vi', 'IV', 'I'),
+
+    ('vi', 'bVIM', 'bVIIM', 'I'),
+    ('vi', 'ii', 'V', 'I'),
+    ('vi', 'IV', 'I', 'V'),
+    ('vi', 'V', 'IV', 'V', 'ii', 'V', 'I', 'I'),
+    ('vi', 'V', 'IV', 'V'),
+    ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
+    )
+
+KEYBOARD_PATCHES = (
+    # Piano
+    'Acoustic Grand Piano',
+    'Bright Acoustic Piano',
+    'Electric Grand Piano',
+    'Honky-tonk Piano',
+    'Electric Piano 1',
+    'Electric Piano 2',
+    'Harpsichord',
+    'Clavinet',
+
+    # Pad
+    'Pad 1 (new age)',
+    'Pad 2 (warm)',
+    'Pad 3 (polysynth)',
+    'Pad 4 (choir)',
+    'Pad 5 (bowed)',
+    'Pad 6 (metallic)',
+    'Pad 7 (halo)',
+    'Pad 8 (sweep)'
+    )
+LEAD_PATCHES = (
+    'Harpsichord',
+    'Clavinet'
+)
+BASS_PATCHES = (
+    # Bass
+    'Acoustic Bass',
+    'Electric Bass (finger)',
+    'Electric Bass (pick)',
+    'Fretless Bass',
+    'Slap Bass 1',
+    'Slap Bass 2',
+    'Synth Bass 1',
+    'Synth Bass 2'
+    )
 
 class Song:
     ''' This class will be used to generate a song'''
@@ -50,89 +121,31 @@ class Song:
         Returns a random Key (based on mido's valid key signatures)
         https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
         '''
-        return random.choice(
-            ('A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab')
-        )
+        return random.choice(VALID_KEYS)
 
     def set_bpm(self) -> int:
         ''' Returns a random BPM within the usable range, inclusive '''
-        return random.randint(BPM_LOWER_BOUND, BPM_UPPER_BOUND)
+        return random.randint(MIN_BPM, MAX_BPM)
 
     def set_time_sig(self) -> tuple:
         ''' Returns tuple with numer and denom of the time signature '''
-        return random.choice((
-            (4,4), (6,8)
-        ))
+        return random.choice(VALID_TIME_SIGNATURES)
 
     def set_chord_prog(self) -> tuple:
         ''' Returns a tuple with the chord identities, not connected to the key '''
-        return random.choice((
-            ('ii', 'V', 'I', 'IV'),
-            ('ii7', 'V', 'I7', 'I7'),
-            ('ii', 'V7', 'iii', 'vi'),
-
-            ('iii', 'vi', 'IV', 'I'),
-
-            ('IV', 'I', 'ii', 'vi'),
-            ('IV', 'I', 'iii', 'IV'),
-            ('IV', 'I', 'V', 'vi'),
-            ('IV', 'IV', 'I', 'V'),
-            ('IV', 'vi', 'I', 'V'),
-            ('IV', 'vi', 'iii', 'I'),
-
-            ('V', 'I', 'vi', 'V'),
-            ('V', 'IV', 'vi', 'I'),
-            ('V', 'vi', 'IV', 'I'),
-
-            ('vi', 'bVIM', 'bVIIM', 'I'),
-            ('vi', 'ii', 'V', 'I'),
-            ('vi', 'IV', 'I', 'V'),
-            ('vi', 'V', 'IV', 'V', 'ii', 'V', 'I', 'I'),
-            ('vi', 'V', 'IV', 'V'),
-            ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
-        ))
+        return random.choice(VALID_CHORD_PROGRESSIONS)
 
     def set_keys_name(self) -> str:
         ''' Returns a random piano or pad midi instrument name '''
-        return random.choice((
-            # Piano
-            'Acoustic Grand Piano',
-            'Bright Acoustic Piano',
-            'Electric Grand Piano',
-            'Honky-tonk Piano',
-            'Electric Piano 1',
-            'Electric Piano 2',
-            'Harpsichord',
-            'Clavinet',
-
-            # Pad
-            'Pad 1 (new age)',
-            'Pad 2 (warm)',
-            'Pad 3 (polysynth)',
-            'Pad 4 (choir)',
-            'Pad 5 (bowed)',
-            'Pad 6 (metallic)',
-            'Pad 7 (halo)',
-            'Pad 8 (sweep)'
-        ))
+        return random.choice(KEYBOARD_PATCHES)
 
     def set_lead_name(self) -> str:
         ''' Returns a random piano/synth/guitar/chromatic perc midi instrument name'''
-        return ''
+        return random.choice(LEAD_PATCHES)
 
     def set_bass_name(self) -> str:
         ''' Returns a random bass midi instrument name'''
-        return random.choice((
-            # Bass
-            'Acoustic Bass',
-            'Electric Bass (finger)',
-            'Electric Bass (pick)',
-            'Fretless Bass',
-            'Slap Bass 1',
-            'Slap Bass 2',
-            'Synth Bass 1',
-            'Synth Bass 2'
-        ))
+        return random.choice(BASS_PATCHES)
 
     def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
@@ -250,6 +263,8 @@ class Song:
             # Reset root note and chord intervals for next chord
             root_note = None
             chord_intervals = None
+
+            return True
 
     # MIDI UTILITY FUNCTIONS
     def close_midi_track(self, track: mido.MidiTrack):
