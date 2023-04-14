@@ -267,10 +267,6 @@ class Song:
             return True
 
     # MIDI UTILITY FUNCTIONS
-    def close_midi_track(self, track: mido.MidiTrack):
-        ''' Closes the midi track '''
-        track.append(mido.MetaMessage('end_of_track', time=1))
-
     def combine_midi_tracks(self):
         ''' Combines the midi tracks into MidiFile '''
         if self.mid_prog_track is not None:
@@ -291,7 +287,6 @@ if __name__ == '__main__':
     song.print_info()
 
     song.gen_chord_prog()
-    song.close_midi_track(song.mid_prog_track)
     song.combine_midi_tracks()
 
     song.print_chords()
