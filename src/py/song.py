@@ -264,7 +264,7 @@ class Song:
             root_note = None
             chord_intervals = None
 
-            return True
+        return True
 
     # MIDI UTILITY FUNCTIONS
     def combine_midi_tracks(self):
