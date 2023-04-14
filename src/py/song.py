@@ -11,10 +11,10 @@ MAX_BPM = 120
 VALID_KEYS = (
     'A', 'Bb', 'B', 'C', 'Db', 'D',
     'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
-    )
+)
 VALID_TIME_SIGNATURES = (
     (4,4),(6,8)
-    )
+)
 VALID_CHORD_PROGRESSIONS = (
     ('ii', 'V', 'I', 'IV'),
     ('ii7', 'V', 'I7', 'I7'),
@@ -39,7 +39,7 @@ VALID_CHORD_PROGRESSIONS = (
     ('vi', 'V', 'IV', 'V', 'ii', 'V', 'I', 'I'),
     ('vi', 'V', 'IV', 'V'),
     ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
-    )
+)
 
 KEYBOARD_PATCHES = (
     # Piano
@@ -61,7 +61,7 @@ KEYBOARD_PATCHES = (
     'Pad 6 (metallic)',
     'Pad 7 (halo)',
     'Pad 8 (sweep)'
-    )
+)
 LEAD_PATCHES = (
     'Harpsichord',
     'Clavinet'
@@ -76,7 +76,7 @@ BASS_PATCHES = (
     'Slap Bass 2',
     'Synth Bass 1',
     'Synth Bass 2'
-    )
+)
 
 class Song:
     ''' This class will be used to generate a song'''
