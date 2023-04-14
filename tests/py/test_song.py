@@ -1,5 +1,7 @@
 ''' test_song.py - Test Song Class functions '''
 
+# pylint: disable = import-error
+
 import mido
 from src.py import song
 
@@ -51,7 +53,7 @@ def test_set_bpm():
     assert isinstance(test_bpm, int)
 
     # Check that the bpm is within the range
-    assert test_bpm >= song.MIN_BPM and test_bpm <= song.MAX_BPM
+    assert song.MIN_BPM <= test_bpm <= song.MAX_BPM
 
 def test_set_time_signature():
     ''' test_set_time_signature - Test Song.set_time_signature() '''
