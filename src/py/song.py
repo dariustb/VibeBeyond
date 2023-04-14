@@ -1,3 +1,5 @@
+''' song.py - This file will be used to generate a song '''
+
 import random
 import mido
 
@@ -6,25 +8,26 @@ BPM_LOWER_BOUND = 75
 BPM_UPPER_BOUND = 120
 
 class Song:
+    ''' This class will be used to generate a song'''
     def __init__(self):
         ''' All the song's static variables will be kept here '''
-        
+
         # Metadata
-        self.title      = self.setTitle()
-        self.artist     = self.setArtist()
-        
+        self.title      = self.set_title()
+        self.artist     = self.set_artist()
+
         # Song generation info
-        self.key        = self.setKey()
-        self.bpm        = self.setBeatsPerMinute() # tempo = mido.bpm2tempo(bpm) =/= bpm
-        self.time_sig   = self.setTimeSig()
-        self.prog       = self.setChordProg()
-        self.keys_name  = self.setKeysName()
-        self.lead_name  = self.setLeadName()
-        self.bass_name  = self.setBassName()
+        self.key        = self.set_key()
+        self.bpm        = self.set_bpm() # tempo = mido.bpm2tempo(bpm) =/= bpm
+        self.time_sig   = self.set_time_sig()
+        self.prog       = self.set_chord_prog()
+        self.keys_name  = self.set_keys_name()
+        self.lead_name  = self.set_lead_name()
+        self.bass_name  = self.set_bass_name()
         self.drum_name  = ''
 
         # Midi info
-        self.mid_prog_track = self.setTrackPrefix()
+        self.mid_prog_track = self.set_track_prefix()
         self.mid_lead_track = None
         self.mid_bass_track = None
         self.mid_drum_track = None
@@ -34,15 +37,15 @@ class Song:
         self.mid        = mido.MidiFile()
 
     ## SETTER FUNCTIONS
-    def setTitle(self) -> str:
+    def set_title(self) -> str:
         ''' Returns a randomized string of text in Title Case '''
         return 'example song'.title()
-    
-    def setArtist(self) -> str:
+
+    def set_artist(self) -> str:
         ''' Returns a randomized string of text in Title Case '''
         return 'example Artist'.title()
-    
-    def setKey(self) -> str:
+
+    def set_key(self) -> str:
         '''
         Returns a random Key (based on mido's valid key signatures)
         https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
@@ -50,18 +53,18 @@ class Song:
         return random.choice(
             ('A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab')
         )
-    
-    def setBeatsPerMinute(self) -> int:
+
+    def set_bpm(self) -> int:
         ''' Returns a random BPM within the usable range, inclusive '''
         return random.randint(BPM_LOWER_BOUND, BPM_UPPER_BOUND)
 
-    def setTimeSig(self) -> tuple:
+    def set_time_sig(self) -> tuple:
         ''' Returns tuple with numer and denom of the time signature '''
         return random.choice((
             (4,4), (6,8)
         ))
-    
-    def setChordProg(self) -> tuple:
+
+    def set_chord_prog(self) -> tuple:
         ''' Returns a tuple with the chord identities, not connected to the key '''
         return random.choice((
             ('ii', 'V', 'I', 'IV'),
@@ -88,8 +91,8 @@ class Song:
             ('vi', 'V', 'IV', 'V'),
             ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
         ))
-    
-    def setKeysName(self) -> str:
+
+    def set_keys_name(self) -> str:
         ''' Returns a random piano or pad midi instrument name '''
         return random.choice((
             # Piano
@@ -112,12 +115,12 @@ class Song:
             'Pad 7 (halo)',
             'Pad 8 (sweep)'
         ))
-    
-    def setLeadName(self) -> str:
+
+    def set_lead_name(self) -> str:
         ''' Returns a random piano/synth/guitar/chromatic perc midi instrument name'''
         return ''
 
-    def setBassName(self) -> str:
+    def set_bass_name(self) -> str:
         ''' Returns a random bass midi instrument name'''
         return random.choice((
             # Bass
@@ -131,7 +134,7 @@ class Song:
             'Synth Bass 2'
         ))
 
-    def setTrackPrefix(self) -> mido.MidiTrack:
+    def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
         # Create track
         track = mido.MidiTrack()
@@ -158,7 +161,7 @@ class Song:
         return track
 
     # PRINT FUNCTIONS
-    def printInfo(self):
+    def print_info(self):
         ''' Prints the class variables to console '''
         print()
         print('Title:\t',       self.title)
@@ -169,7 +172,7 @@ class Song:
         print('BPM:\t',         self.bpm)
         print('Time:\t',        self.time_sig)
         print('Chords:\t',      self.prog)
-        
+
         print()
         print('Keys:\t',        self.keys_name)
         print('Lead:\t',        self.lead_name)
@@ -179,19 +182,20 @@ class Song:
         print()
         print('File:\t',        self.file_name)
 
-    def printChords(self):
+    def print_chords(self):
         ''' Prints the chord progression to console '''
         print()
         print('Chords:\t',      self.mid_prog_track)
 
     # GENERATION FUNCTIONS
-    def genChordProg(self):
+    def gen_chord_prog(self):
         ''' Adds a chord progression to the class variable '''
         root_note  = None
         chord_intervals = None
 
         for chord in self.prog:
             # Evaluate chord type
+            chord_no_acc = chord.replace('b','').replace('#','')
             if '7' in chord:
                 chord_intervals = (0, 4, 7, 10)  # dominant 7th
             elif 'dim' in chord:
@@ -200,7 +204,7 @@ class Song:
                 chord_intervals = (0, 4, 8, 10)  # augmented
             elif chord.lower() == chord:
                 chord_intervals = (0, 3, 7, 10)  # minor 7
-            elif chord.replace('b','').replace('#','').upper() == chord.replace('b','').replace('#',''):
+            elif chord_no_acc.upper() == chord_no_acc:
                 chord_intervals = (0, 4, 7, 11)  # major 7
             else:
                 chord_intervals = None
@@ -222,7 +226,8 @@ class Song:
                 'iii': 4, 'iv': 5,
                 'v':  -5, 'vi': -3,
                 'vii':-1
-            }[chord.lower().replace('b','').replace('#','').replace('7','').replace('dim','').replace('aug','').replace('m','')]
+            }[chord.lower().replace('b','').replace('#','').replace('7','')
+              .replace('dim','').replace('aug','').replace('m','')]
 
             # Evaluate scale degree modification (flat, sharp, etc.)
             if 'b' in chord:
@@ -247,11 +252,11 @@ class Song:
             chord_intervals = None
 
     # MIDI UTILITY FUNCTIONS
-    def closeMidiTrack(self, track: mido.MidiTrack):
+    def close_midi_track(self, track: mido.MidiTrack):
         ''' Closes the midi track '''
         track.append(mido.MetaMessage('end_of_track', time=1))
 
-    def combineMidiTracks(self):
+    def combine_midi_tracks(self):
         ''' Combines the midi tracks into MidiFile '''
         if self.mid_prog_track is not None:
             self.mid.tracks.append(self.mid_prog_track)
@@ -262,18 +267,18 @@ class Song:
         if self.mid_drum_track is not None:
             self.mid.tracks.append(self.mid_drum_track)
 
-    def saveMidiFile(self):
+    def save_midi_file(self):
         ''' Saves the midi file to the directory '''
         self.mid.save('src/static/midi/' + self.title + '.mid')
 
 if __name__ == '__main__':
     song = Song()
-    song.printInfo()
+    song.print_info()
 
-    song.genChordProg()
-    song.closeMidiTrack(song.mid_prog_track)
-    song.combineMidiTracks()
-    
-    song.printChords()
+    song.gen_chord_prog()
+    song.close_midi_track(song.mid_prog_track)
+    song.combine_midi_tracks()
 
-    song.saveMidiFile()
+    song.print_chords()
+
+    song.save_midi_file()
