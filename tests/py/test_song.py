@@ -110,23 +110,3 @@ def test_set_track_prefix():
 
     # Check that the track prefix is a string
     assert isinstance(test_track_prefix, mido.MidiTrack)
-
-def close_midi_track():
-    ''' close_midi_track - Test Song.close_midi_track() '''
-    test_song = song.Song()
-
-    test_song.close_midi_track(test_song.mid_prog_track)
-    assert mido.MetaMessage('end_of_track') in test_song.mid_prog_track
-
-    # NOTE: The following tests are commented out because the other tracks are
-    # not being used at the moment.  They will be uncommented when the other tracks
-    # are being used.
-
-    # test_song.close_midi_track(test_song.mid_lead_track)
-    # assert mido.MetaMessage('end_of_track') in test_song.mid_lead_track
-
-    # test_song.close_midi_track(test_song.mid_bass_track)
-    # assert mido.MetaMessage('end_of_track') in test_song.mid_bass_track
-
-    # test_song.close_midi_track(test_song.mid_drum_track)
-    # assert mido.MetaMessage('end_of_track') in test_song.mid_drum_track
