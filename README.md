@@ -26,7 +26,11 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Vibe beyond is an app that'll probably make the anti-creative-AI crowd upset. The application is used to emulate the function of those 24-hour "Lofi Hip-Hop Beats to Study/Chill to" while working with the component of a desktop app to use the user's storage to build (and remove) new songs to stream.
+Welcome to the world of lofi hip hop! Our radio station is unique in that it generates its music in real-time using Python and Flask. Linh and myself have built a custom algorithm that creates a relaxing, soothing soundscape that's perfect for studying, working, or simply unwinding.
+
+Our code generates a continuous stream of music that's never the same twice, ensuring that our listeners always have a fresh and unique experience. We've designed our platform to be accessible and easy to use, with a sleek and intuitive interface that lets you customize your listening experience to suit your preferences.
+
+At our core, we're passionate about music and technology, and we're committed to pushing the boundaries of what's possible with code. Whether you're a fan of lofi hip hop or simply curious about the intersection of music and programming, we invite you to join us on this journey of exploration and discovery!
 
 _Please [refer to the documentation][docs] for the full breakdown and logic explanation of the app._
 
@@ -46,8 +50,7 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Setup
-#### Install Dependencies
+## Installation
 ```sh
 # python libraries
 pip install -r requirements.txt
@@ -59,15 +62,22 @@ npm install
 npm run tailwind
 ```
 
-#### Run App
-`python src/app.py`
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Testing
+
+### Usage
+```sh
+python src/app.py
+```
+## Development
 #### Unit Test
-`pytest`
-
+```sh
+python -m pytest
+```
 #### Linting Test
-`pylint src/`
+```sh
+pylint src/ tests/
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
