@@ -106,7 +106,7 @@ class Song:
         self.mid_drum_track = None
 
         # File info
-        self.file_name  = str(self.title + '.mp3').replace(' ', '_')
+        self.file_name  = str(self.title.replace(' ', '_') + '.' + sf2.AUDIO_FILE_TYPE)
         self.mid        = mido.MidiFile()
 
     ## SETTER FUNCTIONS
@@ -269,7 +269,7 @@ class Song:
 
     # MIDI UTILITY FUNCTIONS
     def save_midi_file(self):
-        ''' Combines the midi tracks into MidiFile & saves to file '''
+        ''' Combines the midi tracks into MidiFile & saves to .mid file '''
         if self.mid_prog_track is not None:
             self.mid.tracks.append(self.mid_prog_track)
         if self.mid_lead_track is not None:
@@ -279,9 +279,10 @@ class Song:
         if self.mid_drum_track is not None:
             self.mid.tracks.append(self.mid_drum_track)
 
-        self.mid.save('src/static/midi/' + self.title + '.mid')
+        midi_file_name = 'src/gen/midi/' + self.title + '.mid'
+        self.mid.save(midi_file_name)
 
-        return 'src/static/midi/' + self.title + '.mid'
+        return midi_file_name
 
 if __name__ == '__main__':
     song = Song()

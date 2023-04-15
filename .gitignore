@@ -194,12 +194,9 @@ cython_debug/
 # TailwindCSS output css file
 tailwind.css
 
-# MIDI files - test files only
-src/static/midi/test_*.mid
-src/static/midi/Example Song.mid
-
 # sf2 files - ignore all sf2 files, keep the readme
 src/static/sf2/*
 !src/static/sf2/README.md
 
-
+# All generated midi & audio files
+src/gen/*
