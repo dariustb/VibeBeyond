@@ -1,6 +1,7 @@
 ''' song.py - This file will be used to generate a song '''
 
 import random
+import re
 import mido
 
 # Global Vars
@@ -203,10 +204,8 @@ class Song:
     # GENERATION FUNCTIONS
     def gen_chord_prog(self):
         ''' Adds a chord progression to the class variable '''
-        root_note  = None
-        chord_intervals = None
 
-        for chord in self.prog:
+        for i, chord in enumerate(self.prog):
             # Evaluate chord type
             chord_no_acc = chord.replace('b','').replace('#','')
             if '7' in chord:
@@ -234,13 +233,18 @@ class Song:
             }[self.key]
 
             # Evaluate scale degree + add interval to root note
-            root_note += {
-                'i':   0, 'ii': 2,
-                'iii': 4, 'iv': 5,
-                'v':  -5, 'vi': -3,
-                'vii':-1
-            }[chord.lower().replace('b','').replace('#','').replace('7','')
-              .replace('dim','').replace('aug','').replace('m','')]
+            chord_degree = re.sub(r'b|#|7|dim|aug|m', '', chord).lower()
+            if i > 0:
+                last_chord_degree = re.sub(r'b|#|7|dim|aug|m', '', self.prog[i-1]).lower()
+                if (chord_degree in ['iv', 'iv7'] and last_chord_degree in ['v', 'v7']):
+                    root_note += -7 # special case for V-IV, so the chord doesn't jump an octave
+            else:
+                root_note += {
+                    'i':   0, 'ii': 2,
+                    'iii': 4, 'iv': 5,
+                    'v':  -5, 'vi': -3,
+                    'vii':-1
+                }[chord_degree]
 
             # Evaluate scale degree modification (flat, sharp, etc.)
             if 'b' in chord:
@@ -260,15 +264,11 @@ class Song:
                     'note_off', note=root_note+note_interval, velocity=0, time=time
                     ))
 
-            # Reset root note and chord intervals for next chord
-            root_note = None
-            chord_intervals = None
-
         return True
 
     # MIDI UTILITY FUNCTIONS
-    def combine_midi_tracks(self):
-        ''' Combines the midi tracks into MidiFile '''
+    def save_midi_file(self):
+        ''' Combines the midi tracks into MidiFile & saves to file '''
         if self.mid_prog_track is not None:
             self.mid.tracks.append(self.mid_prog_track)
         if self.mid_lead_track is not None:
@@ -278,17 +278,14 @@ class Song:
         if self.mid_drum_track is not None:
             self.mid.tracks.append(self.mid_drum_track)
 
-    def save_midi_file(self):
-        ''' Saves the midi file to the directory '''
         self.mid.save('src/static/midi/' + self.title + '.mid')
+
+        return True
 
 if __name__ == '__main__':
     song = Song()
-    song.print_info()
 
     song.gen_chord_prog()
-    song.combine_midi_tracks()
-
-    song.print_chords()
-
     song.save_midi_file()
+
+    song.print_info()
