@@ -18,8 +18,7 @@ def midi_to_audio(midi_path: str, output_path: str,
 
     # Set the soundfont instrument
     # https://pypi.org/project/sf2-loader/#Change-current-channel-soundfont-id-bank-number-and-preset-number
-    # pylint: disable = pointless-statement
-    loader < sf2_preset
+    loader < sf2_preset # pylint: disable = pointless-statement
 
     # render a MIDI file with current soundfont files and export as a wav file
     loader.export_midi_file(midi_path, name=output_path, format=AUDIO_FILE_TYPE)

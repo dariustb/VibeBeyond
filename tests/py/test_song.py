@@ -1,9 +1,8 @@
 ''' test_song.py - Test Song Class functions '''
 
-# pylint: disable = import-error
 
 import mido
-from src.py import song
+from src.py import song # pylint: disable = import-error
 
 # NOTE: Not testing the following functions:
 #   - Song.__init__()
