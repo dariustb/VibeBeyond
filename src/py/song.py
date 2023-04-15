@@ -3,6 +3,7 @@
 import random
 import re
 import mido
+import soundfont as sf2
 
 # Global Vars
 MIN_BPM = 75
@@ -280,7 +281,7 @@ class Song:
 
         self.mid.save('src/static/midi/' + self.title + '.mid')
 
-        return True
+        return 'src/static/midi/' + self.title + '.mid'
 
 if __name__ == '__main__':
     song = Song()
