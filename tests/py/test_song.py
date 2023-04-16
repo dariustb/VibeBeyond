@@ -1,6 +1,5 @@
 ''' test_song.py - Test Song Class functions '''
 
-
 import mido
 from src.py import song # pylint: disable = import-error
 
