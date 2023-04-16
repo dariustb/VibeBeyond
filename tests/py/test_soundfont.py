@@ -37,7 +37,7 @@ def test_set_bass_name():
         # This is a valid fail
         assert False
 
-    else:   
+    else:
         # Check that the keys name is a string
         assert isinstance(test_bass_name, str)
 
