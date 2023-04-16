@@ -5,7 +5,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<div align="center" id="readme-top">
   <a href="https://github.com/dariustb/vibebeyond">
     <img src="https://i1.sndcdn.com/artworks-nXTBoQMnJHSoNPbn-yX34xA-t500x500.jpg" alt="Logo" width="100" height="100">
   </a>
@@ -40,6 +40,7 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 * ![Tailwind][tailwind.css]
 * ![NPM][npm.io]
 
+## Installation
 
 ### Prerequisites
 
@@ -48,9 +49,8 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
   * [pip 3][python] (versions 22.3 - 23.0.1)
 * [npm][npm] (9.2.0 or greater)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Installation
+### Install Dependencies
 ```sh
 # python libraries
 pip install -r requirements.txt
@@ -65,7 +65,7 @@ npm run tailwind
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-### Usage
+## Usage
 ```sh
 python src/app.py
 ```
@@ -81,6 +81,16 @@ pylint src/ tests/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## TODO
+- [x] Add collection of sf2 soundfonts
+- [ ] Note locations of soundfonts in sf2/readme
+- [x] Loop the song gen to make song-length chords
+- [ ] Connect the "time" value to a tempo and note length
+- [ ] Gather all sf2 into a tuple and route to song.keys/lead/bass_name
+- [ ] Track name / artist name generation
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
@@ -89,7 +99,6 @@ pylint src/ tests/
 
 <!-- Technologies -->
 [vscode]:   https://code.visualstudio.com/
-[volar]:    https://marketplace.visualstudio.com/items?itemName=Vue.volar
 [node]:     https://nodejs.org/en/
 [npm]:      https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 [python]:   https://www.python.org/
