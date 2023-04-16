@@ -3,7 +3,7 @@
 import random
 import re
 import mido
-import soundfont as sf2 # pylint: disable = import-error
+from . import soundfont as sf2
 
 # Global Vars
 MIN_BPM = 75
