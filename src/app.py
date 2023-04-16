@@ -3,6 +3,7 @@
 from flask import Flask, render_template
 from py import song
 from py import soundfont as sf2
+from py import info
 
 app = Flask(__name__)
 
@@ -27,18 +28,18 @@ def play():
 if __name__ == '__main__':
     # app.run(debug=True)
 
-    # Create song
-    song = song.Song()
+    # Create Midi and Sf2 objects
+    SongMid = song.Song()
+    SongSf2 = sf2.SoundFont()
 
     # Create midi file of the song
-    song.gen_chord_prog()
-    MIDI_PATH = song.save_midi_file()
+    SongMid.gen_chord_prog()
+    MIDI_PATH = SongMid.save_midi_file()
 
-    song.print_info()
+    info.print_info(SongMid, SongSf2)
 
     # Convert midi file to audio
-    sf2.midi_to_audio(
+    SongSf2.midi_to_audio(
         midi_path   = MIDI_PATH,
-        output_path = 'src/gen/audio/output.wav',
-        sf2_path    = 'src/static/sf2/rhodes.sf2',
+        output_path = 'src/gen/audio/output.wav'
     )

@@ -76,32 +76,6 @@ def test_set_chord_prog():
     # Check that the chords progression is valid
     assert test_chord_prog in song.VALID_CHORD_PROGRESSIONS
 
-def test_set_keys_name():
-    ''' test_set_keys_name - Test Song.set_keys_name() '''
-    test_keys_name = song.Song().set_keys_name()
-
-    # Check that the keys name is a string
-    assert isinstance(test_keys_name, str)
-
-    # Check that the keys name is not empty
-    assert test_keys_name != ''
-
-    # Check that the keys name is valid
-    assert test_keys_name in song.KEYBOARD_PATCHES
-
-def test_set_bass_name():
-    ''' test_set_bass_name - Test Song.set_bass_name() '''
-    test_bass_name = song.Song().set_bass_name()
-
-    # Check that the keys name is a string
-    assert isinstance(test_bass_name, str)
-
-    # Check that the keys name is not empty
-    assert test_bass_name != ''
-
-    # Check that the keys name is valid
-    assert test_bass_name in song.BASS_PATCHES
-
 def test_set_track_prefix():
     ''' test_set_track_prefix - Test Song.set_track_prefix() '''
     test_track_prefix = song.Song().set_track_prefix()

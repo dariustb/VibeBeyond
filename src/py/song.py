@@ -9,7 +9,7 @@ from . import soundfont as sf2
 MIN_BPM = 75
 MAX_BPM = 120
 
-# https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
+# NOTE: key list - https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
 VALID_KEYS = (
     'A', 'Bb', 'B', 'C', 'Db', 'D',
     'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
@@ -43,43 +43,6 @@ VALID_CHORD_PROGRESSIONS = (
     ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
 )
 
-KEYBOARD_PATCHES = (
-    # Piano
-    'Acoustic Grand Piano',
-    'Bright Acoustic Piano',
-    'Electric Grand Piano',
-    'Honky-tonk Piano',
-    'Electric Piano 1',
-    'Electric Piano 2',
-    'Harpsichord',
-    'Clavinet',
-
-    # Pad
-    'Pad 1 (new age)',
-    'Pad 2 (warm)',
-    'Pad 3 (polysynth)',
-    'Pad 4 (choir)',
-    'Pad 5 (bowed)',
-    'Pad 6 (metallic)',
-    'Pad 7 (halo)',
-    'Pad 8 (sweep)'
-)
-LEAD_PATCHES = (
-    'Harpsichord',
-    'Clavinet'
-)
-BASS_PATCHES = (
-    # Bass
-    'Acoustic Bass',
-    'Electric Bass (finger)',
-    'Electric Bass (pick)',
-    'Fretless Bass',
-    'Slap Bass 1',
-    'Slap Bass 2',
-    'Synth Bass 1',
-    'Synth Bass 2'
-)
-
 class Song:
     ''' This class will be used to generate a song'''
     def __init__(self):
@@ -94,10 +57,6 @@ class Song:
         self.bpm        = self.set_bpm() # tempo = mido.bpm2tempo(bpm) =/= bpm
         self.time_sig   = self.set_time_sig()
         self.prog       = self.set_chord_prog()
-        self.keys_name  = self.set_keys_name()
-        self.lead_name  = self.set_lead_name()
-        self.bass_name  = self.set_bass_name()
-        self.drum_name  = ''
 
         # Midi info
         self.mid_prog_track = self.set_track_prefix()
@@ -109,7 +68,7 @@ class Song:
         self.file_name  = str(self.title.replace(' ', '_') + '.' + sf2.AUDIO_FILE_TYPE)
         self.mid        = mido.MidiFile()
 
-    ## SETTER FUNCTIONS
+    # SETTER FUNCTIONS
     def set_title(self) -> str:
         ''' Returns a randomized string of text in Title Case '''
         return 'example song'.title()
@@ -137,18 +96,6 @@ class Song:
         ''' Returns a tuple with the chord identities, not connected to the key '''
         return random.choice(VALID_CHORD_PROGRESSIONS)
 
-    def set_keys_name(self) -> str:
-        ''' Returns a random piano or pad midi instrument name '''
-        return random.choice(KEYBOARD_PATCHES)
-
-    def set_lead_name(self) -> str:
-        ''' Returns a random piano/synth/guitar/chromatic perc midi instrument name'''
-        return random.choice(LEAD_PATCHES)
-
-    def set_bass_name(self) -> str:
-        ''' Returns a random bass midi instrument name'''
-        return random.choice(BASS_PATCHES)
-
     def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
         # Create track
@@ -174,33 +121,6 @@ class Song:
         track.append(mido.MetaMessage('midi_port', port=0, time=0))
 
         return track
-
-    # PRINT FUNCTIONS
-    def print_info(self):
-        ''' Prints the class variables to console '''
-        print()
-        print('Title:\t',       self.title)
-        print('Artist:\t',      self.artist)
-
-        print()
-        print('Key:\t',         self.key)
-        print('BPM:\t',         self.bpm)
-        print('Time:\t',        self.time_sig)
-        print('Chords:\t',      self.prog)
-
-        print()
-        print('Keys:\t',        self.keys_name)
-        print('Lead:\t',        self.lead_name)
-        print('Bass:\t',        self.bass_name)
-        print('Drum:\t',        self.drum_name)
-
-        print()
-        print('File:\t',        self.file_name)
-
-    def print_chords(self):
-        ''' Prints the chord progression to console '''
-        print()
-        print('Chords:\t',      self.mid_prog_track)
 
     # GENERATION FUNCTIONS
     def get_chord_intervals_list(self):
