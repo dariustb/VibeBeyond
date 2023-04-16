@@ -15,7 +15,7 @@ VALID_KEYS = (
     'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
 )
 VALID_TIME_SIGNATURES = (
-    (4,4),(6,8)
+    (4,4),(4,4)
 )
 VALID_CHORD_PROGRESSIONS = (
     ('ii', 'V', 'I', 'IV'),
@@ -203,11 +203,12 @@ class Song:
         print('Chords:\t',      self.mid_prog_track)
 
     # GENERATION FUNCTIONS
-    def gen_chord_prog(self):
-        ''' Adds a chord progression to the class variable '''
+    def get_chord_intervals_list(self):
+        ''' Returns a list of chord intervals in the progression '''
+        chord_intervals_list = []
 
-        for i, chord in enumerate(self.prog):
-            # Evaluate chord type
+        for chord in self.prog:
+            # Evaluate chord type as intervals
             chord_no_acc = chord.replace('b','').replace('#','')
             if '7' in chord:
                 chord_intervals = (0, 4, 7, 10)  # dominant 7th
@@ -220,8 +221,17 @@ class Song:
             elif chord_no_acc.upper() == chord_no_acc:
                 chord_intervals = (0, 4, 7, 11)  # major 7
             else:
-                chord_intervals = None
+                raise ValueError('Invalid chord type')
 
+            chord_intervals_list.append(chord_intervals)
+
+        return chord_intervals_list
+
+    def get_root_note_list(self):
+        ''' Returns a list of root notes in the progression '''
+        root_note_list = []
+
+        for chord in self.prog:
             # Evaluate key value as root note
             root_note = {
                 'Gb': 54, 'G': 55,
@@ -235,34 +245,59 @@ class Song:
 
             # Evaluate scale degree + add interval to root note
             chord_degree = re.sub(r'b|#|7|dim|aug|m', '', chord).lower()
-            if i > 0:
-                last_chord_degree = re.sub(r'b|#|7|dim|aug|m', '', self.prog[i-1]).lower()
-                if (chord_degree in ['iv', 'iv7'] and last_chord_degree in ['v', 'v7']):
-                    root_note += -7 # special case for V-IV, so the chord doesn't jump an octave
-            else:
-                root_note += {
-                    'i':   0, 'ii': 2,
-                    'iii': 4, 'iv': 5,
-                    'v':  -5, 'vi': -3,
-                    'vii':-1
-                }[chord_degree]
+            root_note += {
+                'i':   0, 'ii': 2,
+                'iii': 4, 
+                'iv': -7, 'v':  -5,
+                'vi': -3, 'vii':-1
+            }[chord_degree]
 
             # Evaluate scale degree modification (flat, sharp, etc.)
             if 'b' in chord:
-                root_note -= 1   # flat/lowered scale degree
+                root_note -= 1   # flat/lowered half-step
             elif '#' in chord:
-                root_note += 1   # sharp/raised scale degree
+                root_note += 1   # sharp/raised half-step
+
+            # Add values to outside lists
+            root_note_list.append(root_note)
+
+        return root_note_list
+
+    def gen_chord_prog(self):
+        ''' Adds a chord progression to the class variable '''
+
+        # Get chord progression variables
+        chord_intervals_list    = self.get_chord_intervals_list()
+        root_note_list          = self.get_root_note_list()
+
+        # Repeat chord progression for length of song
+        for _ in range(16):
 
             # Add notes in chord to midi track
-            for i, note_interval in enumerate(chord_intervals):
-                time = 1 if i == 0 else 0
-                self.mid_prog_track.append(mido.Message(
-                    'note_on', note=root_note+note_interval, velocity=80, time=time
+            for root_note in root_note_list:
+
+                # Get chord intervals
+                temp_list = chord_intervals_list.copy() # copy list so we don't pop from original
+                chord_intervals = temp_list.pop(0)
+
+                # Add note_on: sets the attack time for note (time=0 is instant)
+                for i, note_interval in enumerate(chord_intervals):
+                    note_start_time = 1 if i == 0 else 0
+                    self.mid_prog_track.append(mido.Message(
+                        'note_on',
+                        note = root_note + note_interval,
+                        velocity=80,
+                        time = note_start_time
                     ))
-            for i, note_interval in enumerate(chord_intervals):
-                time = 1919 if i == 0 else 0
-                self.mid_prog_track.append(mido.Message(
-                    'note_off', note=root_note+note_interval, velocity=0, time=time
+
+                # Add note_off: sets the release time for note (time=0 is instant)
+                for i, note_interval in enumerate(chord_intervals):
+                    note_stop_time = 1919 if i == 0 else 0
+                    self.mid_prog_track.append(mido.Message(
+                    'note_off',
+                    note = root_note + note_interval,
+                    velocity = 0,
+                    time = note_stop_time
                     ))
 
         return True
@@ -283,11 +318,3 @@ class Song:
         self.mid.save(midi_file_name)
 
         return midi_file_name
-
-if __name__ == '__main__':
-    song = Song()
-
-    song.gen_chord_prog()
-    song.save_midi_file()
-
-    song.print_info()
