@@ -20,6 +20,11 @@ class SoundFont:
     # SETTER FUNCTIONS
     def set_keys_name(self) -> str:
         ''' Returns a random piano or pad soundfont name '''
+        if not get_sf2_names():
+            raise ValueError(
+                "No soundfonts found in src/static/sf2/. View readme in folder to download soundfonts."
+            )
+        
         return random.choice(get_sf2_names())
 
     def set_lead_name(self) -> str:
