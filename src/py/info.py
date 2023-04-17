@@ -22,9 +22,6 @@ def print_info(song_mid: song.Song, song_sf2: sf2.SoundFont):
     print('Bass:\t',        song_sf2.bass_name)
     print('Drum:\t',        song_sf2.drum_name)
 
-    print()
-    print('File:\t',        song_mid.file_name)
-
 def print_chords(song_mid: song.Song):
     ''' Prints the chord progression to console '''
     print()

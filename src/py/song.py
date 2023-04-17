@@ -3,7 +3,6 @@
 import random
 import re
 import mido
-from . import soundfont as sf2
 
 # Global Vars
 MIN_BPM = 75
@@ -65,7 +64,6 @@ class Song:
         self.mid_drum_track = None
 
         # File info
-        self.file_name  = str(self.title.replace(' ', '_') + '.' + sf2.AUDIO_FILE_TYPE)
         self.mid        = mido.MidiFile()
 
     # SETTER FUNCTIONS
