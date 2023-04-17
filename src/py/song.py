@@ -9,7 +9,7 @@ MIN_BPM = 75
 MAX_BPM = 120
 
 MIDI_FOLDER = 'src/gen/midi/'
-MIDI_FILE_TYPE = 'mid'
+MIDI_FILE_TYPE = '.mid'
 
 VALID_KEYS = (
     'A', 'Bb', 'B', 'C', 'Db', 'D',
@@ -164,7 +164,7 @@ class Song:
             }[self.key]
 
             # Evaluate scale degree + add interval to root note
-            chord_degree = re.sub(r'b|#|7|dim|aug|m', '', chord).lower()
+            chord_degree = re.sub(r'b|#|7|dim|aug|m|M', '', chord).lower()
             root_note += {
                 'i':   0, 'ii': 2,
                 'iii': 4, 
@@ -185,6 +185,10 @@ class Song:
 
     def gen_chord_prog(self):
         ''' Adds a chord progression to the class variable '''
+
+        # Might need to move this later - note length in ticks (480 ticks per beat)
+        qtr_note = 480
+        whole_note = qtr_note * 4
 
         # Get chord progression variables
         chord_intervals_list    = self.get_chord_intervals_list()
@@ -212,7 +216,7 @@ class Song:
 
                 # Add note_off: sets the release time for note (time=0 is instant)
                 for i, note_interval in enumerate(chord_intervals):
-                    note_stop_time = 1919 if i == 0 else 0
+                    note_stop_time = whole_note if i == 0 else 0
                     self.mid_prog_track.append(mido.Message(
                     'note_off',
                     note = root_note + note_interval,
