@@ -8,15 +8,17 @@ import mido
 MIN_BPM = 75
 MAX_BPM = 120
 
-# NOTE: key list - https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
+MIDI_FOLDER = 'src/gen/midi/'
+MIDI_FILE_TYPE = 'mid'
+
 VALID_KEYS = (
     'A', 'Bb', 'B', 'C', 'Db', 'D',
     'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
-)
-VALID_TIME_SIGNATURES = (
+) # NOTE: key list - https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
+TIME_SIGNATURES = (
     (4,4),(4,4)
 )
-VALID_CHORD_PROGRESSIONS = (
+CHORD_PROGRESSIONS = (
     ('ii', 'V', 'I', 'IV'),
     ('ii7', 'V', 'I7', 'I7'),
     ('ii', 'V7', 'iii', 'vi'),
@@ -88,11 +90,11 @@ class Song:
 
     def set_time_sig(self) -> tuple:
         ''' Returns tuple with numer and denom of the time signature '''
-        return random.choice(VALID_TIME_SIGNATURES)
+        return random.choice(TIME_SIGNATURES)
 
     def set_chord_prog(self) -> tuple:
         ''' Returns a tuple with the chord identities, not connected to the key '''
-        return random.choice(VALID_CHORD_PROGRESSIONS)
+        return random.choice(CHORD_PROGRESSIONS)
 
     def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
@@ -232,7 +234,7 @@ class Song:
         if self.mid_drum_track is not None:
             self.mid.tracks.append(self.mid_drum_track)
 
-        midi_file_name = 'src/gen/midi/' + self.title + '.mid'
+        midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.mid.save(midi_file_name)
 
         return midi_file_name
