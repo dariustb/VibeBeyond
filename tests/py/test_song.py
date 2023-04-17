@@ -61,7 +61,7 @@ def test_set_time_signature():
     assert isinstance(test_time_signature, tuple)
 
     # Check that the time signature is a valid time signature
-    assert test_time_signature in song.VALID_TIME_SIGNATURES
+    assert test_time_signature in song.TIME_SIGNATURES
 
 def test_set_chord_prog():
     ''' test_set_chords_prog - Test Song.set_chords_prog() '''
@@ -74,7 +74,7 @@ def test_set_chord_prog():
     assert test_chord_prog != ()
 
     # Check that the chords progression is valid
-    assert test_chord_prog in song.VALID_CHORD_PROGRESSIONS
+    assert test_chord_prog in song.CHORD_PROGRESSIONS
 
 def test_set_track_prefix():
     ''' test_set_track_prefix - Test Song.set_track_prefix() '''

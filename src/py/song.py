@@ -3,21 +3,22 @@
 import random
 import re
 import mido
-from . import soundfont as sf2
 
 # Global Vars
 MIN_BPM = 75
 MAX_BPM = 120
 
-# NOTE: key list - https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
+MIDI_FOLDER = 'src/gen/midi/'
+MIDI_FILE_TYPE = '.mid'
+
 VALID_KEYS = (
     'A', 'Bb', 'B', 'C', 'Db', 'D',
     'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
-)
-VALID_TIME_SIGNATURES = (
+) # https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
+TIME_SIGNATURES = (
     (4,4),(4,4)
 )
-VALID_CHORD_PROGRESSIONS = (
+CHORD_PROGRESSIONS = (
     ('ii', 'V', 'I', 'IV'),
     ('ii7', 'V', 'I7', 'I7'),
     ('ii', 'V7', 'iii', 'vi'),
@@ -65,7 +66,6 @@ class Song:
         self.mid_drum_track = None
 
         # File info
-        self.file_name  = str(self.title.replace(' ', '_') + '.' + sf2.AUDIO_FILE_TYPE)
         self.mid        = mido.MidiFile()
 
     # SETTER FUNCTIONS
@@ -90,11 +90,11 @@ class Song:
 
     def set_time_sig(self) -> tuple:
         ''' Returns tuple with numer and denom of the time signature '''
-        return random.choice(VALID_TIME_SIGNATURES)
+        return random.choice(TIME_SIGNATURES)
 
     def set_chord_prog(self) -> tuple:
         ''' Returns a tuple with the chord identities, not connected to the key '''
-        return random.choice(VALID_CHORD_PROGRESSIONS)
+        return random.choice(CHORD_PROGRESSIONS)
 
     def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
@@ -164,7 +164,7 @@ class Song:
             }[self.key]
 
             # Evaluate scale degree + add interval to root note
-            chord_degree = re.sub(r'b|#|7|dim|aug|m', '', chord).lower()
+            chord_degree = re.sub(r'b|#|7|dim|aug|m|M', '', chord).lower()
             root_note += {
                 'i':   0, 'ii': 2,
                 'iii': 4, 
@@ -185,6 +185,10 @@ class Song:
 
     def gen_chord_prog(self):
         ''' Adds a chord progression to the class variable '''
+
+        # Might need to move this later - note length in ticks (480 ticks per beat)
+        qtr_note = 480
+        whole_note = qtr_note * 4
 
         # Get chord progression variables
         chord_intervals_list    = self.get_chord_intervals_list()
@@ -212,7 +216,7 @@ class Song:
 
                 # Add note_off: sets the release time for note (time=0 is instant)
                 for i, note_interval in enumerate(chord_intervals):
-                    note_stop_time = 1919 if i == 0 else 0
+                    note_stop_time = whole_note if i == 0 else 0
                     self.mid_prog_track.append(mido.Message(
                     'note_off',
                     note = root_note + note_interval,
@@ -234,7 +238,7 @@ class Song:
         if self.mid_drum_track is not None:
             self.mid.tracks.append(self.mid_drum_track)
 
-        midi_file_name = 'src/gen/midi/' + self.title + '.mid'
+        midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.mid.save(midi_file_name)
 
         return midi_file_name
