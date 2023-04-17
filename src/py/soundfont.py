@@ -4,6 +4,7 @@ import os
 import random
 import sf2_loader
 
+# Global Vars
 SF2_FOLDER = 'src/static/sf2/'
 AUDIO_FILE_TYPE = 'wav' # See note on midi_to_audio() before changing
 
