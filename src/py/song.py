@@ -14,7 +14,7 @@ MIDI_FILE_TYPE = '.mid'
 VALID_KEYS = (
     'A', 'Bb', 'B', 'C', 'Db', 'D',
     'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
-) # NOTE: key list - https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
+) # https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
 TIME_SIGNATURES = (
     (4,4),(4,4)
 )
