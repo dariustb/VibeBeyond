@@ -1,7 +1,7 @@
 ''' audio_manip.py - Audio file manipulation '''
 
 from pydub import AudioSegment
-from soundfont import AUDIO_FILE_TYPE
+from . import soundfont as sf2
 
 def combine_audios(audio_paths: tuple, output_path: str):
     ''' combine_audios - Layers multiple audio files toegther into one audio file '''
@@ -10,7 +10,7 @@ def combine_audios(audio_paths: tuple, output_path: str):
 
     # Load the audio files
     for i, audio_path in enumerate(audio_paths):
-        audio_layers.append(AudioSegment.from_file(audio_path, format=AUDIO_FILE_TYPE))
+        audio_layers.append(AudioSegment.from_file(audio_path, format=sf2.AUDIO_FILE_TYPE))
         audio_path = audio_path[:len(audio_paths[0])]
 
         if i:
@@ -18,15 +18,15 @@ def combine_audios(audio_paths: tuple, output_path: str):
             mixed_audio = audio_layers[i-1].overlay(audio_layers[i])
 
     # Export the mixed audio as a new file
-    mixed_audio.export(output_path, format=AUDIO_FILE_TYPE)
+    mixed_audio.export(output_path, format=sf2.AUDIO_FILE_TYPE)
 
     return True
 
 def loop_audio(audio_path: str, output_path: str, loop_count: int):
     ''' loop_audio - Loops an audio file a specified number of times '''
-    audio = AudioSegment.from_file(audio_path, format=AUDIO_FILE_TYPE)
+    audio = AudioSegment.from_file(audio_path, format=sf2.AUDIO_FILE_TYPE)
     looped_audio = audio * loop_count
-    looped_audio.export(output_path, format=AUDIO_FILE_TYPE)
+    looped_audio.export(output_path, format=sf2.AUDIO_FILE_TYPE)
 
     return True
 
