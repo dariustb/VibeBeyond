@@ -35,7 +35,7 @@ def loop_audio(audio_path: str, output_path: str, loop_count: int):
     except FileNotFoundError:
         print('ERROR: Audio file not found')
         return False
-    
+
     return True
 
 if __name__ == "__main__":
