@@ -123,7 +123,7 @@ class Song:
         return track
 
     # GENERATION FUNCTIONS
-    def get_chord_intervals_list(self):
+    def get_chord_intervals_list(self) -> list:
         ''' Returns a list of chord intervals in the progression '''
         chord_intervals_list = []
 
@@ -147,7 +147,7 @@ class Song:
 
         return chord_intervals_list
 
-    def get_root_note_list(self):
+    def get_root_note_list(self) -> list:
         ''' Returns a list of root notes in the progression '''
         root_note_list = []
 
@@ -183,7 +183,7 @@ class Song:
 
         return root_note_list
 
-    def gen_chord_prog(self):
+    def gen_chord_prog(self) -> bool:
         ''' Adds a chord progression to the class variable '''
 
         # Might need to move this later - note length in ticks (480 ticks per beat)
@@ -227,7 +227,7 @@ class Song:
         return True
 
     # MIDI UTILITY FUNCTIONS
-    def save_midi_file(self):
+    def save_midi_file(self, midi_file_name: str = None) -> str:
         ''' Combines the midi tracks into MidiFile & saves to .mid file '''
         if self.mid_prog_track is not None:
             self.mid.tracks.append(self.mid_prog_track)
@@ -238,7 +238,8 @@ class Song:
         if self.mid_drum_track is not None:
             self.mid.tracks.append(self.mid_drum_track)
 
-        midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
+        if midi_file_name is None:
+            midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.mid.save(midi_file_name)
 
         return midi_file_name

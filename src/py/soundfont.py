@@ -67,4 +67,5 @@ class SoundFont:
 
 def get_sf2_names() -> tuple:
     ''' get_sf2_list - Get a list of all soundfont files in the sf2 folder '''
-    return tuple(sf2 for sf2 in os.listdir(SF2_FOLDER) if sf2.lower().endswith('.sf2'))
+    names = [sf2 for sf2 in os.listdir(SF2_FOLDER) if sf2.lower().endswith('.sf2')]
+    return tuple(names)

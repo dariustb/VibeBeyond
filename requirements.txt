@@ -4,6 +4,7 @@ Flask==2.2.3
 # Testing / CI
 pytest
 pylint
+requests
 
 # MIDI Manipulation
 mido
