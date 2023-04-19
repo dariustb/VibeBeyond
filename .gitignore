@@ -200,3 +200,10 @@ src/static/sf2/*
 
 # All generated midi & audio files
 src/gen/*
+
+# test_files - ignore all results, keep the base test files
+tests/test_files/*
+!tests/test_files/test_chord_prog.wav
+!tests/test_files/test_drums.wav
+
+src/static/audio
