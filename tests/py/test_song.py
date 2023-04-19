@@ -4,11 +4,6 @@ import os
 import mido
 from src.py import song # pylint: disable = import-error
 
-# NOTE: Not testing the following functions:
-#   - Song.print_info()
-#   - Song.print_chords()
-#   - Song.save_midi_file()
-
 # __init__ ATTRIBUTES TESTS
 def test_init_title():
     ''' test_init_title - Test Song.title '''
