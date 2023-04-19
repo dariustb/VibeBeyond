@@ -200,4 +200,5 @@ def test_save_midi_file():
         assert test_midi_file_name.endswith('.mid')
     finally:
         # Delete the saved midi file
-        os.remove(test_midi_file_name)
+        if os.path.isfile(test_midi_file_name):
+            os.remove(test_midi_file_name)

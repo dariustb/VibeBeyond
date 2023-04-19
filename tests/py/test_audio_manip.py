@@ -19,7 +19,8 @@ def test_combine_audios():
             output_path = test_output
         )
     finally:
-        os.remove(test_output)
+        if os.path.exists(test_output):
+            os.remove(test_output)
 
 def test_loop_audio():
     ''' test_loop_audio - Tests the loop_audio function '''
@@ -31,4 +32,5 @@ def test_loop_audio():
             loop_count  = 4
         )
     finally:
-        os.remove(test_output)
+        if os.path.exists(test_output):
+            os.remove(test_output)
