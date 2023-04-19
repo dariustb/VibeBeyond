@@ -4,6 +4,8 @@ import os
 import mido
 from src.py import song # pylint: disable = import-error
 
+TEST_FILE_PATH = 'tests/_files/'
+
 # __init__ ATTRIBUTES TESTS
 def test_init_title():
     ''' test_init_title - Test Song.title '''
@@ -187,18 +189,19 @@ def test_save_midi_file():
     ''' test_save_midi_file - Test Song.save_midi_file() '''
     test_song = song.Song()
     test_song.gen_chord_prog()
-    test_midi_file_name = test_song.save_midi_file()
+    test_output = TEST_FILE_PATH + 'test_result_' + test_song.title + '.mid'
+    test_song.save_midi_file(test_output)
 
     try:
         # Check that the midi file name is a string
-        assert isinstance(test_midi_file_name, str)
+        assert isinstance(test_output, str)
 
         # Check that the saved midi file exists
-        assert os.path.isfile(test_midi_file_name)
+        assert os.path.isfile(test_output)
 
         # Check that the saved midi file is a midi file
-        assert test_midi_file_name.endswith('.mid')
+        assert test_output.endswith('.mid')
     finally:
         # Delete the saved midi file
-        if os.path.isfile(test_midi_file_name):
-            os.remove(test_midi_file_name)
+        if os.path.isfile(test_output):
+            os.remove(test_output)

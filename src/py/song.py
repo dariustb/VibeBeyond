@@ -227,7 +227,7 @@ class Song:
         return True
 
     # MIDI UTILITY FUNCTIONS
-    def save_midi_file(self) -> str:
+    def save_midi_file(self, midi_file_name: str = None) -> str:
         ''' Combines the midi tracks into MidiFile & saves to .mid file '''
         if self.mid_prog_track is not None:
             self.mid.tracks.append(self.mid_prog_track)
@@ -238,7 +238,8 @@ class Song:
         if self.mid_drum_track is not None:
             self.mid.tracks.append(self.mid_drum_track)
 
-        midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
+        if midi_file_name is None:
+            midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.mid.save(midi_file_name)
 
         return midi_file_name
