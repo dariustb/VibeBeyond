@@ -205,3 +205,5 @@ src/gen/*
 tests/test_files/*
 !tests/test_files/test_chord_prog.wav
 !tests/test_files/test_drums.wav
+
+src/static/audio
