@@ -3,7 +3,7 @@
 import os
 from src.py import audio_manip # pylint: disable = import-error
 
-TEST_FILE_PATH = 'tests/test_files/'
+TEST_FILE_PATH = 'tests/_files/'
 TEST_DRUMS = TEST_FILE_PATH + 'test_drums.wav'
 TEST_CHORDS = TEST_FILE_PATH + 'test_chord_prog.wav'
 

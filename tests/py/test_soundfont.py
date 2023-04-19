@@ -3,8 +3,9 @@
 import os
 from src.py import soundfont as sf2 # pylint: disable = import-error
 
-TEST_MIDI       = 'tests/test_files/test_midi.mid'
-TEST_SOUNDFONT  = 'tests/test_files/test_soundfont.sf2'
+TEST_FILE_PATH = 'tests/_files/'
+TEST_MIDI       = TEST_FILE_PATH + 'test_midi.mid'
+TEST_SOUNDFONT  = TEST_FILE_PATH + 'test_soundfont.sf2'
 
 # __init__ ATTRIBUTES TESTS
 def test_init_keys_name():
@@ -104,7 +105,7 @@ def test_midi_to_audio():
     ''' test_midi_to_audio - Test Song.midi_to_audio() '''
     test_sf2 = sf2.SoundFont()
 
-    test_output = 'tests/test_files/test_result_midi_to_audio.wav'
+    test_output = 'tests/_files/test_result_midi_to_audio.wav'
 
     try:
         test_sf2.midi_to_audio(
