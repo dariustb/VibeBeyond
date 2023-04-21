@@ -2,58 +2,67 @@
 
 {% block content %}
 <main>
-    <!-- Play button -->
-    <div class="flex items-center justify-center h-screen">
-      <button class="bg-blue-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full">
-        <h1 class="text-[64px]">&nbsp;▶&nbsp;</h1>
-      </button>
-    </div>
+  <!-- Audio Controls -->
+  <div class="flex items-center justify-center h-screen">
+    <audio id="audio" controls>
+      <source src="{{ url_for('song_gen') }}" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 
-    <!-- White corners -->
-    <div>
-      <div id="line-vert" class="absolute left-5 top-5"></div>
-      <div id="line-horz" class="absolute left-5 top-5"></div>
+  <!-- Play button --
+  <div class="flex items-center justify-center h-screen">
+    <button class="bg-blue-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full">
+      <h1 class="text-[64px]">&nbsp;▶&nbsp;</h1>
+    </button>
+  </div>
+  -->
 
-      <div id="line-vert" class="absolute right-5 top-5"></div>
-      <div id="line-horz" class="absolute right-5 top-5"></div>
+  <!-- TL: Play and Volume -->
+  <div
+    class="absolute left-9 top-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+  >
+    <p>PLAY ▶<br />VOL IIIIIIII</p>
+  </div>
 
-      <div id="line-vert" class="absolute left-5 bottom-5"></div>
-      <div id="line-horz" class="absolute left-5 bottom-5"></div>
+  <!-- TR: Now Playing, Song title, Artist name -->
+  <div
+    class="absolute right-9 top-9 text-right drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+  >
+    <p class="text-xs opacity-50 font-semibold">NOW PLAYING</p>
+    <p id="song-name" class="text-[22px]">{{ song_name }}</p>
+    <p id="artist-name" class="text-[22px] font-semibold">
+      {{ song_artist }}
+    </p>
+  </div>
 
-      <div id="line-vert" class="absolute right-5 bottom-5"></div>
-      <div id="line-horz" class="absolute right-5 bottom-5"></div>
-    </div>
+  <!-- BL: Current Time & Date -->
+  <div
+    class="absolute left-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+  >
+    <DateTime></DateTime>
+  </div>
 
-    <!-- TL: Play and Volume -->
-    <div
-      class="absolute left-9 top-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-    >
-      <p>PLAY ▶<br />VOL IIIIIIII</p>
-    </div>
+  <!-- BR: Time on song -->
+  <div
+    class="absolute right-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+  >
+    <p id="play-time">0:00 / {{ song_length }}</p>
+  </div>
 
-    <!-- TR: Now Playing, Song title, Artist name -->
-    <div
-      class="absolute right-9 top-9 text-right drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-    >
-      <p class="text-xs opacity-50 font-semibold">NOW PLAYING</p>
-      <p id="song-name" class="text-[22px]">{{ song_name }}</p>
-      <p id="artist-name" class="text-[22px] font-semibold">
-        {{ song_artist }}
-      </p>
-    </div>
+  <!-- White corners -->
+  <div>
+    <div id="line-vert" class="absolute left-5 top-5"></div>
+    <div id="line-horz" class="absolute left-5 top-5"></div>
 
-    <!-- BL: Current Time & Date -->
-    <div
-      class="absolute left-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-    >
-      <DateTime></DateTime>
-    </div>
+    <div id="line-vert" class="absolute right-5 top-5"></div>
+    <div id="line-horz" class="absolute right-5 top-5"></div>
 
-    <!-- BR: Time on song -->
-    <div
-      class="absolute right-9 bottom-9 text-xs opacity-50 font-semibold drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-    >
-      <p id="play-time">0:00 / {{ song_length }}</p>
-    </div>
-  </main>
+    <div id="line-vert" class="absolute left-5 bottom-5"></div>
+    <div id="line-horz" class="absolute left-5 bottom-5"></div>
+
+    <div id="line-vert" class="absolute right-5 bottom-5"></div>
+    <div id="line-horz" class="absolute right-5 bottom-5"></div>
+  </div>
+</main>
 {% endblock %}
