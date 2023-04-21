@@ -83,10 +83,10 @@ pylint src/ tests/
 
 ## TODO
 - [x] Add collection of sf2 soundfonts
-- [ ] Note locations of soundfonts in sf2/readme
+- [x] Note locations of soundfonts in sf2/readme
 - [x] Loop the song gen to make song-length chords
-- [ ] Connect the "time" value to a tempo and note length
-- [ ] Gather all sf2 into a tuple and route to song.keys/lead/bass_name
+- [x] Connect the "time" value to a tempo and note length
+- [x] Gather all sf2 into a tuple and route to song.keys/lead/bass_name
 - [ ] Track name / artist name generation
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
