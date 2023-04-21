@@ -59,7 +59,7 @@ if __name__ == '__main__':
     try:
         shutil.rmtree(TEMP_DIR)
     except OSError as e:
-        print('Error: %s : %s' % (TEMP_DIR, e.strerror))
+        print('Error:', TEMP_DIR, ':', str(e.strerror))
 
     print('Done!')
 
