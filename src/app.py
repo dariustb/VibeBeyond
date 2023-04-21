@@ -56,7 +56,10 @@ if __name__ == '__main__':
     app.run(debug=True)
 
     # Delete the temporary directory
-    shutil.rmtree(TEMP_DIR)
+    try:
+        shutil.rmtree(TEMP_DIR)
+    except OSError as e:
+        print('Error: %s : %s' % (TEMP_DIR, e.strerror))
 
     print('Done!')
 
