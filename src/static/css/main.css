@@ -1,8 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Glacial Indifference';
+    src: url("../fonts/GlacialIndifference-Regular.otf");
+}
+@font-face {
+    font-family: 'Neirizi';
+    src: url("../fonts/Neirizi-Regular.ttf");
+}
 
 :root{
     /* Set Background image */
@@ -12,12 +19,12 @@
     */
 
     /* Testing with a solid color */
-    background-color: #555eb2;
+    background-color: #ebe9e3;
 }
 
 html, body {
-    font-family: 'Montserrat', sans-serif;
-    color: #f6f6f6;
+    font-family: 'Glacial Indifference', sans-serif;
+    color: #2b2b2b;
 }
 
 #play-button {
@@ -31,11 +38,11 @@ html, body {
 #line-vert {
     height: 30px;
     width: 2px;
-    background: white;
+    background: #2b2b2b;
 }
 
 #line-horz {
     height: 2px;
     width: 30px;
-    background: white;
+    background: #2b2b2b;
 }

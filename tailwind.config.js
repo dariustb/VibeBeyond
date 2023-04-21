@@ -6,6 +6,17 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      neirizi: ["Neirizi", "serif"],
+      glacial: ["Glacial Indifference", "sans-serif"],
+    },
   },
   plugins: [],
+  purge: {
+    enabled: true,
+    content: [
+        './**/*.html'
+    ]
+  }
 }
+
