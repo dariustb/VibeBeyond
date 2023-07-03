@@ -1,13 +1,12 @@
 ''' app.py - driver program for the application '''
 
 # pylint: disable = invalid-name, no-member
+# pylint: disable = wildcard-import, unused-wildcard-import
 
 import pygame
+from constants import *
 
 pygame.init()
-
-APP_NAME: str = "Vibe Beyond"
-SCREEN_SIZE: tuple = 800, 600
 
 if __name__ == '__main__':
 
@@ -24,5 +23,5 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 is_window_open = False
 
-        screen.fill((181, 126, 220))
+        screen.fill(SCREEN_BKGD)
         pygame.display.update()
