@@ -13,3 +13,42 @@ SCREEN_BKGD: tuple = 181, 126, 220
 
 # Pygame mixer
 DEFAULT_VOLUME: float = 0.7
+
+# Music Generation Metadata
+MIDI_FOLDER: str = 'src/gen/midi/'
+MIDI_FILE_TYPE: str = '.mid'
+
+# Music Generation Defaults
+MIN_BPM: int = 75
+MAX_BPM: int = 120
+VALID_KEYS: tuple = 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
+TIME_SIGNATURES: tuple = (4,4),(4,4)
+CHORD_PROGRESSIONS: tuple = (
+    ('ii', 'V', 'I', 'IV'),
+    ('ii7', 'V', 'I7', 'I7'),
+    ('ii', 'V7', 'iii', 'vi'),
+
+    ('iii', 'vi', 'IV', 'I'),
+
+    ('IV', 'I', 'ii', 'vi'),
+    ('IV', 'I', 'iii', 'IV'),
+    ('IV', 'I', 'V', 'vi'),
+    ('IV', 'IV', 'I', 'V'),
+    ('IV', 'vi', 'I', 'V'),
+    ('IV', 'vi', 'iii', 'I'),
+
+    ('V', 'I', 'vi', 'V'),
+    ('V', 'IV', 'vi', 'I'),
+    ('V', 'vi', 'IV', 'I'),
+
+    ('vi', 'bVIM', 'bVIIM', 'I'),
+    ('vi', 'ii', 'V', 'I'),
+    ('vi', 'IV', 'I', 'V'),
+    ('vi', 'V', 'IV', 'V', 'ii', 'V', 'I', 'I'),
+    ('vi', 'V', 'IV', 'V'),
+    ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
+)
+
+# Soundfont
+SF2_FOLDER = 'src/static/sf2/'
+AUDIO_FILE_TYPE = 'wav' # See note on soundfonts.py:midi_to_audio() before changing
