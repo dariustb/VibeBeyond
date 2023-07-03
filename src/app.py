@@ -1,7 +1,6 @@
 ''' app.py - driver program for the application '''
 
-# pylint: disable = invalid-name, no-member
-# pylint: disable = wildcard-import, unused-wildcard-import
+# pylint: disable = W0401, W0614, C0103
 
 import pygame
 from py.constants import *
