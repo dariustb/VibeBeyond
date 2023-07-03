@@ -1,0 +1,12 @@
+# Desktop App Framework
+pygame
+
+# Testing / CI
+pytest
+pylint
+
+# MIDI Manipulation
+mido
+
+# Soundfont Loader
+sf2-loader
