@@ -4,24 +4,27 @@
 # pylint: disable = wildcard-import, unused-wildcard-import
 
 import pygame
-from constants import *
-
-pygame.init()
+from py.constants import *
 
 if __name__ == '__main__':
+    # Start pygame
+    pygame.init()
 
-    icon = pygame.image.load('src/assets/icon256x256.png')
-
-    screen = pygame.display.set_mode(SCREEN_SIZE)
+    # Set up app window
     pygame.display.set_caption(APP_NAME)
-    pygame.display.set_icon(icon)
+    pygame.display.set_icon(pygame.image.load(APP_ICON))
+    pygame.display.set_mode(SCREEN_SIZE).fill(SCREEN_BKGD)
+    pygame.display.update()
 
+    # Set up music player
+    pygame.mixer.init()
+    pygame.mixer.music.load('src/assets/audio/test_sound.wav')
+    pygame.mixer.music.set_volume(DEFAULT_VOLUME)
+    pygame.mixer.music.play()
+
+    # Main program loop
     is_window_open = True
-
     while is_window_open:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_window_open = False
-
-        screen.fill(SCREEN_BKGD)
-        pygame.display.update()
