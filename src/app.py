@@ -6,11 +6,16 @@ import pygame
 
 pygame.init()
 
-SCREEN_SIZE: tuple = 800, 600 # width, height
+APP_NAME: str = "Vibe Beyond"
+SCREEN_SIZE: tuple = 800, 600
 
 if __name__ == '__main__':
 
+    icon = pygame.image.load('src/assets/icon256x256.png')
+
     screen = pygame.display.set_mode(SCREEN_SIZE)
+    pygame.display.set_caption(APP_NAME)
+    pygame.display.set_icon(icon)
 
     is_window_open = True
 
@@ -18,3 +23,6 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_window_open = False
+
+        screen.fill((181, 126, 220))
+        pygame.display.update()
