@@ -2,8 +2,35 @@
 
 # pylint: disable = W0401, W0614, C0103
 
+import random
+import string
 import pygame
 from py.constants import *
+from py import info
+from py import song
+from py import soundfont as sf2
+
+def create_song():
+    ''' create_song - builds song and returns the song file path '''
+
+    # Create Midi and Sf2 objects
+    SongMid = song.Song()
+    SongSf2 = sf2.SoundFont()
+
+    # Create midi file of the song
+    SongMid.gen_chord_prog()
+    song_midi_path = SongMid.save_midi_file()
+
+    info.print_info(SongMid, SongSf2)
+
+    # Generate an output path
+    output_name = ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+    song_output_path = 'src/gen/audio/' + output_name + '.' + AUDIO_FILE_TYPE
+
+    # Convert midi file to audio
+    SongSf2.midi_to_audio(song_midi_path, song_output_path)
+
+    return song_output_path
 
 if __name__ == '__main__':
     # Start pygame
@@ -17,13 +44,20 @@ if __name__ == '__main__':
 
     # Set up music player
     pygame.mixer.init()
-    pygame.mixer.music.load('src/assets/audio/test_sound.wav')
     pygame.mixer.music.set_volume(DEFAULT_VOLUME)
+    pygame.mixer.music.set_endevent(SONG_ENDED)
+    pygame.mixer.music.load(create_song())
     pygame.mixer.music.play()
 
     # Main program loop
-    is_window_open = True
+    is_window_open: bool = True
     while is_window_open:
         for event in pygame.event.get():
+            # User closes window -> end loop
             if event.type == pygame.QUIT:
                 is_window_open = False
+
+            # Song ends -> build/load/play next one
+            if event.type == SONG_ENDED:
+                pygame.mixer.music.load(create_song())
+                pygame.mixer.music.play()
