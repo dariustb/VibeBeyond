@@ -1,9 +1,21 @@
 ''' constants.py - File to contain all important constant values for the application '''
 
+# pylint: disable = E0611
+
+from pygame import USEREVENT
+
 # App metadata
 APP_NAME: str = 'Vibe Beyond'
 APP_VERSION: str = '2.0.0'
 APP_ICON: str = 'src/assets/images/icon256x256.png'
+
+# Folders
+MIDI_FOLDER: str = 'src/gen/midi/'
+SF2_FOLDER: str = 'src/assets/sf2/'
+
+# File types
+MIDI_FILE_TYPE: str = '.mid'
+AUDIO_FILE_TYPE: str = 'wav' # See note on soundfonts.py:midi_to_audio() before changing
 
 # Pygame window
 SCREEN_WIDTH: int = 800
@@ -13,10 +25,7 @@ SCREEN_BKGD: tuple = 181, 126, 220
 
 # Pygame mixer
 DEFAULT_VOLUME: float = 0.7
-
-# Music Generation Metadata
-MIDI_FOLDER: str = 'src/gen/midi/'
-MIDI_FILE_TYPE: str = '.mid'
+SONG_ENDED: int = USEREVENT + 616
 
 # Music Generation Defaults
 MIN_BPM: int = 75
@@ -48,7 +57,3 @@ CHORD_PROGRESSIONS: tuple = (
     ('vi', 'V', 'IV', 'V'),
     ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
 )
-
-# Soundfont
-SF2_FOLDER = 'src/static/sf2/'
-AUDIO_FILE_TYPE = 'wav' # See note on soundfonts.py:midi_to_audio() before changing
