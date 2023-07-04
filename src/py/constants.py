@@ -6,7 +6,7 @@ from pygame import USEREVENT
 
 # App metadata
 APP_NAME: str = 'Vibe Beyond'
-APP_VERSION: str = '2.0.0'
+APP_VERSION: str = '1.0.0'
 APP_ICON: str = 'src/assets/images/icon256x256.png'
 
 # Folders
