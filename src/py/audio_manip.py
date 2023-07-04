@@ -45,8 +45,8 @@ def loop_audio(audio_path: str, output_path: str, loop_count: int):
 if __name__ == "__main__":
     # Make longer drum loop
     loop_audio(
-        audio_path='src/static/audio/90bpm.wav',
-        output_path='src/static/audio/90bpm_looped.wav',
+        audio_path='src/assets/audio/90bpm.wav',
+        output_path='src/assets/audio/90bpm_looped.wav',
         loop_count=4
     )
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     combine_audios(
         audio_paths=(
             'src/gen/audio/90bpm_chords_1.wav',
-            'src/static/audio/90bpm_looped.wav',
+            'src/assets/audio/90bpm_looped.wav',
         ),
         output_path='src/gen/audio/90bpm_beat_3.wav'
     )
