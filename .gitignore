@@ -158,3 +158,10 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# sf2 files - ignore all sf2 files, keep the readme
+src/assets/sf2/*
+!src/assets/sf2/README.md
+
+# All generated midi & audio files
+src/gen/*
