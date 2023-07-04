@@ -22,7 +22,7 @@ class SoundFont:
         ''' Returns a random piano or pad soundfont name '''
         if not get_sf2_names():
             raise ValueError(
-                "No soundfonts found in src/static/sf2/. View readme in folder to download soundfonts." # pylint: disable = line-too-long
+                "No soundfonts found in src/assets/sf2/. View readme in folder to download soundfonts." # pylint: disable = line-too-long
             )
 
         return random.choice(get_sf2_names())
