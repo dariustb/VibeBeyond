@@ -38,7 +38,7 @@ class Song:
 
         # File info
         self.mid: mido.MidiFile = mido.MidiFile()
-        self.mid_path:  str = None
+        self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.song_path: str = AUDIO_FOLDER + 'song.' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
@@ -113,13 +113,13 @@ class Song:
         bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
 
         # Load drum samples
-        kick_file = KICK_FOLDER + random.choice(os.listdir(KICK_FOLDER))
-        hat_file = HAT_FOLDER + random.choice(os.listdir(HAT_FOLDER))
-        snare_file = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
+        kick_file  = random.choice(os.listdir(KICK_FOLDER))
+        hat_file   = random.choice(os.listdir(HAT_FOLDER))
+        snare_file = random.choice(os.listdir(SNARE_FOLDER))
 
-        kick_audio  = AudioSegment.from_file(kick_file)
-        hat_audio   = AudioSegment.from_file(hat_file) - 6
-        snare_audio = AudioSegment.from_file(snare_file) - 3
+        kick_audio  = AudioSegment.from_file(KICK_FOLDER + kick_file)
+        hat_audio   = AudioSegment.from_file(HAT_FOLDER + hat_file) - 6
+        snare_audio = AudioSegment.from_file(SNARE_FOLDER + snare_file) - 3
 
         print('\n\n\nkick:', kick_file, '\nhat:', hat_file, '\nsnare:', snare_file)
 
@@ -152,7 +152,7 @@ class Song:
 
         return True
 
-    # MIDI UTILITY FUNCTIONS
+    # EXPORT FUNCTIONS
     def save_midi_file(self, midi_file_name: str = None) -> str:
         ''' Combines the midi tracks into MidiFile & saves to .mid file '''
         if self.mid_prog_track is not None:
