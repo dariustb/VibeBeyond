@@ -2,6 +2,8 @@
 
 # pylint: disable = W0401, W0614, C0103
 
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide" # Hides welcome msg
 import pygame
 from py.validate import validate_assets
 from py.create_song import create_song
