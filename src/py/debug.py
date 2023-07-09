@@ -30,6 +30,7 @@ def print_info(song_mid: song.Song = None, song_sf2: sf2.SoundFont = None):
         print('Lead:\t',  song_sf2.lead_name)
 
     if song_mid is not None:
+        print()
         print('Kick:\t',  song_mid.kick_name)
         print('Hat:\t',   song_mid.hat_name)
         print('Snare:\t', song_mid.snare_name)
