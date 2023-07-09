@@ -2,13 +2,11 @@
 
 # pylint: disable = W0401, W0614, C0103
 
-import random
-import string
 import pygame
-from py.constants import *
 from py import info
 from py import song
 from py import soundfont as sf2
+from py.constants import *
 
 def create_song():
     ''' create_song - builds song and returns the song file path '''
@@ -19,16 +17,18 @@ def create_song():
 
     # Create midi file of the song
     SongMid.gen_chord_prog()
+    SongMid.gen_drum_loop()
     song_midi_path = SongMid.save_midi_file()
 
     info.print_info(SongMid, SongSf2)
 
     # Generate an output path
-    output_name = ''.join(random.choice(string.ascii_lowercase) for i in range(8))
-    song_output_path = 'src/gen/audio/' + output_name + '.' + AUDIO_FILE_TYPE
+    song_output_path = AUDIO_FOLDER + SongMid.title + '.' + AUDIO_FILE_TYPE
 
     # Convert midi file to audio
     SongSf2.midi_to_audio(song_midi_path, song_output_path)
+
+    SongMid.export_song()
 
     return song_output_path
 

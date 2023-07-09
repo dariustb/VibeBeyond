@@ -3,8 +3,12 @@
 # pylint: disable = W0401, W0614, R0902
 
 import random
-import re
+import string
+import os
+from re import sub
+
 import mido
+from pydub import AudioSegment
 from py.constants import *
 
 class Song:
@@ -13,28 +17,35 @@ class Song:
         ''' All the song's static variables will be kept here '''
 
         # Metadata
-        self.title      = self.set_title()
-        self.artist     = self.set_artist()
+        self.title:  str = self.set_title()
+        self.artist: str = self.set_artist()
 
         # Song generation info
-        self.key        = self.set_key()
-        self.bpm        = self.set_bpm() # tempo = mido.bpm2tempo(bpm) =/= bpm
-        self.time_sig   = self.set_time_sig()
-        self.prog       = self.set_chord_prog()
+        self.key:      str = self.set_key()
+        self.bpm:      str = self.set_bpm() # tempo = mido.bpm2tempo(bpm) =/= bpm
+        self.time_sig: str = self.set_time_sig()
+        self.prog:     str = self.set_chord_prog()
 
-        # Midi info
-        self.mid_prog_track = self.set_track_prefix()
-        self.mid_lead_track = None
-        self.mid_bass_track = None
-        self.mid_drum_track = None
+        # Midi tracks
+        self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
+        self.mid_lead_track: mido.MidiTrack = None
+        self.mid_bass_track: mido.MidiTrack = None
+        self.mid_drum_track: mido.MidiTrack = self.set_drum_track_prefix()
+
+        # Pydub audio segments
+        self.prog_segment: AudioSegment = None
+        self.lead_segment: AudioSegment = None
+        self.drum_segment: AudioSegment = None
 
         # File info
-        self.mid        = mido.MidiFile()
+        self.mid: mido.MidiFile = mido.MidiFile()
+        self.mid_path:  str = None
+        self.song_path: str = AUDIO_FOLDER + 'song.' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
     def set_title(self) -> str:
         ''' Returns a randomized string of text in Title Case '''
-        return 'example song'.title()
+        return ''.join(random.choice(string.ascii_lowercase) for i in range(8)).title()
 
     def set_artist(self) -> str:
         ''' Returns a randomized string of text in Title Case '''
@@ -64,23 +75,46 @@ class Song:
         # Create track
         track = mido.MidiTrack()
 
-        # Add MetaMessages to file
+        # Add Messages / MetaMessages to file
+        # Not sure why yet, but MuseScore does this, and it allows the sound to play
         track.append(mido.MetaMessage('track_name', name='song_track', time=0))
         track.append(mido.MetaMessage('time_signature',
-                                      numerator = self.time_sig[0], denominator = self.time_sig[1],
-                                      clocks_per_click = 24, notated_32nd_notes_per_beat = 8,
-                                      time = 0
-                                      ))
+                                    numerator = self.time_sig[0], denominator = self.time_sig[1],
+                                    clocks_per_click = 24, notated_32nd_notes_per_beat = 8,
+                                    time = 0
+                                    ))
         track.append(mido.MetaMessage('key_signature', key=self.key, time=0))
         track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(self.bpm), time=0))
-
-        # Not sure why yet, but MuseScore does this, and it allows the sound to play
         track.append(mido.Message('control_change', channel=0, control=121, value=0, time=0))
         track.append(mido.Message('program_change', channel=0, program=4, time=0))
         track.append(mido.Message('control_change', channel=0, control=7, value=100, time=0))
         track.append(mido.Message('control_change', channel=0, control=10, value=64, time=0))
         track.append(mido.Message('control_change', channel=0, control=91, value=0, time=0))
         track.append(mido.Message('control_change', channel=0, control=93, value=0, time=0))
+        track.append(mido.MetaMessage('midi_port', port=0, time=0))
+
+        return track
+
+    def set_drum_track_prefix(self) -> mido.MidiTrack:
+        ''' Add necessary info to the beginnning of midi track '''
+        # Create track
+        track = mido.MidiTrack()
+
+        # Add Messages / MetaMessages to file
+        track.append(mido.MetaMessage('track_name', name='Drumset', time=0))
+        track.append(mido.MetaMessage('time_signature',
+                                    numerator = self.time_sig[0], denominator = self.time_sig[1],
+                                    clocks_per_click = 24, notated_32nd_notes_per_beat = 8,
+                                    time = 0
+                                    ))
+        track.append(mido.MetaMessage('key_signature', key=self.key, time=0))
+        track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(self.bpm), time=0))
+        track.append(mido.Message('control_change', channel=9, control=121, value=0, time=0))
+        track.append(mido.Message('program_change', channel=9, program=0, time=0))
+        track.append(mido.Message('control_change', channel=9, control=7, value=100, time=0))
+        track.append(mido.Message('control_change', channel=9, control=10, value=64, time=0))
+        track.append(mido.Message('control_change', channel=9, control=91, value=0, time=0))
+        track.append(mido.Message('control_change', channel=9, control=93, value=0, time=0))
         track.append(mido.MetaMessage('midi_port', port=0, time=0))
 
         return track
@@ -127,7 +161,7 @@ class Song:
             }[self.key]
 
             # Evaluate scale degree + add interval to root note
-            chord_degree = re.sub(r'b|#|7|dim|aug|m|M', '', chord).lower()
+            chord_degree = sub(r'b|#|7|dim|aug|m|M', '', chord).lower()
             root_note += {
                 'i':   0, 'ii': 2,
                 'iii': 4, 
@@ -149,16 +183,12 @@ class Song:
     def gen_chord_prog(self) -> bool:
         ''' Adds a chord progression to the class variable '''
 
-        # Might need to move this later - note length in ticks (480 ticks per beat)
-        qtr_note = 480
-        whole_note = qtr_note * 4
-
         # Get chord progression variables
         chord_intervals_list    = self.get_chord_intervals_list()
         root_note_list          = self.get_root_note_list()
 
         # Repeat chord progression for length of song
-        for _ in range(16):
+        for _ in range(SONG_LENGTH):
 
             # Add notes in chord to midi track
             for root_note in root_note_list:
@@ -173,19 +203,64 @@ class Song:
                     self.mid_prog_track.append(mido.Message(
                         'note_on',
                         note = root_note + note_interval,
-                        velocity=80,
+                        velocity = 80,
                         time = note_start_time
                     ))
 
                 # Add note_off: sets the release time for note (time=0 is instant)
                 for i, note_interval in enumerate(chord_intervals):
-                    note_stop_time = whole_note if i == 0 else 0
+                    note_stop_time = WHOLE_NOTE if i == 0 else 0
                     self.mid_prog_track.append(mido.Message(
                     'note_off',
                     note = root_note + note_interval,
                     velocity = 0,
                     time = note_stop_time
                     ))
+
+        return True
+
+    def gen_drum_loop(self) -> bool:
+        ''' Adds a midi drum loop to the class variable '''
+
+        bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
+
+        # Load drum samples
+        kick_file = KICK_FOLDER + random.choice(os.listdir(KICK_FOLDER))
+        hat_file = HAT_FOLDER + random.choice(os.listdir(HAT_FOLDER))
+        snare_file = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
+
+        kick_audio  = AudioSegment.from_file(kick_file)
+        hat_audio   = AudioSegment.from_file(hat_file) - 6
+        snare_audio = AudioSegment.from_file(snare_file) - 3
+
+        print('\n\n\nkick:', kick_file, '\nhat:', hat_file, '\nsnare:', snare_file)
+
+        # Create drum pattern for midi
+        kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]
+        hat_pattern =  [EIGHTH_NOTE for _ in range(8)]
+
+        # Coordinate audio samples to note values
+        kick_segment = []
+        snare_segment = []
+        hat_segment = []
+
+        for _ in range(len(self.prog)):
+            coordinate_sample(kick_audio, kick_segment, kick_pattern, bpm_in_ms)
+            coordinate_sample(hat_audio, hat_segment, hat_pattern, bpm_in_ms)
+            coordinate_snare(snare_audio, snare_segment, bpm_in_ms) # Snare is hardcoded 2 & 4
+
+        # Combine sample and silences (per instrument)
+        kick_segment = sum(kick_segment)
+        snare_segment = sum(snare_segment)
+        hat_segment = sum(hat_segment)
+
+        # Combine all the drum instruments
+        drum_segment = kick_segment
+        drum_segment = drum_segment.overlay(snare_segment, 0)
+        drum_segment = drum_segment.overlay(hat_segment, 0)
+
+        # Save the segment to mix with other instruments for export later
+        self.drum_segment = drum_segment
 
         return True
 
@@ -198,11 +273,49 @@ class Song:
             self.mid.tracks.append(self.mid_lead_track)
         if self.mid_bass_track is not None:
             self.mid.tracks.append(self.mid_bass_track)
-        if self.mid_drum_track is not None:
-            self.mid.tracks.append(self.mid_drum_track)
 
         if midi_file_name is None:
             midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.mid.save(midi_file_name)
 
         return midi_file_name
+
+    def export_song(self) -> bool:
+        ''' creates an audio file with all the AudioSegments combined '''
+        song_duration = len(self.drum_segment)
+        final_audio = AudioSegment.silent(song_duration)
+
+        if self.prog_segment is not None:
+            final_audio = final_audio.overlay(self.prog_segment,0)
+        if self.lead_segment is not None:
+            final_audio = final_audio.overlay(self.lead_segment,0)
+        if self.drum_segment is not None:
+            final_audio = final_audio.overlay(self.drum_segment,0)
+
+        final_audio.export(self.song_path, format=AUDIO_FILE_TYPE)
+
+def coordinate_sample(audio, segment, pattern, bpm_in_ms):
+    ''' coordinates sample audio to the rhythmic pattern passed in'''
+    for _ in range(SONG_LENGTH):
+        for note in pattern:
+            note_length_in_ms = ((note + 1)/BASE_NOTE) * bpm_in_ms
+            if len(audio) < note_length_in_ms:
+                segment.append(audio)
+                segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
+            elif len(audio) > note_length_in_ms:
+                shortened_audio = audio[:len(audio) - note_length_in_ms]
+                segment.append(shortened_audio)
+
+def coordinate_snare(audio, segment, bpm_in_ms):
+    ''' coordinates snare to the 2 and 4 of the beat '''
+    note_length_in_ms = ((HALF_NOTE + 1)/BASE_NOTE) * bpm_in_ms
+    segment.append(AudioSegment.silent(note_length_in_ms/2))
+    for _ in range(SONG_LENGTH - 1):
+        segment.append(audio)
+        segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
+        segment.append(audio)
+        segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
+    segment.append(audio)
+    segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
+    segment.append(audio)
+    segment.append(AudioSegment.silent(note_length_in_ms/2))
