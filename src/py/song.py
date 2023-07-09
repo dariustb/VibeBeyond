@@ -30,7 +30,6 @@ class Song:
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
         self.mid_lead_track: mido.MidiTrack = None
         self.mid_bass_track: mido.MidiTrack = None
-        self.mid_drum_track: mido.MidiTrack = self.set_drum_track_prefix()
 
         # Pydub audio segments
         self.prog_segment: AudioSegment = None
@@ -64,30 +63,6 @@ class Song:
         track.append(mido.Message('control_change', channel=0, control=10, value=64, time=0))
         track.append(mido.Message('control_change', channel=0, control=91, value=0, time=0))
         track.append(mido.Message('control_change', channel=0, control=93, value=0, time=0))
-        track.append(mido.MetaMessage('midi_port', port=0, time=0))
-
-        return track
-
-    def set_drum_track_prefix(self) -> mido.MidiTrack:
-        ''' Add necessary info to the beginnning of midi track '''
-        # Create track
-        track = mido.MidiTrack()
-
-        # Add Messages / MetaMessages to file
-        track.append(mido.MetaMessage('track_name', name='Drumset', time=0))
-        track.append(mido.MetaMessage('time_signature',
-                                    numerator = self.time_sig[0], denominator = self.time_sig[1],
-                                    clocks_per_click = 24, notated_32nd_notes_per_beat = 8,
-                                    time = 0
-                                    ))
-        track.append(mido.MetaMessage('key_signature', key=self.key, time=0))
-        track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(self.bpm), time=0))
-        track.append(mido.Message('control_change', channel=9, control=121, value=0, time=0))
-        track.append(mido.Message('program_change', channel=9, program=0, time=0))
-        track.append(mido.Message('control_change', channel=9, control=7, value=100, time=0))
-        track.append(mido.Message('control_change', channel=9, control=10, value=64, time=0))
-        track.append(mido.Message('control_change', channel=9, control=91, value=0, time=0))
-        track.append(mido.Message('control_change', channel=9, control=93, value=0, time=0))
         track.append(mido.MetaMessage('midi_port', port=0, time=0))
 
         return track
