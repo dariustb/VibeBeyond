@@ -44,6 +44,7 @@ class Song:
     # SETTER FUNCTIONS
     def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
+
         # Create track
         track = mido.MidiTrack()
 
@@ -125,12 +126,12 @@ class Song:
 
         # Create drum pattern for midi
         kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]
-        hat_pattern =  [EIGHTH_NOTE for _ in range(8)]
+        hat_pattern  = [EIGHTH_NOTE for _ in range(8)]
 
         # Coordinate audio samples to note values
-        kick_segment = []
+        kick_segment  = []
         snare_segment = []
-        hat_segment = []
+        hat_segment   = []
 
         for _ in range(len(self.prog)):
             util.coordinate_sample(kick_audio, kick_segment, kick_pattern, bpm_in_ms)
@@ -138,9 +139,9 @@ class Song:
             util.coordinate_snare(snare_audio, snare_segment, bpm_in_ms)
 
         # Combine sample and silences (per instrument)
-        kick_segment = sum(kick_segment)
+        kick_segment  = sum(kick_segment)
         snare_segment = sum(snare_segment)
-        hat_segment = sum(hat_segment)
+        hat_segment   = sum(hat_segment)
 
         # Combine all the drum instruments
         drum_segment = kick_segment
