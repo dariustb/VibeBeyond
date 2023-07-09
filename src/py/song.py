@@ -179,24 +179,6 @@ class Song:
             loader < loader.get_current_instrument() # pylint: disable = W0106
             loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_TYPE)
 
-        # # Load the soundfont file & preset
-        # if not sf2_path:
-        #     sf2_path = SF2_FOLDER + self.keys_name
-
-        # loader = sf2_loader.sf2_loader(sf2_path)
-        # if not loader.get_current_instrument():
-        #     print('ERROR: Soundfont instrument not found')
-        #     return False
-
-        # if not sf2_preset:
-        #     sf2_preset = loader.get_current_instrument()
-
-        # # Set the soundfont instrument
-        # loader < sf2_preset # pylint: disable = pointless-statement
-
-        # # render a MIDI file with current soundfont files and export as a wav file
-        # loader.export_midi_file(self.midi_path, name=output_path, format=AUDIO_TYPE)
-
         return True
 
     # EXPORT FUNCTIONS
