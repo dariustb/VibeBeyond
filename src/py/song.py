@@ -28,6 +28,10 @@ class Song:
         self.time_sig: str = random.choice(TIME_SIGNATURES)
         self.prog:     str = random.choice(CHORD_PROGRESSIONS)
 
+        self.kick_name  = random.choice(os.listdir(KICK_FOLDER))
+        self.hat_name   = random.choice(os.listdir(HAT_FOLDER))
+        self.snare_name = random.choice(os.listdir(SNARE_FOLDER))
+
         # Midi tracks
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
         self.mid_lead_track: mido.MidiTrack = None
@@ -116,15 +120,9 @@ class Song:
         bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
 
         # Load drum samples
-        kick_file  = random.choice(os.listdir(KICK_FOLDER))
-        hat_file   = random.choice(os.listdir(HAT_FOLDER))
-        snare_file = random.choice(os.listdir(SNARE_FOLDER))
-
-        kick_audio  = AudioSegment.from_file(KICK_FOLDER + kick_file)
-        hat_audio   = AudioSegment.from_file(HAT_FOLDER + hat_file) - 6
-        snare_audio = AudioSegment.from_file(SNARE_FOLDER + snare_file) - 3
-
-        print('\n\n\nkick:', kick_file, '\nhat:', hat_file, '\nsnare:', snare_file)
+        kick_audio  = AudioSegment.from_file(KICK_FOLDER + self.kick_name)
+        hat_audio   = AudioSegment.from_file(HAT_FOLDER + self.hat_name) - 6
+        snare_audio = AudioSegment.from_file(SNARE_FOLDER + self.snare_name) - 3
 
         # Create drum pattern for midi
         kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]
