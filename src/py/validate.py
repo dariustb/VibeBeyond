@@ -3,6 +3,7 @@
 # pylint: disable = W0401, W0614
 
 import os
+import sys
 from py.constants import *
 
 def validate_assets():
@@ -32,4 +33,4 @@ def validate_assets():
               '\n\tEmpty/missing asset folders found.'
               '\n\tView readme in src/assets/ to find more information.'
               '\n\tAsset folders:', missing_list)
-        quit()
+        sys.exit()

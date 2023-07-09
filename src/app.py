@@ -1,9 +1,9 @@
 ''' app.py - driver program for the application '''
 
-# pylint: disable = W0401, W0614, C0103
+# pylint: disable = W0401, W0614, C0103, C0413
 
-import os
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide" # Hides welcome msg
+from os import environ
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from py.validate import validate_assets
 from py.create_song import create_song
