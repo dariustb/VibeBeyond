@@ -2,12 +2,14 @@
 
 # pylint: disable = W0401, W0614, R0902
 
-import random
 import os
+import random
 from string import ascii_lowercase as letters
 
 import mido
+import sf2_loader
 from pydub import AudioSegment
+
 from py import song_utils as util
 from py.constants import *
 
@@ -26,9 +28,12 @@ class Song:
         self.time_sig: str = random.choice(TIME_SIGNATURES)
         self.prog:     str = random.choice(CHORD_PROGRESSIONS)
 
-        self.kick_name  = random.choice(os.listdir(KICK_FOLDER))
-        self.hat_name   = random.choice(os.listdir(HAT_FOLDER))
-        self.snare_name = random.choice(os.listdir(SNARE_FOLDER))
+        self.keys_name  = KEYS_FOLDER + random.choice(os.listdir(KEYS_FOLDER))
+        self.lead_name  = LEAD_FOLDER + random.choice(os.listdir(LEAD_FOLDER))
+
+        self.kick_name  = KICK_FOLDER  + random.choice(os.listdir(KICK_FOLDER))
+        self.hat_name   = HAT_FOLDER   + random.choice(os.listdir(HAT_FOLDER))
+        self.snare_name = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
 
         # Midi tracks
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
@@ -43,6 +48,10 @@ class Song:
         # File info
         self.mid: mido.MidiFile = mido.MidiFile()
         self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
+        self.keys_midi: str = MIDI_FOLDER + 'keys' + MIDI_FILE_TYPE
+        self.lead_midi: str = MIDI_FOLDER + 'lead' + MIDI_FILE_TYPE
+        self.keys_path: str = AUDIO_FOLDER + 'keys.' + AUDIO_FILE_TYPE
+        self.lead_path: str = AUDIO_FOLDER + 'lead.' + AUDIO_FILE_TYPE
         self.song_path: str = AUDIO_FOLDER + 'song.' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
@@ -118,9 +127,9 @@ class Song:
         bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
 
         # Load drum samples
-        kick_audio  = AudioSegment.from_file(KICK_FOLDER + self.kick_name)
-        hat_audio   = AudioSegment.from_file(HAT_FOLDER + self.hat_name) - 6
-        snare_audio = AudioSegment.from_file(SNARE_FOLDER + self.snare_name) - 3
+        kick_audio  = AudioSegment.from_file(self.kick_name)
+        hat_audio   = AudioSegment.from_file(self.hat_name) - 6
+        snare_audio = AudioSegment.from_file(self.snare_name) - 3
 
         # Create drum pattern for midi
         kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]
@@ -151,19 +160,52 @@ class Song:
 
         return True
 
-    # EXPORT FUNCTIONS
-    def save_midi_file(self, midi_file_name: str = None) -> str:
-        ''' Combines the midi tracks into MidiFile & saves to .mid file '''
-        if self.mid_prog_track is not None:
-            self.mid.tracks.append(self.mid_prog_track)
-        if self.mid_lead_track is not None:
-            self.mid.tracks.append(self.mid_lead_track)
-        if self.mid_bass_track is not None:
-            self.mid.tracks.append(self.mid_bass_track)
+    # CONVERTER FUNCTIONS
+    def midi_to_audio(self) -> bool:
+        ''' midi_to_audio - Convert keys & lead MIDI track file to audio files '''
 
-        if midi_file_name is None:
-            midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
-        self.mid.save(midi_file_name)
+        # NOTE: sf2-loader/pydub requires ffmpeg or libav installed
+        # for non-wav files (https://pypi.org/project/sf2-loader/#Windows)
+
+        # Convert keys MIDI
+        if self.mid_prog_track is not None:
+            loader = sf2_loader.sf2_loader(self.keys_name)
+            loader < loader.get_current_instrument() # pylint: disable = W0106
+            loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_FILE_TYPE)
+
+        # Convert lead MIDI
+        if self.mid_lead_track is not None:
+            loader = sf2_loader.sf2_loader(self.lead_name)
+            loader < loader.get_current_instrument() # pylint: disable = W0106
+            loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_FILE_TYPE)
+
+        # # Load the soundfont file & preset
+        # if not sf2_path:
+        #     sf2_path = SF2_FOLDER + self.keys_name
+
+        # loader = sf2_loader.sf2_loader(sf2_path)
+        # if not loader.get_current_instrument():
+        #     print('ERROR: Soundfont instrument not found')
+        #     return False
+
+        # if not sf2_preset:
+        #     sf2_preset = loader.get_current_instrument()
+
+        # # Set the soundfont instrument
+        # loader < sf2_preset # pylint: disable = pointless-statement
+
+        # # render a MIDI file with current soundfont files and export as a wav file
+        # loader.export_midi_file(self.midi_path, name=output_path, format=AUDIO_FILE_TYPE)
+
+        return True
+
+    # EXPORT FUNCTIONS
+    def save_midi_file(self, midi_track: mido.MidiTrack, midi_file_name: str) -> str:
+        ''' Combines the midi tracks into MidiFile & saves to .mid file '''
+        file = mido.MidiFile()
+
+        file.tracks.append(midi_track)
+        file.save(midi_file_name)
 
         return midi_file_name
 
