@@ -8,8 +8,6 @@ from string import ascii_lowercase as letters
 
 import mido
 from pydub import AudioSegment
-from py import debug as dbg
-from py import soundfont as sf2
 from py import song_utils as util
 from py.constants import *
 
@@ -182,30 +180,3 @@ class Song:
             final_audio = final_audio.overlay(self.drum_segment,0)
 
         final_audio.export(self.song_path, format=AUDIO_FILE_TYPE)
-
-# The feast de resistance
-def create_song(debug: bool = False):
-    ''' create_song - builds song and returns the song file path '''
-
-    # Create Midi and Sf2 objects
-    SongMid = Song()
-    SongSf2 = sf2.SoundFont()
-
-    # Create midi file of the song
-    SongMid.gen_chord_prog()
-    SongMid.gen_drum_loop()
-    song_midi_path = SongMid.save_midi_file()
-
-    # Print debug information
-    if debug:
-        dbg.print_info(SongMid, SongSf2)
-
-    # Generate an output path
-    song_output_path = AUDIO_FOLDER + SongMid.title + '.' + AUDIO_FILE_TYPE
-
-    # Convert midi file to audio
-    SongSf2.midi_to_audio(song_midi_path, song_output_path)
-
-    SongMid.export_song()
-
-    return song_output_path

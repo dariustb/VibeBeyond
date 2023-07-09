@@ -3,7 +3,7 @@
 # pylint: disable = W0401, W0614, C0103
 
 import pygame
-from py.song import create_song
+from py.create_song import create_song
 from py.constants import *
 
 if __name__ == '__main__':
