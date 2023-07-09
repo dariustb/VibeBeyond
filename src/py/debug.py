@@ -1,4 +1,4 @@
-''' info.py - Python module for printing test/debug info '''
+''' debug.py - Python module for printing test/debug information '''
 
 from py import song
 import py.soundfont as sf2

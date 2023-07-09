@@ -8,7 +8,7 @@ from string import ascii_lowercase as letters
 
 import mido
 from pydub import AudioSegment
-from py import info
+from py import debug as dbg
 from py import soundfont as sf2
 from py import song_utils as util
 from py.constants import *
@@ -198,7 +198,7 @@ def create_song(debug: bool = False):
 
     # Print debug information
     if debug:
-        info.print_info(SongMid, SongSf2)
+        dbg.print_info(SongMid, SongSf2)
 
     # Generate an output path
     song_output_path = AUDIO_FOLDER + SongMid.title + '.' + AUDIO_FILE_TYPE
