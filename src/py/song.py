@@ -50,9 +50,9 @@ class Song:
         self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.keys_midi: str = MIDI_FOLDER + 'keys' + MIDI_FILE_TYPE
         self.lead_midi: str = MIDI_FOLDER + 'lead' + MIDI_FILE_TYPE
-        self.keys_path: str = AUDIO_FOLDER + 'keys.' + AUDIO_FILE_TYPE
-        self.lead_path: str = AUDIO_FOLDER + 'lead.' + AUDIO_FILE_TYPE
-        self.song_path: str = AUDIO_FOLDER + 'song.' + AUDIO_FILE_TYPE
+        self.keys_path: str = AUDIO_FOLDER + 'keys' + AUDIO_FILE_TYPE
+        self.lead_path: str = AUDIO_FOLDER + 'lead' + AUDIO_FILE_TYPE
+        self.song_path: str = AUDIO_FOLDER + 'song' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
     def set_track_prefix(self) -> mido.MidiTrack:
@@ -171,13 +171,13 @@ class Song:
         if self.mid_prog_track is not None:
             loader = sf2_loader.sf2_loader(self.keys_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_FILE_TYPE)
+            loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_TYPE)
 
         # Convert lead MIDI
         if self.mid_lead_track is not None:
             loader = sf2_loader.sf2_loader(self.lead_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_FILE_TYPE)
+            loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_TYPE)
 
         # # Load the soundfont file & preset
         # if not sf2_path:
@@ -195,7 +195,7 @@ class Song:
         # loader < sf2_preset # pylint: disable = pointless-statement
 
         # # render a MIDI file with current soundfont files and export as a wav file
-        # loader.export_midi_file(self.midi_path, name=output_path, format=AUDIO_FILE_TYPE)
+        # loader.export_midi_file(self.midi_path, name=output_path, format=AUDIO_TYPE)
 
         return True
 
@@ -221,4 +221,4 @@ class Song:
         if self.drum_segment is not None:
             final_audio = final_audio.overlay(self.drum_segment,0)
 
-        final_audio.export(self.song_path, format=AUDIO_FILE_TYPE)
+        final_audio.export(self.song_path, format=AUDIO_TYPE)

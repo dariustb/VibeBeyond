@@ -21,7 +21,8 @@ HAT_FOLDER:   str = 'src/assets/drums/hats/'
 SNARE_FOLDER: str = 'src/assets/drums/snares/'
 
 # File types
-AUDIO_FILE_TYPE: str = 'wav' # See note on soundfonts.py:midi_to_audio() before changing
+AUDIO_TYPE:      str = 'wav' # See note on soundfonts.py:midi_to_audio() before changing
+AUDIO_FILE_TYPE: str = '.' + AUDIO_TYPE
 MIDI_FILE_TYPE:  str = '.mid'
 SF2_FILE_TYPE:   str = '.sf2'
 SF3_FILE_TYPE:   str = '.sf3'
