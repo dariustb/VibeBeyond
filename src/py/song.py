@@ -198,6 +198,7 @@ def create_song(debug: bool = False):
     SongMid.gen_drum_loop()
     song_midi_path = SongMid.save_midi_file()
 
+    # Print debug information
     if debug:
         info.print_info(SongMid, SongSf2)
 

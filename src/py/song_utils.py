@@ -66,7 +66,6 @@ def get_root_note_list(key, chord_prog) -> list:
 
     return root_note_list
 
-
 def coordinate_sample(audio, segment, pattern, bpm_in_ms):
     ''' coordinates sample audio to the rhythmic pattern passed in'''
     for _ in range(SONG_LENGTH):
