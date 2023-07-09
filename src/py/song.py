@@ -2,13 +2,15 @@
 
 # pylint: disable = W0401, W0614, R0902
 
-import random
-import string
 import os
-from re import sub
+import random
+from string import ascii_lowercase as letters
 
 import mido
+import sf2_loader
 from pydub import AudioSegment
+
+from py import song_utils as util
 from py.constants import *
 
 class Song:
@@ -17,20 +19,26 @@ class Song:
         ''' All the song's static variables will be kept here '''
 
         # Metadata
-        self.title:  str = self.set_title()
-        self.artist: str = self.set_artist()
+        self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
+        self.artist: str = 'example Artist'.title()
 
         # Song generation info
-        self.key:      str = self.set_key()
-        self.bpm:      str = self.set_bpm() # tempo = mido.bpm2tempo(bpm) =/= bpm
-        self.time_sig: str = self.set_time_sig()
-        self.prog:     str = self.set_chord_prog()
+        self.key:      str = random.choice(VALID_KEYS)
+        self.bpm:      str = random.randint(MIN_BPM, MAX_BPM) # tempo = mido.bpm2tempo(bpm) =/= bpm
+        self.time_sig: str = random.choice(TIME_SIGNATURES)
+        self.prog:     str = random.choice(CHORD_PROGRESSIONS)
+
+        self.keys_name  = KEYS_FOLDER + random.choice(os.listdir(KEYS_FOLDER))
+        self.lead_name  = LEAD_FOLDER + random.choice(os.listdir(LEAD_FOLDER))
+
+        self.kick_name  = KICK_FOLDER  + random.choice(os.listdir(KICK_FOLDER))
+        self.hat_name   = HAT_FOLDER   + random.choice(os.listdir(HAT_FOLDER))
+        self.snare_name = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
 
         # Midi tracks
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
         self.mid_lead_track: mido.MidiTrack = None
         self.mid_bass_track: mido.MidiTrack = None
-        self.mid_drum_track: mido.MidiTrack = self.set_drum_track_prefix()
 
         # Pydub audio segments
         self.prog_segment: AudioSegment = None
@@ -39,39 +47,17 @@ class Song:
 
         # File info
         self.mid: mido.MidiFile = mido.MidiFile()
-        self.mid_path:  str = None
-        self.song_path: str = AUDIO_FOLDER + 'song.' + AUDIO_FILE_TYPE
+        self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
+        self.keys_midi: str = MIDI_FOLDER + 'keys' + MIDI_FILE_TYPE
+        self.lead_midi: str = MIDI_FOLDER + 'lead' + MIDI_FILE_TYPE
+        self.keys_path: str = AUDIO_FOLDER + 'keys' + AUDIO_FILE_TYPE
+        self.lead_path: str = AUDIO_FOLDER + 'lead' + AUDIO_FILE_TYPE
+        self.song_path: str = AUDIO_FOLDER + 'song' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
-    def set_title(self) -> str:
-        ''' Returns a randomized string of text in Title Case '''
-        return ''.join(random.choice(string.ascii_lowercase) for i in range(8)).title()
-
-    def set_artist(self) -> str:
-        ''' Returns a randomized string of text in Title Case '''
-        return 'example Artist'.title()
-
-    def set_key(self) -> str:
-        '''
-        Returns a random Key (based on mido's valid key signatures)
-        https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
-        '''
-        return random.choice(VALID_KEYS)
-
-    def set_bpm(self) -> int:
-        ''' Returns a random BPM within the usable range, inclusive '''
-        return random.randint(MIN_BPM, MAX_BPM)
-
-    def set_time_sig(self) -> tuple:
-        ''' Returns tuple with numer and denom of the time signature '''
-        return random.choice(TIME_SIGNATURES)
-
-    def set_chord_prog(self) -> tuple:
-        ''' Returns a tuple with the chord identities, not connected to the key '''
-        return random.choice(CHORD_PROGRESSIONS)
-
     def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
+
         # Create track
         track = mido.MidiTrack()
 
@@ -95,97 +81,13 @@ class Song:
 
         return track
 
-    def set_drum_track_prefix(self) -> mido.MidiTrack:
-        ''' Add necessary info to the beginnning of midi track '''
-        # Create track
-        track = mido.MidiTrack()
-
-        # Add Messages / MetaMessages to file
-        track.append(mido.MetaMessage('track_name', name='Drumset', time=0))
-        track.append(mido.MetaMessage('time_signature',
-                                    numerator = self.time_sig[0], denominator = self.time_sig[1],
-                                    clocks_per_click = 24, notated_32nd_notes_per_beat = 8,
-                                    time = 0
-                                    ))
-        track.append(mido.MetaMessage('key_signature', key=self.key, time=0))
-        track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(self.bpm), time=0))
-        track.append(mido.Message('control_change', channel=9, control=121, value=0, time=0))
-        track.append(mido.Message('program_change', channel=9, program=0, time=0))
-        track.append(mido.Message('control_change', channel=9, control=7, value=100, time=0))
-        track.append(mido.Message('control_change', channel=9, control=10, value=64, time=0))
-        track.append(mido.Message('control_change', channel=9, control=91, value=0, time=0))
-        track.append(mido.Message('control_change', channel=9, control=93, value=0, time=0))
-        track.append(mido.MetaMessage('midi_port', port=0, time=0))
-
-        return track
-
     # GENERATION FUNCTIONS
-    def get_chord_intervals_list(self) -> list:
-        ''' Returns a list of chord intervals in the progression '''
-        chord_intervals_list = []
-
-        for chord in self.prog:
-            # Evaluate chord type as intervals
-            chord_no_acc = chord.replace('b','').replace('#','')
-            if '7' in chord:
-                chord_intervals = (0, 4, 7, 10)  # dominant 7th
-            elif 'dim' in chord:
-                chord_intervals = (0, 3, 6, 9)   # diminished
-            elif 'aug' in chord:
-                chord_intervals = (0, 4, 8, 10)  # augmented
-            elif chord.lower() == chord:
-                chord_intervals = (0, 3, 7, 10)  # minor 7
-            elif chord_no_acc.upper() == chord_no_acc:
-                chord_intervals = (0, 4, 7, 11)  # major 7
-            else:
-                raise ValueError('Invalid chord type')
-
-            chord_intervals_list.append(chord_intervals)
-
-        return chord_intervals_list
-
-    def get_root_note_list(self) -> list:
-        ''' Returns a list of root notes in the progression '''
-        root_note_list = []
-
-        for chord in self.prog:
-            # Evaluate key value as root note
-            root_note = {
-                'Gb': 54, 'G': 55,
-                'Ab': 56, 'A': 57,
-                'Bb': 58, 'B': 59,
-                'C': 60,
-                'Db': 61, 'D': 62,
-                'Eb': 63, 'E': 64,
-                'F': 65
-            }[self.key]
-
-            # Evaluate scale degree + add interval to root note
-            chord_degree = sub(r'b|#|7|dim|aug|m|M', '', chord).lower()
-            root_note += {
-                'i':   0, 'ii': 2,
-                'iii': 4, 
-                'iv': -7, 'v':  -5,
-                'vi': -3, 'vii':-1
-            }[chord_degree]
-
-            # Evaluate scale degree modification (flat, sharp, etc.)
-            if 'b' in chord:
-                root_note -= 1   # flat/lowered half-step
-            elif '#' in chord:
-                root_note += 1   # sharp/raised half-step
-
-            # Add values to outside lists
-            root_note_list.append(root_note)
-
-        return root_note_list
-
     def gen_chord_prog(self) -> bool:
         ''' Adds a chord progression to the class variable '''
 
         # Get chord progression variables
-        chord_intervals_list    = self.get_chord_intervals_list()
-        root_note_list          = self.get_root_note_list()
+        chord_intervals_list    = util.get_chord_intervals_list(self.prog)
+        root_note_list          = util.get_root_note_list(self.key, self.prog)
 
         # Repeat chord progression for length of song
         for _ in range(SONG_LENGTH):
@@ -225,34 +127,28 @@ class Song:
         bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
 
         # Load drum samples
-        kick_file = KICK_FOLDER + random.choice(os.listdir(KICK_FOLDER))
-        hat_file = HAT_FOLDER + random.choice(os.listdir(HAT_FOLDER))
-        snare_file = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
-
-        kick_audio  = AudioSegment.from_file(kick_file)
-        hat_audio   = AudioSegment.from_file(hat_file) - 6
-        snare_audio = AudioSegment.from_file(snare_file) - 3
-
-        print('\n\n\nkick:', kick_file, '\nhat:', hat_file, '\nsnare:', snare_file)
+        kick_audio  = AudioSegment.from_file(self.kick_name)
+        hat_audio   = AudioSegment.from_file(self.hat_name) - 6
+        snare_audio = AudioSegment.from_file(self.snare_name) - 3
 
         # Create drum pattern for midi
         kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]
-        hat_pattern =  [EIGHTH_NOTE for _ in range(8)]
+        hat_pattern  = [EIGHTH_NOTE for _ in range(8)]
 
         # Coordinate audio samples to note values
-        kick_segment = []
+        kick_segment  = []
         snare_segment = []
-        hat_segment = []
+        hat_segment   = []
 
         for _ in range(len(self.prog)):
-            coordinate_sample(kick_audio, kick_segment, kick_pattern, bpm_in_ms)
-            coordinate_sample(hat_audio, hat_segment, hat_pattern, bpm_in_ms)
-            coordinate_snare(snare_audio, snare_segment, bpm_in_ms) # Snare is hardcoded 2 & 4
+            util.coordinate_sample(kick_audio, kick_segment, kick_pattern, bpm_in_ms)
+            util.coordinate_sample(hat_audio, hat_segment, hat_pattern, bpm_in_ms)
+            util.coordinate_snare(snare_audio, snare_segment, bpm_in_ms)
 
         # Combine sample and silences (per instrument)
-        kick_segment = sum(kick_segment)
+        kick_segment  = sum(kick_segment)
         snare_segment = sum(snare_segment)
-        hat_segment = sum(hat_segment)
+        hat_segment   = sum(hat_segment)
 
         # Combine all the drum instruments
         drum_segment = kick_segment
@@ -264,19 +160,34 @@ class Song:
 
         return True
 
-    # MIDI UTILITY FUNCTIONS
-    def save_midi_file(self, midi_file_name: str = None) -> str:
-        ''' Combines the midi tracks into MidiFile & saves to .mid file '''
-        if self.mid_prog_track is not None:
-            self.mid.tracks.append(self.mid_prog_track)
-        if self.mid_lead_track is not None:
-            self.mid.tracks.append(self.mid_lead_track)
-        if self.mid_bass_track is not None:
-            self.mid.tracks.append(self.mid_bass_track)
+    # CONVERTER FUNCTIONS
+    def midi_to_audio(self) -> bool:
+        ''' midi_to_audio - Convert keys & lead MIDI track file to audio files '''
 
-        if midi_file_name is None:
-            midi_file_name = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
-        self.mid.save(midi_file_name)
+        # NOTE: sf2-loader/pydub requires ffmpeg or libav installed
+        # for non-wav files (https://pypi.org/project/sf2-loader/#Windows)
+
+        # Convert keys MIDI
+        if self.mid_prog_track is not None:
+            loader = sf2_loader.sf2_loader(self.keys_name)
+            loader < loader.get_current_instrument() # pylint: disable = W0106
+            loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_TYPE)
+
+        # Convert lead MIDI
+        if self.mid_lead_track is not None:
+            loader = sf2_loader.sf2_loader(self.lead_name)
+            loader < loader.get_current_instrument() # pylint: disable = W0106
+            loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_TYPE)
+
+        return True
+
+    # EXPORT FUNCTIONS
+    def save_midi_file(self, midi_track: mido.MidiTrack, midi_file_name: str) -> str:
+        ''' Combines the midi tracks into MidiFile & saves to .mid file '''
+        file = mido.MidiFile()
+
+        file.tracks.append(midi_track)
+        file.save(midi_file_name)
 
         return midi_file_name
 
@@ -292,30 +203,4 @@ class Song:
         if self.drum_segment is not None:
             final_audio = final_audio.overlay(self.drum_segment,0)
 
-        final_audio.export(self.song_path, format=AUDIO_FILE_TYPE)
-
-def coordinate_sample(audio, segment, pattern, bpm_in_ms):
-    ''' coordinates sample audio to the rhythmic pattern passed in'''
-    for _ in range(SONG_LENGTH):
-        for note in pattern:
-            note_length_in_ms = ((note + 1)/BASE_NOTE) * bpm_in_ms
-            if len(audio) < note_length_in_ms:
-                segment.append(audio)
-                segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
-            elif len(audio) > note_length_in_ms:
-                shortened_audio = audio[:len(audio) - note_length_in_ms]
-                segment.append(shortened_audio)
-
-def coordinate_snare(audio, segment, bpm_in_ms):
-    ''' coordinates snare to the 2 and 4 of the beat '''
-    note_length_in_ms = ((HALF_NOTE + 1)/BASE_NOTE) * bpm_in_ms
-    segment.append(AudioSegment.silent(note_length_in_ms/2))
-    for _ in range(SONG_LENGTH - 1):
-        segment.append(audio)
-        segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
-        segment.append(audio)
-        segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
-    segment.append(audio)
-    segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
-    segment.append(audio)
-    segment.append(AudioSegment.silent(note_length_in_ms/2))
+        final_audio.export(self.song_path, format=AUDIO_TYPE)
