@@ -19,6 +19,7 @@ LEAD_FOLDER:  str = 'src/assets/sf2/'
 KICK_FOLDER:  str = 'src/assets/drums/kicks/'
 HAT_FOLDER:   str = 'src/assets/drums/hats/'
 SNARE_FOLDER: str = 'src/assets/drums/snares/'
+IMAGE_FOLDER: str = 'src/assets/images'
 
 # File types
 AUDIO_TYPE:      str = 'wav' # See note on soundfonts.py:midi_to_audio() before changing
