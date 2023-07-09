@@ -3,34 +3,8 @@
 # pylint: disable = W0401, W0614, C0103
 
 import pygame
-from py import info
-from py import song
-from py import soundfont as sf2
+from py.song import create_song
 from py.constants import *
-
-def create_song():
-    ''' create_song - builds song and returns the song file path '''
-
-    # Create Midi and Sf2 objects
-    SongMid = song.Song()
-    SongSf2 = sf2.SoundFont()
-
-    # Create midi file of the song
-    SongMid.gen_chord_prog()
-    SongMid.gen_drum_loop()
-    song_midi_path = SongMid.save_midi_file()
-
-    info.print_info(SongMid, SongSf2)
-
-    # Generate an output path
-    song_output_path = AUDIO_FOLDER + SongMid.title + '.' + AUDIO_FILE_TYPE
-
-    # Convert midi file to audio
-    SongSf2.midi_to_audio(song_midi_path, song_output_path)
-
-    SongMid.export_song()
-
-    return song_output_path
 
 if __name__ == '__main__':
     # Start pygame
@@ -46,7 +20,7 @@ if __name__ == '__main__':
     pygame.mixer.init()
     pygame.mixer.music.set_volume(DEFAULT_VOLUME)
     pygame.mixer.music.set_endevent(SONG_ENDED)
-    pygame.mixer.music.load(create_song())
+    pygame.mixer.music.load(create_song(debug=True))
     pygame.mixer.music.play()
 
     # Main program loop
@@ -59,5 +33,5 @@ if __name__ == '__main__':
 
             # Song ends -> build/load/play next one
             if event.type == SONG_ENDED:
-                pygame.mixer.music.load(create_song())
+                pygame.mixer.music.load(create_song(debug=True))
                 pygame.mixer.music.play()
