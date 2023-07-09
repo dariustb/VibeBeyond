@@ -65,7 +65,7 @@ CHORD_PROGRESSIONS: tuple = (
     ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
 )
 SONG_LENGTH:    int = 4 # number of chord progression repeats in a song
-BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat) 
+BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat)
 QTR_NOTE:       int = BASE_NOTE - 1
 HALF_NOTE:      int = BASE_NOTE * 2 - 1
 WHOLE_NOTE:     int = BASE_NOTE * 4 - 1
