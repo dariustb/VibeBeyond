@@ -3,8 +3,8 @@
 # pylint: disable = W0401, W0614, R0902
 
 import random
-import string
 import os
+from string import ascii_lowercase as letters
 
 import mido
 from pydub import AudioSegment
@@ -17,14 +17,14 @@ class Song:
         ''' All the song's static variables will be kept here '''
 
         # Metadata
-        self.title:  str = self.set_title()
-        self.artist: str = self.set_artist()
+        self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
+        self.artist: str = 'example Artist'.title()
 
         # Song generation info
-        self.key:      str = self.set_key()
-        self.bpm:      str = self.set_bpm() # tempo = mido.bpm2tempo(bpm) =/= bpm
-        self.time_sig: str = self.set_time_sig()
-        self.prog:     str = self.set_chord_prog()
+        self.key:      str = random.choice(VALID_KEYS)
+        self.bpm:      str = random.randint(MIN_BPM, MAX_BPM) # tempo = mido.bpm2tempo(bpm) =/= bpm
+        self.time_sig: str = random.choice(TIME_SIGNATURES)
+        self.prog:     str = random.choice(CHORD_PROGRESSIONS)
 
         # Midi tracks
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
@@ -43,33 +43,6 @@ class Song:
         self.song_path: str = AUDIO_FOLDER + 'song.' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
-    def set_title(self) -> str:
-        ''' Returns a randomized string of text in Title Case '''
-        return ''.join(random.choice(string.ascii_lowercase) for i in range(8)).title()
-
-    def set_artist(self) -> str:
-        ''' Returns a randomized string of text in Title Case '''
-        return 'example Artist'.title()
-
-    def set_key(self) -> str:
-        '''
-        Returns a random Key (based on mido's valid key signatures)
-        https://mido.readthedocs.io/en/latest/meta_message_types.html#key-signature-0x59
-        '''
-        return random.choice(VALID_KEYS)
-
-    def set_bpm(self) -> int:
-        ''' Returns a random BPM within the usable range, inclusive '''
-        return random.randint(MIN_BPM, MAX_BPM)
-
-    def set_time_sig(self) -> tuple:
-        ''' Returns tuple with numer and denom of the time signature '''
-        return random.choice(TIME_SIGNATURES)
-
-    def set_chord_prog(self) -> tuple:
-        ''' Returns a tuple with the chord identities, not connected to the key '''
-        return random.choice(CHORD_PROGRESSIONS)
-
     def set_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
         # Create track
