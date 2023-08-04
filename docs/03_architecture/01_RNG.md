@@ -5,6 +5,7 @@ permalink: /architecture/rng
 has_children: false
 has_toc: false
 nav_order: 1
+parent: Architecture
 ---
 
 # How the RNG works
