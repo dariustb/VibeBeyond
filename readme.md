@@ -7,7 +7,7 @@
 <br />
 <div align="center" id="readme-top">
   <a href="https://github.com/dariustb/vibebeyond">
-    <img src="https://i1.sndcdn.com/artworks-nXTBoQMnJHSoNPbn-yX34xA-t500x500.jpg" alt="Logo" width="100" height="100">
+    <img src="docs/images/vb_logo.svg" alt="VB Logo">
   </a>
 
   <h1 align="center">Vibe Beyond</h1>
