@@ -1,9 +1,10 @@
 ---
 layout: default
 title: Home
-nav_order: 1
-description: "Vibe Beyond is a Python app to produce AI-generated lofi hip hop."
 permalink: /
+has_children: false
+has_toc: true
+nav_order: 1
 ---
 
 # Listen to music created in real-time!

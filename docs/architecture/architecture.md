@@ -1,9 +1,10 @@
 ---
 layout: default
-title: Backend Architecture
-nav_order: 3
-description: "A quick guide to get the application up and running"
+title: Architecture
 permalink: /architecture
+has_children: true
+has_toc: true
+nav_order: 3
 ---
 
 # Backend Architecture
