@@ -6,24 +6,38 @@ import os
 import sys
 from py.constants import *
 
+SET_FOLDERS = [
+    GEN_FOLDER,
+    ASSETS_FOLDER,
+    AUDIO_FOLDER,
+    MIDI_FOLDER,
+    SF2_FOLDER,
+    KEYS_FOLDER,
+    LEAD_FOLDER,
+    KICK_FOLDER,
+    HAT_FOLDER,
+    SNARE_FOLDER,
+    IMAGE_FOLDER
+]
+
+def prep_assets():
+    ''' Creates missing asset folders for first run '''
+    print("Running prep_assets()")
+    for folder in SET_FOLDERS:
+        if not os.path.isdir(folder):
+            os.mkdir(folder)
+
 def validate_assets():
     ''' quits if assets folders are missing files '''
 
     is_missing_files = False
     missing_list = []
 
-    asset_folders = [
-        KEYS_FOLDER,
-        LEAD_FOLDER,
-        KICK_FOLDER,
-        HAT_FOLDER,
-        SNARE_FOLDER,
-        IMAGE_FOLDER
-    ]
-
     # Check for empty folders
-    for folder in asset_folders:
-        if (not os.path.isdir(folder)) or (os.listdir(folder) == []):
+    for folder in SET_FOLDERS:
+        if folder in (AUDIO_FOLDER, MIDI_FOLDER):
+            continue
+        if os.listdir(folder) == []:
             is_missing_files = True
             missing_list.append(folder)
 

@@ -10,16 +10,18 @@ APP_VERSION: str = '1.0.0'
 APP_ICON:    str = 'src/assets/images/icon256x256.png'
 
 # Folders
-AUDIO_FOLDER: str = 'src/gen/audio/'
-MIDI_FOLDER:  str = 'src/gen/midi/'
-SF2_FOLDER:   str = 'src/assets/sf2/'
-SF3_FOLDER:   str = 'src/assets/sf3/'
-KEYS_FOLDER:  str = 'src/assets/sf2/'
-LEAD_FOLDER:  str = 'src/assets/sf2/'
-KICK_FOLDER:  str = 'src/assets/drums/kicks/'
-HAT_FOLDER:   str = 'src/assets/drums/hats/'
-SNARE_FOLDER: str = 'src/assets/drums/snares/'
-IMAGE_FOLDER: str = 'src/assets/images'
+GEN_FOLDER:    str = 'src/gen/'
+AUDIO_FOLDER:  str = 'src/gen/audio/'
+MIDI_FOLDER:   str = 'src/gen/midi/'
+ASSETS_FOLDER: str = 'src/assets/'
+SF2_FOLDER:    str = 'src/assets/sf2/'
+SF3_FOLDER:    str = 'src/assets/sf3/'
+KEYS_FOLDER:   str = 'src/assets/sf2/'
+LEAD_FOLDER:   str = 'src/assets/sf2/'
+KICK_FOLDER:   str = 'src/assets/drums/kicks/'
+HAT_FOLDER:    str = 'src/assets/drums/hats/'
+SNARE_FOLDER:  str = 'src/assets/drums/snares/'
+IMAGE_FOLDER:  str = 'src/assets/images'
 
 # File types
 AUDIO_TYPE:      str = 'wav' # See note on soundfonts.py:midi_to_audio() before changing
