@@ -1,9 +1,10 @@
 ---
 layout: default
 title: Getting Started
-nav_order: 2
-description: "A quick guide to get the application up and running"
 permalink: /getting-started
+has_children: false
+has_toc: false
+nav_order: 2
 ---
 
 # Getting Started Guide
