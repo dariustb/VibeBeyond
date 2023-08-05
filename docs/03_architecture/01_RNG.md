@@ -47,7 +47,7 @@ Chords are written in Roman numeric notation. In the key of *C*, a notation of "
 Chords were decided and pre-written beforehand. The RNG chooses which chord progression to play and base the melody on. The chord itself is based on the key and used in Roman numeric notation for portability across any single key. ii-V-I will always be a 2-5-1 progression in any key
 
 ## Drum pattern
-*TBA*
+As of right now the drum pattern is hard-coded. Will need to debug timing issue then proceed into other drum rhythm ideas.
 
 ## Song title
 At this point, it's just a random string generator. Will add a feature to create more realistic sounding names with real English words later.
