@@ -55,7 +55,7 @@ class Song:
         self.keys_path: str = AUDIO_FOLDER + self.title + '_keys' + AUDIO_FILE_TYPE
         self.lead_path: str = AUDIO_FOLDER + self.title + '_lead' + AUDIO_FILE_TYPE
         self.drum_path: str = AUDIO_FOLDER + self.title + '_drum' + AUDIO_FILE_TYPE
-        self.song_path: str = AUDIO_FOLDER + self.title + '_song' + AUDIO_FILE_TYPE
+        self.song_path: str = AUDIO_FOLDER + self.title + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
     def set_track_prefix(self) -> mido.MidiTrack:
@@ -205,3 +205,17 @@ class Song:
             final_audio = final_audio.overlay(self.drum_segment,0)
 
         final_audio.export(self.song_path, format=AUDIO_TYPE)
+
+    def delete_loops(self) -> bool:
+        ''' deletes audio/midi files of the song loops '''
+        for loop_file in (
+            self.mid_path,
+            self.keys_midi,
+            self.lead_midi,
+            self.keys_path,
+            self.lead_path,
+            self.drum_path
+        ):
+            if os.path.isfile(loop_file):
+                os.remove(loop_file)
+        return True

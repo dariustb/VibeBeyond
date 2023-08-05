@@ -11,7 +11,7 @@ from py.constants import *
 def create_song(debug: bool = False):
     ''' create_song - builds song and returns the song file path '''
 
-    # Create Midi and Sf2 objects
+    # Create Song Elements to build song with
     SongObj = song.Song()
 
     # Print debug information
@@ -47,5 +47,8 @@ def create_song(debug: bool = False):
 
     # Export final song
     song_segment.export(SongObj.song_path, format=AUDIO_TYPE)
+
+    # Clean up loop files
+    SongObj.delete_loops()
 
     return SongObj.song_path
