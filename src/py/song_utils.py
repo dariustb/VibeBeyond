@@ -75,12 +75,14 @@ def coordinate_sample(audio, segment, pattern, bpm_in_ms):
                 segment.append(audio)
                 segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
             elif len(audio) > note_length_in_ms:
-                shortened_audio = audio[:len(audio) - note_length_in_ms]
+                shortened_audio = audio[:note_length_in_ms]
                 segment.append(shortened_audio)
 
 def coordinate_snare(audio, segment, bpm_in_ms):
     ''' coordinates snare to the 2 and 4 of the beat '''
     note_length_in_ms = ((HALF_NOTE + 1)/BASE_NOTE) * bpm_in_ms
+    if len(audio) > note_length_in_ms:
+        audio = audio[:note_length_in_ms]
     segment.append(AudioSegment.silent(note_length_in_ms/2))
     for _ in range(SONG_LENGTH - 1):
         segment.append(audio)
@@ -90,4 +92,6 @@ def coordinate_snare(audio, segment, bpm_in_ms):
     segment.append(audio)
     segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
     segment.append(audio)
+    if len(audio) > note_length_in_ms/2:
+        audio = audio[:note_length_in_ms/2]
     segment.append(AudioSegment.silent(note_length_in_ms/2 - len(audio)))
