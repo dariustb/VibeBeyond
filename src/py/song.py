@@ -172,12 +172,22 @@ class Song:
             loader = sf2_loader.sf2_loader(self.keys_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
             loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_TYPE)
+            keys_audio = AudioSegment.from_file(self.keys_path) + KEYS_VOLUME
+            keys_segment = []
+            keys_segment.append(keys_audio)
+            keys_segment = sum(keys_segment)
+            self.prog_segment = keys_segment
 
         # Convert lead MIDI
         if self.mid_lead_track is not None:
             loader = sf2_loader.sf2_loader(self.lead_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
             loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_TYPE)
+            lead_audio = AudioSegment.from_file(self.lead_path) + LEAD_VOLUME
+            lead_segment = []
+            lead_segment.append(lead_audio)
+            lead_segment = sum(lead_segment)
+            self.lead_segment = lead_segment
 
         return True
 
