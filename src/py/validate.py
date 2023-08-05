@@ -22,7 +22,6 @@ SET_FOLDERS = [
 
 def prep_assets():
     ''' Creates missing asset folders for first run '''
-    print("Running prep_assets()")
     for folder in SET_FOLDERS:
         if not os.path.isdir(folder):
             os.mkdir(folder)
