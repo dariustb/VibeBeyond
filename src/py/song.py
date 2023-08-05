@@ -16,7 +16,7 @@ from py.constants import *
 class Song:
     ''' This class will be used to generate a song'''
     def __init__(self):
-        ''' All the song's static variables will be kept here '''
+        ''' All the song's attributes will be kept here '''
 
         # Metadata
         self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
@@ -28,12 +28,14 @@ class Song:
         self.time_sig: str = random.choice(TIME_SIGNATURES)
         self.prog:     str = random.choice(CHORD_PROGRESSIONS)
 
-        self.keys_name  = KEYS_FOLDER + random.choice(os.listdir(KEYS_FOLDER))
-        self.lead_name  = LEAD_FOLDER + random.choice(os.listdir(LEAD_FOLDER))
-
+        self.keys_name  = KEYS_FOLDER  + random.choice(os.listdir(KEYS_FOLDER))
+        self.lead_name  = LEAD_FOLDER  + random.choice(os.listdir(LEAD_FOLDER))
         self.kick_name  = KICK_FOLDER  + random.choice(os.listdir(KICK_FOLDER))
         self.hat_name   = HAT_FOLDER   + random.choice(os.listdir(HAT_FOLDER))
         self.snare_name = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
+
+        # Song structure
+        self.song_structure: tuple = random.choice(SONG_STRUCTURES)
 
         # Midi tracks
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
@@ -52,6 +54,7 @@ class Song:
         self.lead_midi: str = MIDI_FOLDER + 'lead' + MIDI_FILE_TYPE
         self.keys_path: str = AUDIO_FOLDER + 'keys' + AUDIO_FILE_TYPE
         self.lead_path: str = AUDIO_FOLDER + 'lead' + AUDIO_FILE_TYPE
+        self.drum_path: str = AUDIO_FOLDER + 'drum' + AUDIO_FILE_TYPE
         self.song_path: str = AUDIO_FOLDER + 'song' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
@@ -127,9 +130,9 @@ class Song:
         bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
 
         # Load drum samples
-        kick_audio  = AudioSegment.from_file(self.kick_name)
-        hat_audio   = AudioSegment.from_file(self.hat_name) - 6
-        snare_audio = AudioSegment.from_file(self.snare_name) - 3
+        kick_audio  = AudioSegment.from_file(self.kick_name)  + KICK_VOLUME
+        hat_audio   = AudioSegment.from_file(self.hat_name)   + HAT_VOLUME
+        snare_audio = AudioSegment.from_file(self.snare_name) + SNARE_VOLUME
 
         # Create drum pattern for midi
         kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]
@@ -172,6 +175,7 @@ class Song:
             loader = sf2_loader.sf2_loader(self.keys_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
             loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_TYPE)
+
 
         # Convert lead MIDI
         if self.mid_lead_track is not None:

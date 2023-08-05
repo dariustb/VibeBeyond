@@ -38,13 +38,34 @@ SCREEN_BKGD: tuple = 181, 126, 220
 
 # Pygame mixer
 DEFAULT_VOLUME: float = 0.7
-SONG_ENDED: int = USEREVENT + 616
+SONG_ENDED:       int = USEREVENT + 616
 
-# Music Generation Defaults
-MIN_BPM: int = 75
-MAX_BPM: int = 100
-VALID_KEYS:         tuple = 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
-TIME_SIGNATURES:    tuple = (4,4),(4,4)
+# Music generation defaults
+MIN_BPM:           int = 75
+MAX_BPM:           int = 100
+VALID_KEYS:      tuple = 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
+TIME_SIGNATURES: tuple = (4,4),(4,4)
+
+# Instrument volume adjustments
+KEYS_VOLUME:      int = 0
+LEAD_VOLUME:      int = 0
+KICK_VOLUME:      int = 0
+HAT_VOLUME:       int = -6
+SNARE_VOLUME:     int = -3
+NO_VOLUME_CHANGE: int = 0
+
+# MIDI note durations
+SONG_LENGTH:    int = 2 # number of chord progression repeats in a song
+BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat)
+QTR_NOTE:       int = BASE_NOTE - 1
+HALF_NOTE:      int = BASE_NOTE * 2 - 1
+WHOLE_NOTE:     int = BASE_NOTE * 4 - 1
+EIGHTH_NOTE:    int = BASE_NOTE // 2 - 1
+SIXTEENTH_NOTE: int = BASE_NOTE // 4 - 1
+DOT_QTR_NOTE:   int = int(BASE_NOTE * 1.5) - 1
+DOT_8TH_NOTE:   int = int(BASE_NOTE * 0.75) - 1
+
+# Music structures
 CHORD_PROGRESSIONS: tuple = (
     ('ii', 'V', 'I', 'IV'),
     ('ii7', 'V', 'I7', 'I7'),
@@ -70,12 +91,45 @@ CHORD_PROGRESSIONS: tuple = (
     ('vi', 'V', 'IV', 'V'),
     ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
 )
-SONG_LENGTH:    int = 4 # number of chord progression repeats in a song
-BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat)
-QTR_NOTE:       int = BASE_NOTE - 1
-HALF_NOTE:      int = BASE_NOTE * 2 - 1
-WHOLE_NOTE:     int = BASE_NOTE * 4 - 1
-EIGHTH_NOTE:    int = BASE_NOTE // 2 - 1
-SIXTEENTH_NOTE: int = BASE_NOTE // 4 - 1
-DOT_QTR_NOTE:   int = int(BASE_NOTE * 1.5) - 1
-DOT_8TH_NOTE:   int = int(BASE_NOTE * 0.75) - 1
+SONG_STRUCTURES:    tuple = (
+    (
+        (0,0,0,0,0,1,1,1,1,1,1),    # Ambient
+        (0,0,0,1,1,0,0,1,1,1,1),    # Melody
+        (0,0,0,0,0,0,0,1,1,1,1),    # Countermelody
+        (1,1,1,1,1,1,1,1,1,1,1),    # Chords
+        (0,1,1,1,1,0,1,1,1,1,1),    # Bass
+        (0,1,1,1,1,0,1,1,1,1,1)     # Drums
+    ),
+    (
+        (0,0,1,1,0,0,1,1,1,1,1,1,0,0),
+        (0,0,0,0,1,1,0,0,1,1,1,1,0,0),
+        (0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+        (1,1,1,1,1,1,1,1,1,1,1,1,1,1),
+        (0,0,1,1,1,1,1,1,1,1,1,1,0,0),
+        (0,1,1,1,1,1,0,0,1,1,1,1,0,0)
+    ),
+    (
+        (0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,1),
+        (0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1),
+        (0,0,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1),
+        (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),
+        (1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1),
+        (0,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1)
+    ),
+    (
+        (0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,0),
+        (0,0,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1),
+        (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+        (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),
+        (0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0),
+        (0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0)
+    ),
+    (
+        (0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,0,0),
+        (0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1),
+        (0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0),
+        (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),
+        (0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,0),
+        (0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,0)
+    )
+)

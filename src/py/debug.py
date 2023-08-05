@@ -34,6 +34,18 @@ def print_info(song_mid: song.Song):
         print('Hat:\t',   song_mid.hat_name.replace(HAT_FOLDER, ''))
         print('Snare:\t', song_mid.snare_name.replace(SNARE_FOLDER, ''))
 
+        print()
+        print('Structure:')
+        for track in song_mid.song_structure:
+            print('\t', end='')
+            for value in track:
+                if value:
+                    print('X', end='')
+                else:
+                    print('_', end='')
+            print()
+
+    print()
     print('-------------------------------------------------------')
     print()
 
