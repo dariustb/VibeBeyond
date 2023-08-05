@@ -7,6 +7,8 @@ has_toc: true
 nav_order: 1
 ---
 
+![Vibe Beyond logo](../images/vb_logo.svg)
+
 # Listen to music created in real-time!
 {: .fs-9 }
 
