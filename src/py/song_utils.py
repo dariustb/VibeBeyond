@@ -90,4 +90,4 @@ def coordinate_snare(audio, segment, bpm_in_ms):
     segment.append(audio)
     segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
     segment.append(audio)
-    segment.append(AudioSegment.silent(note_length_in_ms/2))
+    segment.append(AudioSegment.silent(note_length_in_ms/2 - len(audio)))
