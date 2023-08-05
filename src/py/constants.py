@@ -38,13 +38,15 @@ SCREEN_BKGD: tuple = 181, 126, 220
 
 # Pygame mixer
 DEFAULT_VOLUME: float = 0.7
-SONG_ENDED: int = USEREVENT + 616
+SONG_ENDED:       int = USEREVENT + 616
 
-# Music Generation Defaults
-MIN_BPM: int = 75
-MAX_BPM: int = 100
-VALID_KEYS:         tuple = 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
-TIME_SIGNATURES:    tuple = (4,4),(4,4)
+# Music generation defaults
+MIN_BPM:           int = 75
+MAX_BPM:           int = 100
+VALID_KEYS:      tuple = 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
+TIME_SIGNATURES: tuple = (4,4),(4,4)
+
+# Music structures
 CHORD_PROGRESSIONS: tuple = (
     ('ii', 'V', 'I', 'IV'),
     ('ii7', 'V', 'I7', 'I7'),
@@ -113,6 +115,7 @@ SONG_STRUCTURES:    tuple = (
     )
 )
 
+# MIDI note durations
 SONG_LENGTH:    int = 4 # number of chord progression repeats in a song
 BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat)
 QTR_NOTE:       int = BASE_NOTE - 1
