@@ -4,15 +4,16 @@
 
 from py import song
 from py.constants import *
+from py.log import log_error
 
 # PRINT FUNCTIONS
-def print_info(song_mid: song.Song):
+def print_debug_song_info(song_mid: song.Song):
     ''' Prints the class variables to console '''
     print()
     print('--------------- DEBUG: SONG INFORMATION ---------------')
 
     if not song_mid:
-        print('print_info: No information available')
+        log_error(print_debug_song_info, 'No information available')
 
     else:
         print()
@@ -35,9 +36,9 @@ def print_info(song_mid: song.Song):
         print('Snare:\t', song_mid.snare_name.replace(SNARE_FOLDER, ''))
 
         print()
-        print('Structure:')
+        print('Struct:', end='')
         for track in song_mid.song_structure:
-            print('\t', end='')
+            print('\t ', end='')
             for value in track:
                 if value:
                     print('X', end='')
@@ -49,7 +50,7 @@ def print_info(song_mid: song.Song):
     print('-------------------------------------------------------')
     print()
 
-def print_chords(song_mid: song.Song):
+def print_debug_midi_track(song_mid: song.Song):
     ''' Prints the chord progression to console '''
     print()
     print('Chords:\t',      song_mid.mid_prog_track)

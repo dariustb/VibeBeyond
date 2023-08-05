@@ -16,7 +16,7 @@ def create_song(debug: bool = False):
 
     # Print debug information
     if debug:
-        dbg.print_info(SongObj)
+        dbg.print_debug_song_info(SongObj)
 
     # Create MIDI loops for all sf2 elements
     SongObj.gen_chord_prog()
