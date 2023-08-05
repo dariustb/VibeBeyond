@@ -16,7 +16,7 @@ from py.constants import *
 class Song:
     ''' This class will be used to generate a song'''
     def __init__(self):
-        ''' All the song's static variables will be kept here '''
+        ''' All the song's attributes will be kept here '''
 
         # Metadata
         self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
@@ -127,9 +127,9 @@ class Song:
         bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
 
         # Load drum samples
-        kick_audio  = AudioSegment.from_file(self.kick_name)
-        hat_audio   = AudioSegment.from_file(self.hat_name) - 6
-        snare_audio = AudioSegment.from_file(self.snare_name) - 3
+        kick_audio  = AudioSegment.from_file(self.kick_name)  + KICK_VOLUME
+        hat_audio   = AudioSegment.from_file(self.hat_name)   + HAT_VOLUME
+        snare_audio = AudioSegment.from_file(self.snare_name) + SNARE_VOLUME
 
         # Create drum pattern for midi
         kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]

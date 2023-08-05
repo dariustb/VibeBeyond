@@ -46,6 +46,11 @@ MAX_BPM:           int = 100
 VALID_KEYS:      tuple = 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab'
 TIME_SIGNATURES: tuple = (4,4),(4,4)
 
+# Instrument volume adjustments
+KICK_VOLUME:  int = 0
+HAT_VOLUME:   int = -6 # lower vol by 6 units
+SNARE_VOLUME: int = -3
+
 # MIDI note durations
 SONG_LENGTH:    int = 4 # number of chord progression repeats in a song
 BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat)
