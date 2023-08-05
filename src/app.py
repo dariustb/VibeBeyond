@@ -6,14 +6,13 @@ from os import environ
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 import pygame
-from py.validate import prep_assets, validate_assets
+from py.startup import startup_check
 from py.create_song import create_song
 from py.constants import *
 
 if __name__ == '__main__':
     # Confirm necessary files/folders
-    prep_assets()
-    validate_assets()
+    startup_check()
 
     # Start pygame
     pygame.init()
