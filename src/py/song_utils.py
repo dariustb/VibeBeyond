@@ -68,30 +68,32 @@ def get_root_note_list(key, chord_prog) -> list:
 
 def coordinate_sample(audio, segment, pattern, bpm_in_ms):
     ''' coordinates sample audio to the rhythmic pattern passed in'''
-    for _ in range(SONG_LENGTH):
-        for note in pattern:
-            note_length_in_ms = ((note + 1)/BASE_NOTE) * bpm_in_ms
-            if len(audio) < note_length_in_ms:
-                segment.append(audio)
-                segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
-            elif len(audio) > note_length_in_ms:
-                shortened_audio = audio[:note_length_in_ms]
-                segment.append(shortened_audio)
+    for note in pattern:
+        note_length_in_ms = ((note + 1)/BASE_NOTE) * bpm_in_ms
+        if len(audio) < note_length_in_ms:
+            segment.append(audio)
+            segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
+        elif len(audio) > note_length_in_ms:
+            shortened_audio = audio[:note_length_in_ms]
+            segment.append(shortened_audio)
 
 def coordinate_snare(audio, segment, bpm_in_ms):
     ''' coordinates snare to the 2 and 4 of the beat '''
-    note_length_in_ms = ((HALF_NOTE + 1)/BASE_NOTE) * bpm_in_ms
-    if len(audio) > note_length_in_ms:
-        audio = audio[:note_length_in_ms]
+    note_length_in_ms = ((HALF_NOTE + 1)/BASE_NOTE) * bpm_in_ms # half note length
     segment.append(AudioSegment.silent(note_length_in_ms/2))
-    for _ in range(SONG_LENGTH - 1):
-        segment.append(audio)
-        segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
-        segment.append(audio)
-        segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
     segment.append(audio)
     segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
     segment.append(audio)
-    if len(audio) > note_length_in_ms/2:
-        audio = audio[:note_length_in_ms/2]
     segment.append(AudioSegment.silent(note_length_in_ms/2 - len(audio)))
+
+def build_structured_segment(track_structure, audio_path, volume):
+    ''' Builds the segments based on the track's structure '''
+    audio = AudioSegment.from_file(audio_path) + volume
+    segment = []
+    for value in track_structure:
+        if value:
+            segment.append(audio)
+        else:
+            segment.append(AudioSegment.silent(len(audio)))
+    segment = sum(segment)
+    return segment

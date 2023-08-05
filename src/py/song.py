@@ -28,12 +28,14 @@ class Song:
         self.time_sig: str = random.choice(TIME_SIGNATURES)
         self.prog:     str = random.choice(CHORD_PROGRESSIONS)
 
-        self.keys_name  = KEYS_FOLDER + random.choice(os.listdir(KEYS_FOLDER))
-        self.lead_name  = LEAD_FOLDER + random.choice(os.listdir(LEAD_FOLDER))
-
+        self.keys_name  = KEYS_FOLDER  + random.choice(os.listdir(KEYS_FOLDER))
+        self.lead_name  = LEAD_FOLDER  + random.choice(os.listdir(LEAD_FOLDER))
         self.kick_name  = KICK_FOLDER  + random.choice(os.listdir(KICK_FOLDER))
         self.hat_name   = HAT_FOLDER   + random.choice(os.listdir(HAT_FOLDER))
         self.snare_name = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
+
+        # Song structure
+        self.song_structure: tuple = random.choice(SONG_STRUCTURES)
 
         # Midi tracks
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
@@ -52,6 +54,7 @@ class Song:
         self.lead_midi: str = MIDI_FOLDER + 'lead' + MIDI_FILE_TYPE
         self.keys_path: str = AUDIO_FOLDER + 'keys' + AUDIO_FILE_TYPE
         self.lead_path: str = AUDIO_FOLDER + 'lead' + AUDIO_FILE_TYPE
+        self.drum_path: str = AUDIO_FOLDER + 'drum' + AUDIO_FILE_TYPE
         self.song_path: str = AUDIO_FOLDER + 'song' + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
@@ -172,22 +175,13 @@ class Song:
             loader = sf2_loader.sf2_loader(self.keys_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
             loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_TYPE)
-            keys_audio = AudioSegment.from_file(self.keys_path) + KEYS_VOLUME
-            keys_segment = []
-            keys_segment.append(keys_audio)
-            keys_segment = sum(keys_segment)
-            self.prog_segment = keys_segment
+
 
         # Convert lead MIDI
         if self.mid_lead_track is not None:
             loader = sf2_loader.sf2_loader(self.lead_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
             loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_TYPE)
-            lead_audio = AudioSegment.from_file(self.lead_path) + LEAD_VOLUME
-            lead_segment = []
-            lead_segment.append(lead_audio)
-            lead_segment = sum(lead_segment)
-            self.lead_segment = lead_segment
 
         return True
 
