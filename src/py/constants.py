@@ -49,8 +49,8 @@ TIME_SIGNATURES: tuple = (4,4),(4,4)
 # Instrument volume adjustments
 KEYS_VOLUME:      int = 0
 LEAD_VOLUME:      int = 0
-KICK_VOLUME:      int = 0
-HAT_VOLUME:       int = -6
+KICK_VOLUME:      int = -3
+HAT_VOLUME:       int = -10
 SNARE_VOLUME:     int = -3
 NO_VOLUME_CHANGE: int = 0
 
