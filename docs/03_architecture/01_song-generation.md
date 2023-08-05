@@ -53,7 +53,7 @@ These parts will be taken in and out of the song to give the song a sense of dir
 ### Example
 Here's a visual of how the song structure will work:
 
-![Song structure visual](/docs/images/song_structure_example.png)
+![Song structure visual](../images/song_structure_example.png)
 > Structure of lo-fi song, [*The Far Side*](https://www.youtube.com/watch?v=xocnshwEbrM&t=0s) by Comus
 
 Each square represents the duration of a sigle chord progression (which we'll call a "loop"). The parts that are filled in are the actively played elements during that point in the song; empty squares are silent. This will be the basis of how the songs will work from beginning to end.
