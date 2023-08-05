@@ -87,9 +87,8 @@ CHORD_PROGRESSIONS: tuple = (
     ('vi', 'bVIM', 'bVIIM', 'I'),
     ('vi', 'ii', 'V', 'I'),
     ('vi', 'IV', 'I', 'V'),
-    ('vi', 'V', 'IV', 'V', 'ii', 'V', 'I', 'I'),
     ('vi', 'V', 'IV', 'V'),
-    ('vi', 'vii', 'V', 'vi', '#IVdim', 'V')
+    ('vi', 'vii', 'V', 'vi')
 )
 SONG_STRUCTURES:    tuple = (
     (
