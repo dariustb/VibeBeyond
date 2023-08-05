@@ -171,14 +171,20 @@ class Song:
         if self.mid_prog_track is not None:
             loader = sf2_loader.sf2_loader(self.keys_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.keys_midi, decay=0.0, name=self.keys_path, format=AUDIO_TYPE)
+            loader.export_midi_file(self.keys_midi,
+                decay=0.0,
+                name=self.keys_path,
+                format=AUDIO_TYPE)
 
 
         # Convert lead MIDI
         if self.mid_lead_track is not None:
             loader = sf2_loader.sf2_loader(self.lead_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.lead_midi, decay=0.0, name=self.lead_path, format=AUDIO_TYPE)
+            loader.export_midi_file(self.lead_midi,
+                decay=0.0,
+                name=self.lead_path,
+                format=AUDIO_TYPE)
 
         return True
 
