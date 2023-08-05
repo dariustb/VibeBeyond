@@ -30,12 +30,12 @@ def create_song(debug: bool = False):
     )
 
     # Create song-length track segments based on the structure
-    SongObj.prog_segment = util.build_structured_segment(
+    SongObj.prog_segment = util.gen_track_segment(
         SongObj.song_structure[3],
         SongObj.keys_path,
         KEYS_VOLUME
     )
-    SongObj.drum_segment = util.build_structured_segment(
+    SongObj.drum_segment = util.gen_track_segment(
         SongObj.song_structure[5],
         SongObj.drum_path,
         NO_VOLUME_CHANGE
