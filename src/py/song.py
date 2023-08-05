@@ -50,12 +50,12 @@ class Song:
         # File info
         self.mid: mido.MidiFile = mido.MidiFile()
         self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
-        self.keys_midi: str = MIDI_FOLDER + 'keys' + MIDI_FILE_TYPE
-        self.lead_midi: str = MIDI_FOLDER + 'lead' + MIDI_FILE_TYPE
-        self.keys_path: str = AUDIO_FOLDER + 'keys' + AUDIO_FILE_TYPE
-        self.lead_path: str = AUDIO_FOLDER + 'lead' + AUDIO_FILE_TYPE
-        self.drum_path: str = AUDIO_FOLDER + 'drum' + AUDIO_FILE_TYPE
-        self.song_path: str = AUDIO_FOLDER + 'song' + AUDIO_FILE_TYPE
+        self.keys_midi: str = MIDI_FOLDER + self.title + '_keys' + MIDI_FILE_TYPE
+        self.lead_midi: str = MIDI_FOLDER + self.title + '_lead' + MIDI_FILE_TYPE
+        self.keys_path: str = AUDIO_FOLDER + self.title + '_keys' + AUDIO_FILE_TYPE
+        self.lead_path: str = AUDIO_FOLDER + self.title + '_lead' + AUDIO_FILE_TYPE
+        self.drum_path: str = AUDIO_FOLDER + self.title + '_drum' + AUDIO_FILE_TYPE
+        self.song_path: str = AUDIO_FOLDER + self.title + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
     def set_track_prefix(self) -> mido.MidiTrack:
@@ -92,35 +92,32 @@ class Song:
         chord_intervals_list    = util.get_chord_intervals_list(self.prog)
         root_note_list          = util.get_root_note_list(self.key, self.prog)
 
-        # Repeat chord progression for length of song
-        for _ in range(SONG_LENGTH):
+        # Add notes in chord to midi track
+        for root_note in root_note_list:
 
-            # Add notes in chord to midi track
-            for root_note in root_note_list:
+            # Get chord intervals
+            temp_list = chord_intervals_list.copy() # copy list so we don't pop from original
+            chord_intervals = temp_list.pop(0)
 
-                # Get chord intervals
-                temp_list = chord_intervals_list.copy() # copy list so we don't pop from original
-                chord_intervals = temp_list.pop(0)
-
-                # Add note_on: sets the attack time for note (time=0 is instant)
-                for i, note_interval in enumerate(chord_intervals):
-                    note_start_time = 1 if i == 0 else 0
-                    self.mid_prog_track.append(mido.Message(
-                        'note_on',
-                        note = root_note + note_interval,
-                        velocity = 80,
-                        time = note_start_time
-                    ))
-
-                # Add note_off: sets the release time for note (time=0 is instant)
-                for i, note_interval in enumerate(chord_intervals):
-                    note_stop_time = WHOLE_NOTE if i == 0 else 0
-                    self.mid_prog_track.append(mido.Message(
-                    'note_off',
+            # Add note_on: sets the attack time for note (time=0 is instant)
+            for i, note_interval in enumerate(chord_intervals):
+                note_start_time = 1 if i == 0 else 0
+                self.mid_prog_track.append(mido.Message(
+                    'note_on',
                     note = root_note + note_interval,
-                    velocity = 0,
-                    time = note_stop_time
-                    ))
+                    velocity = 80,
+                    time = note_start_time
+                ))
+
+            # Add note_off: sets the release time for note (time=0 is instant)
+            for i, note_interval in enumerate(chord_intervals):
+                note_stop_time = WHOLE_NOTE if i == 0 else 0
+                self.mid_prog_track.append(mido.Message(
+                'note_off',
+                note = root_note + note_interval,
+                velocity = 0,
+                time = note_stop_time
+                ))
 
         return True
 
@@ -174,14 +171,20 @@ class Song:
         if self.mid_prog_track is not None:
             loader = sf2_loader.sf2_loader(self.keys_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.keys_midi, name=self.keys_path, format=AUDIO_TYPE)
+            loader.export_midi_file(self.keys_midi,
+                decay=0.0,
+                name=self.keys_path,
+                format=AUDIO_TYPE)
 
 
         # Convert lead MIDI
         if self.mid_lead_track is not None:
             loader = sf2_loader.sf2_loader(self.lead_name)
             loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.lead_midi, name=self.lead_path, format=AUDIO_TYPE)
+            loader.export_midi_file(self.lead_midi,
+                decay=0.0,
+                name=self.lead_path,
+                format=AUDIO_TYPE)
 
         return True
 
@@ -208,3 +211,17 @@ class Song:
             final_audio = final_audio.overlay(self.drum_segment,0)
 
         final_audio.export(self.song_path, format=AUDIO_TYPE)
+
+    def delete_loops(self) -> bool:
+        ''' deletes audio/midi files of the song loops '''
+        for loop_file in (
+            self.mid_path,
+            self.keys_midi,
+            self.lead_midi,
+            self.keys_path,
+            self.lead_path,
+            self.drum_path
+        ):
+            if os.path.isfile(loop_file):
+                os.remove(loop_file)
+        return True
