@@ -12,7 +12,7 @@ def create_song(debug: bool = False):
     ''' create_song - builds song and returns the song file path '''
 
     # Create Song Elements to build song with
-    SongObj = song.Song()
+    SongObj = song.SongElements()
 
     # Print debug information
     if debug:

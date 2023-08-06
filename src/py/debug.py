@@ -13,7 +13,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 # PRINT FUNCTIONS
-def print_debug_song_info(song_mid: song.Song):
+def print_debug_song_info(song_mid: song.SongElements):
     ''' Prints the class variables to console '''
     if not song_mid:
         logger.error('(%s) No song information available', print_debug_song_info.__name__)
@@ -38,6 +38,6 @@ def print_debug_song_info(song_mid: song.Song):
 
         logger.debug('-------------------------------------------------------')
 
-def print_debug_midi_track(song_mid: song.Song):
+def print_debug_midi_track(song_mid: song.SongElements):
     ''' Prints the chord progression to console '''
     logger.debug('Chords:\t%s', song_mid.mid_prog_track)
