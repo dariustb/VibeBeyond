@@ -26,7 +26,7 @@ def print_debug_song_info(song_mid: song.SongElements):
 
         logger.debug('Key:\t%s',    song_mid.key)
         logger.debug('BPM:\t%s',    song_mid.bpm)
-        logger.debug('Time:\t%s',   song_mid.time_sig)
+        logger.debug('Time:\t%s',   song_mid.time)
         logger.debug('Chords:\t%s', song_mid.prog)
 
         logger.debug('Keys:\t%s',   song_mid.keys_name.replace(KEYS_FOLDER, ''))

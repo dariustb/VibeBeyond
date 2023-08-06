@@ -23,10 +23,10 @@ class SongElements:
         self.artist: str = 'example Artist'.title()
 
         # Song generation info
-        self.key:      str = random.choice(VALID_KEYS)
-        self.bpm:      str = random.randint(MIN_BPM, MAX_BPM) # tempo = mido.bpm2tempo(bpm) =/= bpm
-        self.time_sig: str = random.choice(TIME_SIGNATURES)
-        self.prog:     str = random.choice(CHORD_PROGRESSIONS)
+        self.key:  str = random.choice(VALID_KEYS)
+        self.bpm:  str = random.randint(MIN_BPM, MAX_BPM) # tempo = mido.bpm2tempo(bpm) =/= bpm
+        self.time: str = random.choice(TIME_SIGNATURES)
+        self.prog: str = random.choice(CHORD_PROGRESSIONS)
 
         # Instruments/Sample names
         self.keys_name:  str = KEYS_FOLDER  + random.choice(os.listdir(KEYS_FOLDER))
@@ -69,7 +69,7 @@ class SongElements:
         # Not sure why yet, but MuseScore does this, and it allows the sound to play
         track.append(mido.MetaMessage('track_name', name='song_track', time=0))
         track.append(mido.MetaMessage('time_signature',
-                                    numerator = self.time_sig[0], denominator = self.time_sig[1],
+                                    numerator = self.time[0], denominator = self.time[1],
                                     clocks_per_click = 24, notated_32nd_notes_per_beat = 8,
                                     time = 0
                                     ))
