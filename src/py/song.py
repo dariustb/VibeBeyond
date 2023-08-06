@@ -16,50 +16,43 @@ from py.constants import *
 class SongElements:
     ''' This class will hold the song's musical elements + setters/getters '''
     def __init__(self):
-        ''' All the song's attributes will be kept here '''
-
-        # Metadata
-        self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
-        self.artist: str = 'example Artist'.title()
+        ''' All the song's element attributes will be kept here '''
 
         # Song generation info
         self.key:  str = random.choice(VALID_KEYS)
-        self.bpm:  str = random.randint(MIN_BPM, MAX_BPM) # tempo = mido.bpm2tempo(bpm) =/= bpm
         self.time: str = random.choice(TIME_SIGNATURES)
+        self.bpm:  str = random.randint(MIN_BPM, MAX_BPM) # tempo = mido.bpm2tempo(bpm) =/= bpm
         self.prog: str = random.choice(CHORD_PROGRESSIONS)
 
-        # Instruments/Sample names
-        self.keys_name:  str = KEYS_FOLDER  + random.choice(os.listdir(KEYS_FOLDER))
-        self.lead_name:  str = LEAD_FOLDER  + random.choice(os.listdir(LEAD_FOLDER))
-        self.kick_name:  str = KICK_FOLDER  + random.choice(os.listdir(KICK_FOLDER))
-        self.hat_name:   str = HAT_FOLDER   + random.choice(os.listdir(HAT_FOLDER))
-        self.snare_name: str = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
+class SongMidiGen:
+    ''' This class is for generating MIDI loop files '''
+    def __init__(self) -> None:
+        ''' All the song's MIDI attributes will be kept here '''
+        
+        # Midi Tracks
+        self.prog_midi_track:    mido.MidiTrack = None
+        self.chords_midi_track:  mido.MidiTrack = None
+        self.ambient_midi_track: mido.MidiTrack = None
+        self.melody_midi_track:  mido.MidiTrack = None
+        self.cmelody_midi_track: mido.MidiTrack = None
+        self.bass_midi_track:    mido.MidiTrack = None
 
-        # Song structure
-        self.song_structure: tuple = random.choice(SONG_STRUCTURES)
-
-        # Midi tracks
-        self.mid: mido.MidiFile = mido.MidiFile()
-        self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
-        self.mid_lead_track: mido.MidiTrack = None
-        self.mid_bass_track: mido.MidiTrack = None
-
-        # Pydub audio segments
-        self.prog_segment: AudioSegment = None
-        self.lead_segment: AudioSegment = None
-        self.drum_segment: AudioSegment = None
-
-        # File paths 
-        self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
-        self.keys_midi: str = MIDI_FOLDER + self.title + '_keys' + MIDI_FILE_TYPE
-        self.lead_midi: str = MIDI_FOLDER + self.title + '_lead' + MIDI_FILE_TYPE
-        self.song_path: str = AUDIO_FOLDER + self.title + AUDIO_FILE_TYPE
-        self.keys_path: str = AUDIO_FOLDER + self.title + '_keys' + AUDIO_FILE_TYPE
-        self.lead_path: str = AUDIO_FOLDER + self.title + '_lead' + AUDIO_FILE_TYPE
-        self.drum_path: str = AUDIO_FOLDER + self.title + '_drum' + AUDIO_FILE_TYPE
+        # Midi file paths 
+        self.keys_midi_path:    str = self.set_path('keys')
+        self.lead_midi_path:    str = self.set_path('lead')
+        self.ambient_midi_path: str = self.set_path('ambient')
+        self.melody_midi_path:  str = self.set_path('melody')
+        self.cmelody_midi_path: str = self.set_path('cmelody')
+        self.chords_midi_path:  str = self.set_path('chords')
+        self.bass_midi_path:    str = self.set_path('bass')
 
     # SETTER FUNCTIONS
-    def set_track_prefix(self) -> mido.MidiTrack:
+    def set_path(self, name: str) -> str:
+        ''' Returns a file path based on parameters '''
+        return MIDI_FOLDER + name + '_midi' + MIDI_FILE_TYPE
+
+    # GENERATION FUNCTIONS
+    def gen_track_prefix(self) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
 
         # Create track
@@ -85,13 +78,14 @@ class SongElements:
 
         return track
 
-    # GENERATION FUNCTIONS
-    def gen_chord_prog(self) -> bool:
-        ''' Adds a chord progression to the class variable '''
+    def gen_chords(self, key, prog) -> mido.MidiTrack:
+        ''' Returns a MIDI track of the chord progression '''
 
         # Get chord progression variables
-        chord_intervals_list    = util.get_chord_intervals_list(self.prog)
-        root_note_list          = util.get_root_note_list(self.key, self.prog)
+        chord_intervals_list    = util.get_chord_intervals_list(prog)
+        root_note_list          = util.get_root_note_list(key, prog)
+
+        chords = mido.MidiTrack()
 
         # Add notes in chord to midi track
         for root_note in root_note_list:
@@ -103,29 +97,85 @@ class SongElements:
             # Add note_on: sets the attack time for note (time=0 is instant)
             for i, note_interval in enumerate(chord_intervals):
                 note_start_time = 1 if i == 0 else 0
-                self.mid_prog_track.append(mido.Message(
+                chords.append(mido.Message(
                     'note_on',
                     note = root_note + note_interval,
-                    velocity = 80,
+                    velocity = 100,
                     time = note_start_time
                 ))
 
             # Add note_off: sets the release time for note (time=0 is instant)
             for i, note_interval in enumerate(chord_intervals):
                 note_stop_time = WHOLE_NOTE if i == 0 else 0
-                self.mid_prog_track.append(mido.Message(
+                chords.append(mido.Message(
                 'note_off',
                 note = root_note + note_interval,
                 velocity = 0,
                 time = note_stop_time
                 ))
 
-        return True
+        return chords
 
-    def gen_drum_loop(self) -> bool:
+    def gen_melody(self, key, prog, complexity) -> mido.MidiTrack:
+        ''' Returns a generated melody '''
+        return None
+
+    # EXPORT FUNCTIONS
+    def export_midi_from_tracks(self, midi_track: mido.MidiTrack, midi_path: str) -> str:
+        ''' Combines the midi tracks into MidiFile & saves to .mid file '''
+        if midi_track is None:
+            return None
+        
+        file = mido.MidiFile()
+
+        file.tracks.append(midi_track)
+        file.save(midi_path)
+
+        return midi_path
+
+class SongLoopGen:
+    ''' This class is for generating Audio loop files '''
+    def __init__(self) -> None:
+        ''' All the song's loop attributes will be kept here '''
+
+        # Instruments/Sample names
+        self.keys_name:    str = self.set_name(KEYS_FOLDER)
+        self.lead_name:    str = self.set_name(LEAD_FOLDER)
+        self.ambient_name: str = self.set_name(AMBIENT_FOLDER)
+        self.melody_name:  str = self.set_name(MELODY_FOLDER)
+        self.cmelody_name: str = self.set_name(CMELODY_FOLDER)
+        self.chords_name:  str = self.set_name(CHORDS_FOLDER)
+        self.bass_name:    str = self.set_name(BASS_FOLDER)
+        self.kick_name:    str = self.set_name(KICK_FOLDER)
+        self.hat_name:     str = self.set_name(HAT_FOLDER)
+        self.snare_name:   str = self.set_name(SNARE_FOLDER)
+
+        # Audio file paths
+        self.keys_loop_path:    str = self.set_path('keys')
+        self.lead_loop_path:    str = self.set_path('lead')
+        self.ambient_loop_path: str = self.set_path('ambient')
+        self.melody_loop_path:  str = self.set_path('melody')
+        self.cmelody_loop_path: str = self.set_path('cmelody')
+        self.chords_loop_path:  str = self.set_path('chords')
+        self.bass_loop_path:    str = self.set_path('bass')
+        self.drum_loop_path:    str = self.set_path('drum')
+
+    # SETTER FUNCTIONS
+    def set_name(self, folder) -> str:
+        ''' Returns soundfont/sample name '''
+        if not os.path.isdir(folder) or os.listdir(folder) == []:
+            return ''
+        return folder + random.choice(os.listdir(folder))
+
+    def set_path(self, name: str) -> str:
+        ''' Returns a file path based on parameters '''
+        return AUDIO_FOLDER + name + '_loop' + AUDIO_FILE_TYPE
+    
+    # GENERATION FUNCTIONS
+    def gen_drum_loop(self, prog, bpm) -> AudioSegment:
         ''' Adds a midi drum loop to the class variable '''
 
-        bpm_in_ms = int(60 / self.bpm * 1000) # milliseconds per beat
+        bpm_in_ms = int(60 / bpm * 1000) # milliseconds per beat
 
         # Load drum samples
         kick_audio  = AudioSegment.from_file(self.kick_name)  + KICK_VOLUME
@@ -141,7 +191,7 @@ class SongElements:
         snare_segment = []
         hat_segment   = []
 
-        for _ in range(len(self.prog)):
+        for _ in range(len(prog)):
             util.coordinate_sample(kick_audio, kick_segment, kick_pattern, bpm_in_ms)
             util.coordinate_sample(hat_audio, hat_segment, hat_pattern, bpm_in_ms)
             util.coordinate_snare(snare_audio, snare_segment, bpm_in_ms)
@@ -156,73 +206,119 @@ class SongElements:
         drum_segment = drum_segment.overlay(snare_segment, 0)
         drum_segment = drum_segment.overlay(hat_segment, 0)
 
-        # Save the segment to mix with other instruments for export later
-        self.drum_segment = drum_segment
+        # return the segment to mix with other instruments for export later
+        return drum_segment
 
-        return True
-
-    # CONVERTER FUNCTIONS
-    def midi_to_audio(self) -> bool:
+    # EXPORT FUNCTIONS
+    def export_loop_from_midi(self, 
+                              midi_path: str, midi_track: mido.MidiTrack,
+                              loop_path: str, sf2_name: str) -> str:
         ''' midi_to_audio - Convert keys & lead MIDI track file to audio files '''
 
         # NOTE: sf2-loader/pydub requires ffmpeg or libav installed
         # for non-wav files (https://pypi.org/project/sf2-loader/#Windows)
 
-        # Convert keys MIDI
-        if self.mid_prog_track is not None:
-            loader = sf2_loader.sf2_loader(self.keys_name)
-            loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.keys_midi,
-                decay=0.0,
-                name=self.keys_path,
-                format=AUDIO_TYPE)
+        if midi_track == None:
+            return None
 
+        loader = sf2_loader.sf2_loader(sf2_name)
+        loader < loader.get_current_instrument() # pylint: disable = W0106
+        loader.export_midi_file(midi_path,
+            decay=0.0,
+            name=loop_path,
+            format=AUDIO_TYPE)
 
-        # Convert lead MIDI
-        if self.mid_lead_track is not None:
-            loader = sf2_loader.sf2_loader(self.lead_name)
-            loader < loader.get_current_instrument() # pylint: disable = W0106
-            loader.export_midi_file(self.lead_midi,
-                decay=0.0,
-                name=self.lead_path,
-                format=AUDIO_TYPE)
+        return loop_path
 
-        return True
+    def export_loop_from_segment(self, segment: AudioSegment, loop_path: str) -> str:
+        ''' creates an audio file with all the AudioSegments combined '''        
+        segment.export(loop_path, format=AUDIO_TYPE)
+        return loop_path
+
+class SongSegmentGen:
+    ''' This class is for generating song segments (excluding drum loop) '''
+    def __init__(self) -> None:
+        ''' All the song's segment attributes will be kept here '''
+        
+        # Song structure
+        self.song_structure: tuple = random.choice(SONG_STRUCTURES)
+
+        # Pydub audio segments
+        self.ambient_segment: AudioSegment = None
+        self.melody_segment:  AudioSegment = None
+        self.cmelody_segment: AudioSegment = None
+        self.chords_segment:  AudioSegment = None
+        self.drum_segment:    AudioSegment = None
+
+    def gen_segment(self, track_structure: tuple, audio_path: str, volume: int = NO_VOLUME_CHANGE):
+        ''' Builds the segments based on the track's structure '''
+        if not os.path.isfile(audio_path):
+            return None
+
+        audio = AudioSegment.from_file(audio_path) + volume
+        segment = []
+        for value in track_structure:
+            if value:
+                segment.append(audio)
+            else:
+                segment.append(AudioSegment.silent(len(audio)))
+        segment = sum(segment)
+        return segment
+
+class SongCombine:
+    ''' This class is for combining all the song segments into final audio '''
+    def __init__(self) -> None:
+        ''' All the song's final attributes will be kept here '''
+
+        # Metadata
+        self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
+        self.artist: str = 'example Artist'.title()
+
+        # Audio segment
+        self.song_segment: AudioSegment = None
+
+        # Audio file paths
+        self.song_path: str = AUDIO_FOLDER + self.title + AUDIO_FILE_TYPE
+
+    def combine_segments(self, Segments:SongSegmentGen) -> AudioSegment:
+        ''' Combines segments into one whole segment '''
+        song_duration = len(Segments.drum_segment)
+        self.song_segment = AudioSegment.silent(song_duration)
+
+        if Segments.ambient_segment is not None:
+            self.song_segment = self.song_segment.overlay(Segments.ambient_segment,0)
+        if Segments.melody_segment is not None:
+            self.song_segment = self.song_segment.overlay(Segments.melody_segment,0)
+        if Segments.cmelody_segment is not None:
+            self.song_segment = self.song_segment.overlay(Segments.cmelody_segment,0)
+        if Segments.chords_segment is not None:
+            self.song_segment = self.song_segment.overlay(Segments.chords_segment,0)
+        if Segments.drum_segment is not None:
+            self.song_segment = self.song_segment.overlay(Segments.drum_segment,0)
+
+        return self.song_segment
 
     # EXPORT FUNCTIONS
-    def save_midi_file(self, midi_track: mido.MidiTrack, midi_file_name: str) -> str:
-        ''' Combines the midi tracks into MidiFile & saves to .mid file '''
-        file = mido.MidiFile()
+    def export_audio_from_segment(self) -> str:
+        ''' creates an audio file with all the AudioSegments combined '''        
+        self.song_segment.export(self.song_path, format=AUDIO_TYPE)
+        return self.song_path
 
-        file.tracks.append(midi_track)
-        file.save(midi_file_name)
-
-        return midi_file_name
-
-    def export_song(self) -> bool:
-        ''' creates an audio file with all the AudioSegments combined '''
-        song_duration = len(self.drum_segment)
-        final_audio = AudioSegment.silent(song_duration)
-
-        if self.prog_segment is not None:
-            final_audio = final_audio.overlay(self.prog_segment,0)
-        if self.lead_segment is not None:
-            final_audio = final_audio.overlay(self.lead_segment,0)
-        if self.drum_segment is not None:
-            final_audio = final_audio.overlay(self.drum_segment,0)
-
-        final_audio.export(self.song_path, format=AUDIO_TYPE)
-
-    def delete_loops(self) -> bool:
-        ''' deletes audio/midi files of the song loops '''
-        for loop_file in (
-            self.mid_path,
-            self.keys_midi,
-            self.lead_midi,
-            self.keys_path,
-            self.lead_path,
-            self.drum_path
-        ):
-            if os.path.isfile(loop_file):
-                os.remove(loop_file)
-        return True
+def delete_loops(Midi: SongMidiGen, Loop: SongLoopGen) -> bool:
+    ''' deletes audio/midi files of the song loops '''
+    for loop_file in (
+        Midi.ambient_midi_path,
+        Midi.melody_midi_path,
+        Midi.cmelody_midi_path,
+        Midi.chords_midi_path,
+        Midi.bass_midi_path,
+        Loop.ambient_loop_path,
+        Loop.melody_loop_path,
+        Loop.cmelody_loop_path,
+        Loop.chords_loop_path,
+        Loop.bass_loop_path,
+        Loop.drum_loop_path,
+    ):
+        if os.path.isfile(loop_file):
+            os.remove(loop_file)
+    return True

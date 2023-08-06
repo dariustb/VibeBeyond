@@ -53,8 +53,6 @@ VALID_KEYS:      tuple = 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', '
 TIME_SIGNATURES: tuple = (4,4),(4,4)
 
 # Instrument volume adjustments
-KEYS_VOLUME:      int = 0
-LEAD_VOLUME:      int = 0
 KICK_VOLUME:      int = -3
 HAT_VOLUME:       int = -10
 SNARE_VOLUME:     int = -3
@@ -70,6 +68,12 @@ EIGHTH_NOTE:    int = BASE_NOTE // 2 - 1
 SIXTEENTH_NOTE: int = BASE_NOTE // 4 - 1
 DOT_QTR_NOTE:   int = int(BASE_NOTE * 1.5) - 1
 DOT_8TH_NOTE:   int = int(BASE_NOTE * 0.75) - 1
+
+# Melody complexities
+BASS_COMPLEXITY:    int = 1
+AMBIENT_COMPLEXITY: int = 2
+CMELODY_COMPLEXITY: int = 3
+MELODY_COMPLEXITY:  int = 4
 
 # Music structures
 CHORD_PROGRESSIONS: tuple = (
