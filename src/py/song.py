@@ -13,8 +13,8 @@ from pydub import AudioSegment
 from py import song_utils as util
 from py.constants import *
 
-class Song:
-    ''' This class will be used to generate a song'''
+class SongElements:
+    ''' This class will hold the song's musical  elements + setters/getters '''
     def __init__(self):
         ''' All the song's attributes will be kept here '''
 
@@ -38,6 +38,7 @@ class Song:
         self.song_structure: tuple = random.choice(SONG_STRUCTURES)
 
         # Midi tracks
+        self.mid: mido.MidiFile = mido.MidiFile()
         self.mid_prog_track: mido.MidiTrack = self.set_track_prefix()
         self.mid_lead_track: mido.MidiTrack = None
         self.mid_bass_track: mido.MidiTrack = None
@@ -47,8 +48,7 @@ class Song:
         self.lead_segment: AudioSegment = None
         self.drum_segment: AudioSegment = None
 
-        # File info
-        self.mid: mido.MidiFile = mido.MidiFile()
+        # File paths 
         self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.keys_midi: str = MIDI_FOLDER + self.title + '_keys' + MIDI_FILE_TYPE
         self.lead_midi: str = MIDI_FOLDER + self.title + '_lead' + MIDI_FILE_TYPE
