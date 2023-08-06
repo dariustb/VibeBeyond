@@ -85,15 +85,3 @@ def coordinate_snare(audio, segment, bpm_in_ms):
     segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
     segment.append(audio)
     segment.append(AudioSegment.silent(note_length_in_ms/2 - len(audio)))
-
-def build_structured_segment(track_structure, audio_path, volume):
-    ''' Builds the segments based on the track's structure '''
-    audio = AudioSegment.from_file(audio_path) + volume
-    segment = []
-    for value in track_structure:
-        if value:
-            segment.append(audio)
-        else:
-            segment.append(AudioSegment.silent(len(audio)))
-    segment = sum(segment)
-    return segment

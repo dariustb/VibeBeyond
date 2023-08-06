@@ -2,54 +2,42 @@
 
 # pylint: disable = W0401, W0614
 
+import logging
 from py import song
 from py.constants import *
 
-# PRINT FUNCTIONS
-def print_info(song_mid: song.Song):
-    ''' Prints the class variables to console '''
-    print()
-    print('--------------- DEBUG: SONG INFORMATION ---------------')
+logging.basicConfig(filename="vb_log.log",
+            format='%(asctime)s %(message)s',
+            filemode='w')
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
+# PRINT FUNCTIONS
+def print_debug_song_info(song_mid: song.SongElements):
+    ''' Prints the class variables to console '''
     if not song_mid:
-        print('print_info: No information available')
+        logger.error('(%s) No song information available', print_debug_song_info.__name__)
 
     else:
-        print()
-        print('Title:\t',  song_mid.title)
-        print('Artist:\t', song_mid.artist)
+        logger.debug('(%s)', print_debug_song_info.__name__)
+        logger.debug('--------------- DEBUG: SONG INFORMATION ---------------')
+        logger.debug('Title:\t%s',  song_mid.title)
+        logger.debug('Artist:\t%s', song_mid.artist)
 
-        print()
-        print('Key:\t',    song_mid.key)
-        print('BPM:\t',    song_mid.bpm)
-        print('Time:\t',   song_mid.time_sig)
-        print('Chords:\t', song_mid.prog)
+        logger.debug('Key:\t%s',    song_mid.key)
+        logger.debug('BPM:\t%s',    song_mid.bpm)
+        logger.debug('Time:\t%s',   song_mid.time)
+        logger.debug('Chords:\t%s', song_mid.prog)
 
-        print()
-        print('Keys:\t',  song_mid.keys_name.replace(KEYS_FOLDER, ''))
-        print('Lead:\t',  song_mid.lead_name.replace(LEAD_FOLDER, ''))
+        logger.debug('Keys:\t%s',   song_mid.keys_name.replace(KEYS_FOLDER, ''))
+        logger.debug('Lead:\t%s',   song_mid.lead_name.replace(LEAD_FOLDER, ''))
 
-        print()
-        print('Kick:\t',  song_mid.kick_name.replace(KICK_FOLDER, ''))
-        print('Hat:\t',   song_mid.hat_name.replace(HAT_FOLDER, ''))
-        print('Snare:\t', song_mid.snare_name.replace(SNARE_FOLDER, ''))
+        logger.debug('Kick:\t%s',   song_mid.kick_name.replace(KICK_FOLDER, ''))
+        logger.debug('Hat:\t%s',    song_mid.hat_name.replace(HAT_FOLDER, ''))
+        logger.debug('Snare:\t%s',  song_mid.snare_name.replace(SNARE_FOLDER, ''))
 
-        print()
-        print('Structure:')
-        for track in song_mid.song_structure:
-            print('\t', end='')
-            for value in track:
-                if value:
-                    print('X', end='')
-                else:
-                    print('_', end='')
-            print()
+        logger.debug('-------------------------------------------------------')
 
-    print()
-    print('-------------------------------------------------------')
-    print()
-
-def print_chords(song_mid: song.Song):
+def print_debug_midi_track(song_mid: song.SongElements):
     ''' Prints the chord progression to console '''
-    print()
-    print('Chords:\t',      song_mid.mid_prog_track)
+    logger.debug('Chords:\t%s', song_mid.mid_prog_track)
