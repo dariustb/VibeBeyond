@@ -1,6 +1,6 @@
 ''' song.py - This file will be used to generate a song '''
 
-# pylint: disable = W0401, W0614, R0902
+# pylint: disable = W0401, W0614, R0902, C0103, W0613
 
 import os
 import random
@@ -28,15 +28,15 @@ class SongElements:
     def set_key(self):
         ''' Returns randomly chosen key '''
         return random.choice(VALID_KEYS)
-    
+
     def set_time(self):
         ''' Returns randomly chosen time signature '''
         return random.choice(TIME_SIGNATURES)
-    
+
     def set_bpm(self):
         ''' Returns randomly chosen bpm '''
         return random.randint(MIN_BPM, MAX_BPM)
-    
+
     def set_prog(self):
         ''' Returns randomly chosen chord progression '''
         return random.choice(CHORD_PROGRESSIONS)
@@ -69,7 +69,7 @@ class SongMidiGen:
         return MIDI_FOLDER + name + '_midi' + MIDI_FILE_TYPE
 
     # GENERATION FUNCTIONS
-    def gen_track_prefix(self) -> mido.MidiTrack:
+    def gen_track_prefix(self, key, time, bpm) -> mido.MidiTrack:
         ''' Add necessary info to the beginnning of midi track '''
 
         # Create track
@@ -79,12 +79,12 @@ class SongMidiGen:
         # Not sure why yet, but MuseScore does this, and it allows the sound to play
         track.append(mido.MetaMessage('track_name', name='song_track', time=0))
         track.append(mido.MetaMessage('time_signature',
-                                    numerator = self.time[0], denominator = self.time[1],
+                                    numerator = time[0], denominator = time[1],
                                     clocks_per_click = 24, notated_32nd_notes_per_beat = 8,
                                     time = 0
                                     ))
-        track.append(mido.MetaMessage('key_signature', key=self.key, time=0))
-        track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(self.bpm), time=0))
+        track.append(mido.MetaMessage('key_signature', key=key, time=0))
+        track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(bpm), time=0))
         track.append(mido.Message('control_change', channel=0, control=121, value=0, time=0))
         track.append(mido.Message('program_change', channel=0, program=4, time=0))
         track.append(mido.Message('control_change', channel=0, control=7, value=100, time=0))
@@ -95,14 +95,14 @@ class SongMidiGen:
 
         return track
 
-    def gen_chords(self, key, prog) -> mido.MidiTrack:
+    def gen_chords(self, key, time, bpm, prog) -> mido.MidiTrack:
         ''' Returns a MIDI track of the chord progression '''
 
         # Get chord progression variables
         chord_intervals_list    = util.get_chord_intervals_list(prog)
         root_note_list          = util.get_root_note_list(key, prog)
 
-        chords = mido.MidiTrack()
+        chords = self.gen_track_prefix(key, time, bpm)
 
         # Add notes in chord to midi track
         for root_note in root_note_list:
@@ -235,7 +235,7 @@ class SongLoopGen:
         # NOTE: sf2-loader/pydub requires ffmpeg or libav installed
         # for non-wav files (https://pypi.org/project/sf2-loader/#Windows)
 
-        if midi_track == None:
+        if midi_track is None:
             return None
 
         loader = sf2_loader.sf2_loader(sf2_name)
@@ -252,7 +252,7 @@ class SongLoopGen:
         segment.export(loop_path, format=AUDIO_TYPE)
         return loop_path
 
-class SongSegmentGen:
+class SongSegmentGen: # pylint: disable = R0903
     ''' This class is for generating song segments (excluding drum loop) '''
     def __init__(self) -> None:
         ''' All the song's segment attributes will be kept here '''

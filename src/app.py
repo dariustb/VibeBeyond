@@ -27,7 +27,7 @@ if __name__ == '__main__':
     pygame.mixer.init()
     pygame.mixer.music.set_volume(DEFAULT_VOLUME)
     pygame.mixer.music.set_endevent(SONG_ENDED)
-    pygame.mixer.music.load(create_song(debug=True))
+    pygame.mixer.music.load(create_song())
     pygame.mixer.music.play()
 
     # Main program loop
@@ -40,5 +40,5 @@ if __name__ == '__main__':
 
             # Song ends -> build/load/play next one
             if event.type == SONG_ENDED:
-                pygame.mixer.music.load(create_song(debug=True))
+                pygame.mixer.music.load(create_song())
                 pygame.mixer.music.play()

@@ -6,7 +6,7 @@ from py import song
 from py.constants import *
 
 # The feast de resistance
-def create_song(debug: bool = False):
+def create_song():
     ''' create_song - builds song and returns the song file path '''
 
     # 1. RNG Song Elements
@@ -15,7 +15,10 @@ def create_song(debug: bool = False):
     # 2. Generate MIDI Loop Files
     ## 2a. Generate chords using `key` and `prog`
     Midi = song.SongMidiGen()
-    Midi.chords_midi_track  = Midi.gen_chords(Elements.key, Elements.prog)
+    Midi.chords_midi_track  = Midi.gen_chords(Elements.key,
+                                              Elements.time,
+                                              Elements.bpm,
+                                              Elements.prog)
 
     ## 2b. Use chords to make melodic/harmonic parts
     Midi.ambient_midi_track = Midi.gen_melody(Elements.key, Elements.prog, AMBIENT_COMPLEXITY)

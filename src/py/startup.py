@@ -44,4 +44,5 @@ def startup_check():
 
     # Log information and quit if found
     if is_missing_files:
-        logging.critical('(%s) Empty asset folders found: \n\t%s', startup_check.__name__, str(missing_list))
+        logging.critical('(%s) Empty asset folders found: \n\t%s',
+                         startup_check.__name__, str(missing_list))
