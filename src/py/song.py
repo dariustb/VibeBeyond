@@ -19,16 +19,33 @@ class SongElements:
         ''' All the song's element attributes will be kept here '''
 
         # Song generation info
-        self.key:  str = random.choice(VALID_KEYS)
-        self.time: str = random.choice(TIME_SIGNATURES)
-        self.bpm:  str = random.randint(MIN_BPM, MAX_BPM) # tempo = mido.bpm2tempo(bpm) =/= bpm
-        self.prog: str = random.choice(CHORD_PROGRESSIONS)
+        self.key:  str = self.set_key()
+        self.time: str = self.set_time()
+        self.bpm:  str = self.set_bpm() # tempo = mido.bpm2tempo(bpm) =/= bpm
+        self.prog: str = self.set_prog()
+
+    # SETTER FUNCTIONS
+    def set_key(self):
+        ''' Returns randomly chosen key '''
+        return random.choice(VALID_KEYS)
+    
+    def set_time(self):
+        ''' Returns randomly chosen time signature '''
+        return random.choice(TIME_SIGNATURES)
+    
+    def set_bpm(self):
+        ''' Returns randomly chosen bpm '''
+        return random.randint(MIN_BPM, MAX_BPM)
+    
+    def set_prog(self):
+        ''' Returns randomly chosen chord progression '''
+        return random.choice(CHORD_PROGRESSIONS)
 
 class SongMidiGen:
     ''' This class is for generating MIDI loop files '''
     def __init__(self) -> None:
         ''' All the song's MIDI attributes will be kept here '''
-        
+
         # Midi Tracks
         self.prog_midi_track:    mido.MidiTrack = None
         self.chords_midi_track:  mido.MidiTrack = None
@@ -37,7 +54,7 @@ class SongMidiGen:
         self.cmelody_midi_track: mido.MidiTrack = None
         self.bass_midi_track:    mido.MidiTrack = None
 
-        # Midi file paths 
+        # Midi file paths
         self.keys_midi_path:    str = self.set_path('keys')
         self.lead_midi_path:    str = self.set_path('lead')
         self.ambient_midi_path: str = self.set_path('ambient')
@@ -125,7 +142,7 @@ class SongMidiGen:
         ''' Combines the midi tracks into MidiFile & saves to .mid file '''
         if midi_track is None:
             return None
-        
+
         file = mido.MidiFile()
 
         file.tracks.append(midi_track)
@@ -170,7 +187,7 @@ class SongLoopGen:
     def set_path(self, name: str) -> str:
         ''' Returns a file path based on parameters '''
         return AUDIO_FOLDER + name + '_loop' + AUDIO_FILE_TYPE
-    
+
     # GENERATION FUNCTIONS
     def gen_drum_loop(self, prog, bpm) -> AudioSegment:
         ''' Adds a midi drum loop to the class variable '''
@@ -210,7 +227,7 @@ class SongLoopGen:
         return drum_segment
 
     # EXPORT FUNCTIONS
-    def export_loop_from_midi(self, 
+    def export_loop_from_midi(self,
                               midi_path: str, midi_track: mido.MidiTrack,
                               loop_path: str, sf2_name: str) -> str:
         ''' midi_to_audio - Convert keys & lead MIDI track file to audio files '''
@@ -239,7 +256,7 @@ class SongSegmentGen:
     ''' This class is for generating song segments (excluding drum loop) '''
     def __init__(self) -> None:
         ''' All the song's segment attributes will be kept here '''
-        
+
         # Song structure
         self.song_structure: tuple = random.choice(SONG_STRUCTURES)
 

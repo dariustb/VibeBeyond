@@ -1,10 +1,8 @@
 ''' create_song.py - houses the create_song function to prevent cycling in song.py '''
 
-# pylint: disable = W0401, W0614, C0103
+# pylint: disable = W0401, W0614, C0103, E1128
 
 from py import song
-from py import debug as dbg
-from py import song_utils as util
 from py.constants import *
 
 # The feast de resistance
