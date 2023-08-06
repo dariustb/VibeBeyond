@@ -14,7 +14,7 @@ from py import song_utils as util
 from py.constants import *
 
 class SongElements:
-    ''' This class will hold the song's musical  elements + setters/getters '''
+    ''' This class will hold the song's musical elements + setters/getters '''
     def __init__(self):
         ''' All the song's attributes will be kept here '''
 
@@ -28,11 +28,12 @@ class SongElements:
         self.time_sig: str = random.choice(TIME_SIGNATURES)
         self.prog:     str = random.choice(CHORD_PROGRESSIONS)
 
-        self.keys_name  = KEYS_FOLDER  + random.choice(os.listdir(KEYS_FOLDER))
-        self.lead_name  = LEAD_FOLDER  + random.choice(os.listdir(LEAD_FOLDER))
-        self.kick_name  = KICK_FOLDER  + random.choice(os.listdir(KICK_FOLDER))
-        self.hat_name   = HAT_FOLDER   + random.choice(os.listdir(HAT_FOLDER))
-        self.snare_name = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
+        # Instruments/Sample names
+        self.keys_name:  str = KEYS_FOLDER  + random.choice(os.listdir(KEYS_FOLDER))
+        self.lead_name:  str = LEAD_FOLDER  + random.choice(os.listdir(LEAD_FOLDER))
+        self.kick_name:  str = KICK_FOLDER  + random.choice(os.listdir(KICK_FOLDER))
+        self.hat_name:   str = HAT_FOLDER   + random.choice(os.listdir(HAT_FOLDER))
+        self.snare_name: str = SNARE_FOLDER + random.choice(os.listdir(SNARE_FOLDER))
 
         # Song structure
         self.song_structure: tuple = random.choice(SONG_STRUCTURES)
@@ -52,10 +53,10 @@ class SongElements:
         self.mid_path:  str = MIDI_FOLDER + self.title + MIDI_FILE_TYPE
         self.keys_midi: str = MIDI_FOLDER + self.title + '_keys' + MIDI_FILE_TYPE
         self.lead_midi: str = MIDI_FOLDER + self.title + '_lead' + MIDI_FILE_TYPE
+        self.song_path: str = AUDIO_FOLDER + self.title + AUDIO_FILE_TYPE
         self.keys_path: str = AUDIO_FOLDER + self.title + '_keys' + AUDIO_FILE_TYPE
         self.lead_path: str = AUDIO_FOLDER + self.title + '_lead' + AUDIO_FILE_TYPE
         self.drum_path: str = AUDIO_FOLDER + self.title + '_drum' + AUDIO_FILE_TYPE
-        self.song_path: str = AUDIO_FOLDER + self.title + AUDIO_FILE_TYPE
 
     # SETTER FUNCTIONS
     def set_track_prefix(self) -> mido.MidiTrack:
