@@ -3,7 +3,7 @@
 # pylint: disable = W0401, W0614
 
 import os
-import sys
+import logging
 from py.constants import *
 
 ESSENTIAL_FOLDERS = [
@@ -14,6 +14,7 @@ ESSENTIAL_FOLDERS = [
     SF2_FOLDER,
     KEYS_FOLDER,
     LEAD_FOLDER,
+    DRUMS_FOLDER,
     KICK_FOLDER,
     HAT_FOLDER,
     SNARE_FOLDER
@@ -43,8 +44,4 @@ def startup_check():
 
     # Log information and quit if found
     if is_missing_files:
-        print('[VIBE BEYOND]'
-              '\n\tEmpty/missing asset folders found.'
-              '\n\tView docs in src/assets/ to find more information.'
-              '\n\tAsset folders:', missing_list)
-        sys.exit()
+        logging.critical('(%s) Empty asset folders found: \n\t%s', startup_check.__name__, str(missing_list))
