@@ -73,7 +73,7 @@ Use simple RNG to create values for these base song elements:
 ### Generate chords using `key` and `prog`
 The `prog`'s are written in Roman numeric notation, functionally between "I" and "VII" including the accidental and chord type. This allows the progressions to be transposed into any key that's RNG'd.
 
-The chords are the `prog` once given a `key`. The `prog` item **bV7** becomes **G♭7** once the key of **C** is expressed. Both `key` and `prog` are initialized in the [*SongElements*](#rng-song-elements) step. Using this information, combined with the bpm and time signature, we create the chords of the song.
+The chords are the `prog` once given a `key`. The `prog` item **bV7** becomes __G♭7__ once the key of **C** is expressed. Both `key` and `prog` are initialized in the [*SongElements*](#rng-song-elements) step. Using this information, combined with the bpm and time signature, we create the chords of the song.
 
 The `prog` is randomly chosen from a hard-coded list.
 
@@ -82,7 +82,7 @@ Given the key is *C*, and the notation is "bVI7", here's how we'd find the chord
  - (*VI*) - **VI** is Roman numeral for 6, so we'd base the root of our chord on the 6th scale degree of *C*, which is `A`.
  - (*b*) - **b** is an alpha representation of the flat symbol, ♭. This means the scale is lowered by half a step, so *A* is lowered into `A♭`
  - (*VI* is uppercase) - Uppercase means that the chord is major, and lowercase *vi* means the chord is minor. So we have an `A♭ major` chord
- - (*7*) - 7 directly after the chord here will mean the chord is a dominant chord (major chord with a ♭7). So we have an `A♭ Dominant 7th`
+ - (*7*) - **7** directly after the chord here will mean the chord is a dominant chord (major chord with a ♭7). So we have an `A♭ Dominant 7th`
 
 Key=*C* + Chord=*bVI7* = Chord is `A♭7`
 
