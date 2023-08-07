@@ -22,12 +22,12 @@ Each song is generated through this process:
     - `prog`
 1. **MidiGen** - [Generate MIDI Loop Files](#generate-midi-loop-files)
     1. [Generate chords using `key` and `prog`](#generate-chords-using-key-and-prog)
-        - `chords_mid`
+        - `chords_midi_path`
     1. [Use chords to make melodic/harmonic parts](#use-chords-to-make-melodicharmonic-parts)
-        - `ambient_mid`
-        - `melody_mid`
-        - `cmelody_mid`
-        - `bass_mid`
+        - `ambient_midi_path`
+        - `melody_midi_path`
+        - `cmelody_midi_path`
+        - `bass_midi_path`
 1. **LoopGen** - [Generate Audio Loop Files](#generate-audio-loop-files)
     1. [RNG Sf2 Instruments](#rng-sf2-instruments)
         - `ambient_name`
@@ -36,17 +36,17 @@ Each song is generated through this process:
         - `chords_name`
         - `bass_name`
     1.  [Produce Audio Loops from Sf2 Name and MIDI Loop](#produce-audio-loops-from-sf2-name-and-midi-loop)
-        - `ambient_loop`
-        - `melody_loop`
-        - `cmelody_loop`
-        - `chords_loop`
-        - `bass_loop`
+        - `ambient_loop_path`
+        - `melody_loop_path`
+        - `cmelody_loop_path`
+        - `chords_loop_path`
+        - `bass_loop_path`
     1. [RNG Drum Kit Samples](#rng-drum-kit-samples)
         - `kick_name`
         - `hat_name`
         - `snare_name`
     1. [Produce Drum Loop from Samples and bpm](#produce-drum-loop-from-samples-and-bpm)
-        - `drum_loop`
+        - `drum_loop_path`
 1. **SegmentGen** - [Generate Song Segments](#generate-song-segments)
     1. [RNG Song Structure](#rng-song-structure)
         - `song_structure`
@@ -73,7 +73,7 @@ Use simple RNG to create values for these base song elements:
 ### Generate chords using `key` and `prog`
 The `prog`'s are written in Roman numeric notation, functionally between "I" and "VII" including the accidental and chord type. This allows the progressions to be transposed into any key that's RNG'd.
 
-The chords are the `prog` once given a `key`. The `prog` item **bV7** becomes **G♭7** once the key of **C** is expressed. Both `key` and `prog` are initialized in the [*SongElements*](#rng-song-elements) step. Using this information, combined with the bpm and time signature, we create the chords of the song.
+The chords are the `prog` once given a `key`. The `prog` item **bV7** becomes __G♭7__ once the key of **C** is expressed. Both `key` and `prog` are initialized in the [*SongElements*](#rng-song-elements) step. Using this information, combined with the bpm and time signature, we create the chords of the song.
 
 The `prog` is randomly chosen from a hard-coded list.
 
@@ -82,7 +82,7 @@ Given the key is *C*, and the notation is "bVI7", here's how we'd find the chord
  - (*VI*) - **VI** is Roman numeral for 6, so we'd base the root of our chord on the 6th scale degree of *C*, which is `A`.
  - (*b*) - **b** is an alpha representation of the flat symbol, ♭. This means the scale is lowered by half a step, so *A* is lowered into `A♭`
  - (*VI* is uppercase) - Uppercase means that the chord is major, and lowercase *vi* means the chord is minor. So we have an `A♭ major` chord
- - (*7*) - 7 directly after the chord here will mean the chord is a dominant chord (major chord with a ♭7). So we have an `A♭ Dominant 7th`
+ - (*7*) - **7** directly after the chord here will mean the chord is a dominant chord (major chord with a ♭7). So we have an `A♭ Dominant 7th`
 
 Key=*C* + Chord=*bVI7* = Chord is `A♭7`
 
@@ -98,10 +98,10 @@ The RNG chooses which chord progression to use for the song and the chords will 
 
 ### Use chords to make melodic/harmonic parts
 The chords can also give the information on what the notes are in that chord's scale. Those notes can be used to generate melodic ideas. These midi files are randomly generated melodic ideas, in order of increasing complexity:
-- `bass_mid`
-- `ambient_mid`
-- `cmelody_mid`
-- `melody_mid`
+- `bass_midi_path`
+- `ambient_midi_path`
+- `cmelody_midi_path`
+- `melody_midi_path`
 
 These MIDI files are the size of a single loop - a duration of a whole chord progression (typically 4 measures for 4-chord progressions).
 
