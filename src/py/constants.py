@@ -59,7 +59,6 @@ SNARE_VOLUME:     int = -3
 NO_VOLUME_CHANGE: int = 0
 
 # MIDI note durations
-SONG_LENGTH:    int = 2 # number of chord progression repeats in a song
 BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat)
 QTR_NOTE:       int = BASE_NOTE - 1
 HALF_NOTE:      int = BASE_NOTE * 2 - 1
