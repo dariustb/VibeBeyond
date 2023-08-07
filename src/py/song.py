@@ -289,7 +289,7 @@ class SongCombine:
 
         # Metadata
         self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
-        self.artist: str = 'example Artist'.title()
+        self.artist: str = 'example artist'.title()
 
         # Audio segment
         self.song_segment: AudioSegment = None
