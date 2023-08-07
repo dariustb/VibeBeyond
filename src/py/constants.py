@@ -15,7 +15,6 @@ AUDIO_FOLDER:   str = 'src/gen/audio/'
 MIDI_FOLDER:    str = 'src/gen/midi/'
 ASSETS_FOLDER:  str = 'src/assets/'
 SF2_FOLDER:     str = 'src/assets/sf2/'
-SF3_FOLDER:     str = 'src/assets/sf3/'
 KEYS_FOLDER:    str = SF2_FOLDER
 AMBIENT_FOLDER: str = 'src/assets/sf2/ambient/'
 LEAD_FOLDER:    str = 'src/assets/sf2/lead/'
@@ -34,7 +33,6 @@ AUDIO_TYPE:      str = 'wav' # See note on soundfonts.py:midi_to_audio() before 
 AUDIO_FILE_TYPE: str = '.' + AUDIO_TYPE
 MIDI_FILE_TYPE:  str = '.mid'
 SF2_FILE_TYPE:   str = '.sf2'
-SF3_FILE_TYPE:   str = '.sf3'
 
 # Pygame window
 SCREEN_WIDTH:  int = 800
