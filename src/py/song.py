@@ -47,7 +47,6 @@ class SongMidiGen:
         ''' All the song's MIDI attributes will be kept here '''
 
         # Midi Tracks
-        self.prog_midi_track:    mido.MidiTrack = None
         self.chords_midi_track:  mido.MidiTrack = None
         self.ambient_midi_track: mido.MidiTrack = None
         self.melody_midi_track:  mido.MidiTrack = None
@@ -55,8 +54,6 @@ class SongMidiGen:
         self.bass_midi_track:    mido.MidiTrack = None
 
         # Midi file paths
-        self.keys_midi_path:    str = self.set_path('keys')
-        self.lead_midi_path:    str = self.set_path('lead')
         self.ambient_midi_path: str = self.set_path('ambient')
         self.melody_midi_path:  str = self.set_path('melody')
         self.cmelody_midi_path: str = self.set_path('cmelody')
@@ -156,8 +153,6 @@ class SongLoopGen:
         ''' All the song's loop attributes will be kept here '''
 
         # Instruments/Sample names
-        self.keys_name:    str = self.set_name(KEYS_FOLDER)
-        self.lead_name:    str = self.set_name(LEAD_FOLDER)
         self.ambient_name: str = self.set_name(AMBIENT_FOLDER)
         self.melody_name:  str = self.set_name(MELODY_FOLDER)
         self.cmelody_name: str = self.set_name(CMELODY_FOLDER)
@@ -168,8 +163,6 @@ class SongLoopGen:
         self.snare_name:   str = self.set_name(SNARE_FOLDER)
 
         # Audio file paths
-        self.keys_loop_path:    str = self.set_path('keys')
-        self.lead_loop_path:    str = self.set_path('lead')
         self.ambient_loop_path: str = self.set_path('ambient')
         self.melody_loop_path:  str = self.set_path('melody')
         self.cmelody_loop_path: str = self.set_path('cmelody')
@@ -230,7 +223,7 @@ class SongLoopGen:
     def export_loop_from_midi(self,
                               midi_path: str, midi_track: mido.MidiTrack,
                               loop_path: str, sf2_name: str) -> str:
-        ''' midi_to_audio - Convert keys & lead MIDI track file to audio files '''
+        ''' midi_to_audio - Convert any given MIDI track file to audio files '''
 
         # NOTE: sf2-loader/pydub requires ffmpeg or libav installed
         # for non-wav files (https://pypi.org/project/sf2-loader/#Windows)
