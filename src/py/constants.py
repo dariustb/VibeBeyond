@@ -59,15 +59,14 @@ SNARE_VOLUME:     int = -3
 NO_VOLUME_CHANGE: int = 0
 
 # MIDI note durations
-SONG_LENGTH:    int = 2 # number of chord progression repeats in a song
-BASE_NOTE:      int = 480 # note length in ticks (480 ticks per beat)
-QTR_NOTE:       int = BASE_NOTE - 1
-HALF_NOTE:      int = BASE_NOTE * 2 - 1
-WHOLE_NOTE:     int = BASE_NOTE * 4 - 1
-EIGHTH_NOTE:    int = BASE_NOTE // 2 - 1
-SIXTEENTH_NOTE: int = BASE_NOTE // 4 - 1
-DOT_QTR_NOTE:   int = int(BASE_NOTE * 1.5) - 1
-DOT_8TH_NOTE:   int = int(BASE_NOTE * 0.75) - 1
+BASE_NOTE:      int = 480 - 1 # note length in ticks (480 ticks per beat)
+QTR_NOTE:       int = BASE_NOTE
+HALF_NOTE:      int = BASE_NOTE * 2
+WHOLE_NOTE:     int = BASE_NOTE * 4
+EIGHTH_NOTE:    int = BASE_NOTE // 2
+SIXTEENTH_NOTE: int = BASE_NOTE // 4
+DOT_QTR_NOTE:   int = int(BASE_NOTE * 1.5)
+DOT_8TH_NOTE:   int = int(BASE_NOTE * 0.75)
 
 # Melody complexities
 BASS_COMPLEXITY:    int = 1

@@ -125,10 +125,10 @@ class SongMidiGen:
             for i, note_interval in enumerate(chord_intervals):
                 note_stop_time = WHOLE_NOTE if i == 0 else 0
                 chords.append(mido.Message(
-                'note_off',
-                note = root_note + note_interval,
-                velocity = 0,
-                time = note_stop_time
+                    'note_off',
+                    note = root_note + note_interval,
+                    velocity = 0,
+                    time = note_stop_time
                 ))
 
         return chords
