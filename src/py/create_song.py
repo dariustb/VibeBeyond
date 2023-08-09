@@ -21,10 +21,14 @@ def create_song():
                                               Elements.prog)
 
     ## 2b. Use chords to make melodic/harmonic parts
-    Midi.ambient_midi_track = Midi.gen_melody(Elements.key, Elements.prog, AMBIENT_COMPLEXITY)
-    Midi.melody_midi_track  = Midi.gen_melody(Elements.key, Elements.prog, MELODY_COMPLEXITY)
-    Midi.cmelody_midi_track = Midi.gen_melody(Elements.key, Elements.prog, CMELODY_COMPLEXITY)
-    Midi.bass_midi_track    = Midi.gen_melody(Elements.key, Elements.prog, BASS_COMPLEXITY)
+    Midi.ambient_midi_track = Midi.gen_melody(Elements.key, Elements.time,
+                                              Elements.bpm, Elements.prog,  AMBIENT_COMPLEXITY)
+    Midi.melody_midi_track  = Midi.gen_melody(Elements.key, Elements.time,
+                                              Elements.bpm, Elements.prog,  MELODY_COMPLEXITY)
+    Midi.cmelody_midi_track = Midi.gen_melody(Elements.key, Elements.time,
+                                              Elements.bpm, Elements.prog,  CMELODY_COMPLEXITY)
+    Midi.bass_midi_track    = Midi.gen_melody(Elements.key, Elements.time,
+                                              Elements.bpm, Elements.prog,  BASS_COMPLEXITY)
 
     ## 2c. Export MIDI files
     Midi.export_midi_from_tracks(Midi.ambient_midi_track, Midi.ambient_midi_path)
