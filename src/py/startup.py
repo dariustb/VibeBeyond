@@ -3,6 +3,7 @@
 # pylint: disable = W0401, W0614
 
 import os
+import sys
 import logging
 from py.constants import *
 
@@ -46,3 +47,4 @@ def startup_check():
     if is_missing_files:
         logging.critical('(%s) Empty asset folders found: \n\t%s',
                          startup_check.__name__, str(missing_list))
+        sys.exit()
