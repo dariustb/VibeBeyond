@@ -1,6 +1,6 @@
 ''' song.py - This file will be used to generate a song '''
 
-# pylint: disable = W0401, W0614, R0902, C0103, W0613
+# pylint: disable = W0401, W0613, W0614, R0902, R0913, R0914, C0103
 
 import os
 import random
@@ -145,7 +145,7 @@ class SongMidiGen:
 
         rhythm = []
         melody = []
-        
+
         track: mido.MidiTrack = self.gen_track_prefix(key, time, bpm)
 
         for _ in range(len(prog)):
@@ -379,9 +379,3 @@ def delete_loops(Midi: SongMidiGen, Loop: SongLoopGen) -> bool:
         if os.path.isfile(loop_file):
             os.remove(loop_file)
     return True
-
-
-if __name__ == '__main__':
-    elements = SongElements()
-    midiGen = SongMidiGen()
-    print(midiGen.gen_melody(elements.key, elements.prog, complexity=4))
