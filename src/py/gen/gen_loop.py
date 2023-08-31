@@ -9,7 +9,7 @@ import mido
 
 from pydub import AudioSegment
 
-from py import util
+from py.gen import gen_util
 from py.constants import *
 
 class SongLoopGen:
@@ -67,9 +67,9 @@ class SongLoopGen:
         hat_segment   = []
 
         for _ in range(len(prog)):
-            util.coordinate_sample(kick_audio, kick_segment, kick_pattern, bpm_in_ms)
-            util.coordinate_sample(hat_audio, hat_segment, hat_pattern, bpm_in_ms)
-            util.coordinate_snare(snare_audio, snare_segment, bpm_in_ms)
+            gen_util.coordinate_sample(kick_audio, kick_segment, kick_pattern, bpm_in_ms)
+            gen_util.coordinate_sample(hat_audio, hat_segment, hat_pattern, bpm_in_ms)
+            gen_util.coordinate_snare(snare_audio, snare_segment, bpm_in_ms)
 
         # Combine sample and silences (per instrument)
         kick_segment  = sum(kick_segment)

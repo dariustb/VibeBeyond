@@ -6,7 +6,7 @@ import random
 import mido
 
 from py.constants import *
-from py import util
+from py.gen import gen_util
 
 class SongMidiGen:
     ''' This class is for generating MIDI loop files '''
@@ -63,8 +63,8 @@ class SongMidiGen:
         ''' Returns a MIDI track of the chord progression '''
 
         # Get chord progression variables
-        chord_intervals_list    = util.get_chord_intervals_list(prog)
-        root_note_list          = util.get_root_note_list(key, prog)
+        chord_intervals_list    = gen_util.get_chord_intervals_list(prog)
+        root_note_list          = gen_util.get_root_note_list(key, prog)
 
         chords = self.gen_track_prefix(key, time, bpm)
 
@@ -107,8 +107,8 @@ class SongMidiGen:
             note_durations: tuple = WHOLE_NOTE, WHOLE_NOTE
         shortest_subdivision = note_durations[0]
 
-        intervals = util.get_chord_intervals_list(prog)
-        roots = util.get_root_note_list(key, prog)
+        intervals = gen_util.get_chord_intervals_list(prog)
+        roots     = gen_util.get_root_note_list(key, prog)
 
         rhythm = []
         melody = []
