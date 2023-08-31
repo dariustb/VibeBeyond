@@ -1,5 +1,7 @@
 ''' loop_gen.py - This file will generate AudioSegment loops '''
 
+# pylint: disable = W0401, W0614, R0902
+
 import os
 import random
 import sf2_loader

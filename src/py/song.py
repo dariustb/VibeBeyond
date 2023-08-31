@@ -4,8 +4,8 @@
 
 import os
 
-from py.midi_gen import SongMidiGen
-from py.loop_gen import SongLoopGen
+from py.gen_midi import SongMidiGen
+from py.gen_loop import SongLoopGen
 from py.constants import *
 
 def delete_loops(Midi: SongMidiGen, Loop: SongLoopGen) -> bool:

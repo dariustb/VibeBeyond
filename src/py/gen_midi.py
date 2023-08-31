@@ -1,9 +1,12 @@
 ''' midi_gen.py - This file will generate midi files'''
 
+# pylint: disable = W0401, W0614, R0902, R0913, R0914
+
 import random
 import mido
-from py import song_utils as util
+
 from py.constants import *
+from py import song_utils as util
 
 class SongMidiGen:
     ''' This class is for generating MIDI loop files '''

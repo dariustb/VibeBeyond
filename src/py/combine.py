@@ -1,12 +1,14 @@
-''' '''
+''' combine.py - This file will combine song segments '''
+
+# pylint: disable = W0401, W0614, C0103
 
 import random
 
+from string import ascii_lowercase
 from pydub import AudioSegment
-from string import ascii_lowercase as letters
 
-from py.seg_gen import SongSegmentGen
 from py.constants import *
+from py.gen_sgmt  import SongSegmentGen
 
 class SongCombine:
     ''' This class is for combining all the song segments into final audio '''
@@ -14,7 +16,7 @@ class SongCombine:
         ''' All the song's final attributes will be kept here '''
 
         # Metadata
-        self.title:  str = ''.join(random.choice(letters) for _ in range(8)).title()
+        self.title:  str = ''.join(random.choice(ascii_lowercase) for _ in range(8)).title()
         self.artist: str = 'example artist'.title()
 
         # Audio segment

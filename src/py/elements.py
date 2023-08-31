@@ -1,4 +1,6 @@
-''' '''
+''' elements.py - This file will produce elements to make the song '''
+
+# pylint: disable = W0401, W0614
 
 import random
 from py.constants import *

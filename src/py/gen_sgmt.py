@@ -1,8 +1,11 @@
 '''seg_gen.py - This file will generate song segments'''
 
+# pylint: disable = W0401, W0614
+
 import os
 import random
 from pydub import AudioSegment
+
 from py.constants import *
 
 class SongSegmentGen: # pylint: disable = R0903
