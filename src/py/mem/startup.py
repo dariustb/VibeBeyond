@@ -4,47 +4,51 @@
 
 import os
 import sys
-import logging
 from py.constants import *
 
-ESSENTIAL_FOLDERS = [
-    GEN_FOLDER,
-    ASSETS_FOLDER,
-    AUDIO_FOLDER,
-    MIDI_FOLDER,
-    SF2_FOLDER,
-    KEYS_FOLDER,
-    LEAD_FOLDER,
-    DRUMS_FOLDER,
-    KICK_FOLDER,
-    HAT_FOLDER,
-    SNARE_FOLDER
-]
+class Startup:
+    ''' This class will create essential folders for first-time runs '''
+    def __init__(self):
+        ''' All the Startup's attributes will be kept here '''
+        self.essential_folders = [
+            GEN_FOLDER,
+            ASSETS_FOLDER,
+            AUDIO_FOLDER,
+            MIDI_FOLDER,
+            SF2_FOLDER,
+            KEYS_FOLDER,
+            LEAD_FOLDER,
+            DRUMS_FOLDER,
+            KICK_FOLDER,
+            HAT_FOLDER,
+            SNARE_FOLDER
+        ]
+        self.prep()
+        self.check()
 
-def startup_prep():
-    ''' creates missing essential folders for first run '''
-    for folder in ESSENTIAL_FOLDERS:
-        if not os.path.isdir(folder):
-            os.mkdir(folder)
+    def prep(self) -> None:
+        ''' creates missing essential folders for first run '''
+        for folder in self.essential_folders:
+            if not os.path.isdir(folder):
+                os.mkdir(folder)
 
-def startup_check():
-    ''' checks essential folders & quits if folders are empty '''
+    def check(self) -> None:
+        ''' checks essential folders & quits if folders are empty '''
 
-    startup_prep()
+        is_missing_files = False
+        missing_list = []
 
-    is_missing_files = False
-    missing_list = []
+        # Check for empty folders
+        for folder in self.essential_folders:
+            if folder in (AUDIO_FOLDER, MIDI_FOLDER):
+                continue
+            if os.listdir(folder) == []:
+                is_missing_files = True
+                missing_list.append(folder)
 
-    # Check for empty folders
-    for folder in ESSENTIAL_FOLDERS:
-        if folder in (AUDIO_FOLDER, MIDI_FOLDER):
-            continue
-        if os.listdir(folder) == []:
-            is_missing_files = True
-            missing_list.append(folder)
-
-    # Log information and quit if found
-    if is_missing_files:
-        logging.critical('(%s) Empty asset folders found: \n\t%s',
-                         startup_check.__name__, str(missing_list))
-        sys.exit()
+        # Log information and quit if found
+        if is_missing_files:
+            print('Empty asset folders found: \n\t%s',
+                             str(missing_list))
+            print('Go to https://dariustb.github.io/VibeBeyond/faq for more information')
+            sys.exit()

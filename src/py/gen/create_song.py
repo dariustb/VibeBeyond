@@ -1,6 +1,6 @@
 ''' create_song.py - houses the create_song function to prevent cycling in song.py '''
 
-# pylint: disable = W0401, W0614, C0103, E1128
+# pylint: disable = W0401, W0614, C0103
 
 from py.mem import teardown
 from py.constants import *
@@ -11,7 +11,7 @@ from py.gen.gen_sgmt  import SongSegmentGen
 from py.gen.combine   import SongCombine
 
 # The feast de resistance
-def create_song():
+def create_song() -> str:
     ''' create_song - builds song and returns the song file path '''
 
     # 1. RNG Song Elements
