@@ -1,6 +1,6 @@
 ''' midi_gen.py - This file will generate midi files'''
 
-# pylint: disable = W0401, W0614, R0902, R0913, R0914
+# pylint: disable = W0401, W0614, R0902, R0913, R0914, E0611
 
 import random
 import mido

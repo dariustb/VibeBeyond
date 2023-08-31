@@ -1,6 +1,6 @@
 ''' create_song.py - houses the create_song function to prevent cycling in song.py '''
 
-# pylint: disable = W0401, W0614, C0103
+# pylint: disable = W0401, W0614, C0103, E0611
 
 from ..         import constants as const
 from ..mem      import teardown

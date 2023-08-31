@@ -1,6 +1,6 @@
 ''' validate.py - Used to hold the validation functions '''
 
-# pylint: disable = W0401, W0614
+# pylint: disable = W0401, W0614, E0611
 
 import os
 import sys

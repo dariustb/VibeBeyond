@@ -1,6 +1,6 @@
 ''' gen_util.py - Utility functions for gen related code '''
 
-# pylint: disable = W0401, W0614
+# pylint: disable = W0401, W0614, E0611
 
 from re    import sub
 from pydub import AudioSegment

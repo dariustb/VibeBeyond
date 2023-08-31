@@ -1,6 +1,6 @@
 '''seg_gen.py - This file will generate song segments'''
 
-# pylint: disable = W0401, W0614
+# pylint: disable = W0401, W0614, E0611
 
 import os
 import random

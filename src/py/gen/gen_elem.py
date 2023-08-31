@@ -1,6 +1,6 @@
 ''' elements.py - This file will produce elements to make the song '''
 
-# pylint: disable = W0401, W0614
+# pylint: disable = W0401, W0614, E0611
 
 import random
 from .. import constants as const

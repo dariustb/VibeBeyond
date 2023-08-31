@@ -1,6 +1,6 @@
 ''' combine.py - This file will combine song segments '''
 
-# pylint: disable = W0401, W0614, C0103
+# pylint: disable = W0401, W0614, C0103, E0611
 
 import random
 
