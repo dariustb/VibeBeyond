@@ -2,13 +2,13 @@
 
 # pylint: disable = W0401, W0614, C0103, E1128
 
-from py import song
+from py.mem import teardown
 from py.constants import *
-from py.elements  import SongElements
-from py.gen_midi  import SongMidiGen
-from py.gen_loop  import SongLoopGen
-from py.gen_sgmt  import SongSegmentGen
-from py.combine   import SongCombine
+from py.gen.gen_elem  import SongElements
+from py.gen.gen_midi  import SongMidiGen
+from py.gen.gen_loop  import SongLoopGen
+from py.gen.gen_sgmt  import SongSegmentGen
+from py.gen.combine   import SongCombine
 
 # The feast de resistance
 def create_song():
@@ -86,6 +86,6 @@ def create_song():
     Combine.export_audio_from_segment()
 
     # Clean up loops files
-    song.delete_loops(Midi, Loop)
+    teardown.delete_loops(Midi, Loop)
 
     return Combine.song_path

@@ -9,7 +9,7 @@ import mido
 
 from pydub import AudioSegment
 
-from py import song_utils as util
+from py import util
 from py.constants import *
 
 class SongLoopGen:

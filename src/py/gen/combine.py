@@ -8,7 +8,7 @@ from string import ascii_lowercase
 from pydub import AudioSegment
 
 from py.constants import *
-from py.gen_sgmt  import SongSegmentGen
+from py.gen.gen_sgmt  import SongSegmentGen
 
 class SongCombine:
     ''' This class is for combining all the song segments into final audio '''

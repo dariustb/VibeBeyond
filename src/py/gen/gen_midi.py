@@ -6,7 +6,7 @@ import random
 import mido
 
 from py.constants import *
-from py import song_utils as util
+from py import util
 
 class SongMidiGen:
     ''' This class is for generating MIDI loop files '''

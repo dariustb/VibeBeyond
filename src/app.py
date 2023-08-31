@@ -4,10 +4,10 @@
 
 from os import environ
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
-
 import pygame
-from py.startup import startup_check
-from py.create_song import create_song
+
+from py.mem.startup import startup_check
+from py.gen.create_song import create_song
 from py.constants import *
 
 if __name__ == '__main__':
