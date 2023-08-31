@@ -1,20 +1,25 @@
 ''' create_song.py - houses the create_song function to prevent cycling in song.py '''
 
-# pylint: disable = W0401, W0614, C0103, E1128
+# pylint: disable = W0401, W0614, C0103
 
-from py import song
+from py.mem import teardown
 from py.constants import *
+from py.gen.gen_elem  import SongElements
+from py.gen.gen_midi  import SongMidiGen
+from py.gen.gen_loop  import SongLoopGen
+from py.gen.gen_sgmt  import SongSegmentGen
+from py.gen.combine   import SongCombine
 
 # The feast de resistance
-def create_song():
+def create_song() -> str:
     ''' create_song - builds song and returns the song file path '''
 
     # 1. RNG Song Elements
-    Elements = song.SongElements()
+    Elements = SongElements()
 
     # 2. Generate MIDI Loop Files
     ## 2a. Generate chords using `key` and `prog`
-    Midi = song.SongMidiGen()
+    Midi = SongMidiGen()
     Midi.chords_midi_track  = Midi.gen_chords(Elements.key,
                                               Elements.time,
                                               Elements.bpm,
@@ -39,7 +44,7 @@ def create_song():
 
     # 3. Generate Audio Loop Files
     ## 3a. RNG Sf2 Instruments & Drum Kit Samples
-    Loop = song.SongLoopGen()
+    Loop = SongLoopGen()
 
     ## 3b. Produce Audio Loops from Sf2 Name and MIDI Loop
     Loop.export_loop_from_midi(Midi.ambient_midi_path, Midi.ambient_midi_track,
@@ -59,7 +64,7 @@ def create_song():
 
     # 4. Generate Song Segments
     ## 4a. RNG Song Structure
-    Segments = song.SongSegmentGen()
+    Segments = SongSegmentGen()
 
     ## 4b. Produce Segments from Loop and Song Structure
     Segments.ambient_segment = Segments.gen_segment(Segments.song_structure[0],
@@ -76,11 +81,11 @@ def create_song():
                                                     Loop.drum_loop_path)
 
     # 5. Combine segments into final song audio
-    Combine = song.SongCombine()
+    Combine = SongCombine()
     Combine.combine_segments(Segments)
     Combine.export_audio_from_segment()
 
     # Clean up loops files
-    song.delete_loops(Midi, Loop)
+    teardown.delete_loops(Midi, Loop)
 
     return Combine.song_path

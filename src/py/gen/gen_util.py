@@ -1,4 +1,4 @@
-''' song_utils.py - Utility functions for song.py '''
+''' gen_util.py - Utility functions for gen related code '''
 
 # pylint: disable = W0401, W0614
 
