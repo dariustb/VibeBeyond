@@ -5,8 +5,8 @@
 import random
 import mido
 
-from py.constants import *
-from py.gen import gen_util
+from .. import constants as const
+from .  import gen_util
 
 class SongMidiGen:
     ''' This class is for generating MIDI loop files '''
@@ -30,7 +30,7 @@ class SongMidiGen:
     # SETTER FUNCTIONS
     def set_path(self, name: str) -> str:
         ''' Returns a file path based on parameters '''
-        return MIDI_FOLDER + name + '_midi' + MIDI_FILE_TYPE
+        return const.MIDI_FOLDER + name + '_midi' + const.MIDI_FILE_TYPE
 
     # GENERATION FUNCTIONS
     def gen_track_prefix(self, key, time, bpm) -> mido.MidiTrack:
@@ -87,7 +87,7 @@ class SongMidiGen:
 
             # Add note_off: sets the release time for note (time=0 is instant)
             for i, note_interval in enumerate(chord_intervals):
-                note_stop_time = WHOLE_NOTE if i == 0 else 0
+                note_stop_time = const.WHOLE_NOTE if i == 0 else 0
                 chords.append(mido.Message(
                     'note_off',
                     note = root_note + note_interval,
@@ -100,11 +100,12 @@ class SongMidiGen:
     def gen_melody(self, key, time, bpm, prog, complexity) -> mido.MidiTrack:
         ''' Returns a generated melody '''
         if complexity >= 3:
-            note_durations: tuple = EIGHTH_NOTE, QTR_NOTE, DOT_QTR_NOTE, HALF_NOTE, WHOLE_NOTE
+            note_durations: tuple = (const.EIGHTH_NOTE, const.QTR_NOTE, const.DOT_QTR_NOTE,
+                                     const.HALF_NOTE, const.WHOLE_NOTE)
         elif complexity == 2:
-            note_durations: tuple = QTR_NOTE, HALF_NOTE, WHOLE_NOTE
+            note_durations: tuple =  const.QTR_NOTE, const.HALF_NOTE, const.WHOLE_NOTE
         elif complexity == 1:
-            note_durations: tuple = WHOLE_NOTE, WHOLE_NOTE
+            note_durations: tuple =  const.WHOLE_NOTE, const.WHOLE_NOTE
         shortest_subdivision = note_durations[0]
 
         intervals = gen_util.get_chord_intervals_list(prog)
@@ -119,7 +120,7 @@ class SongMidiGen:
             root_note = roots.pop()
             chord_intervals = intervals.pop()
             scale_notes = chord_intervals
-            measure_length = time[0] * (WHOLE_NOTE / time[1])
+            measure_length = time[0] * (const.WHOLE_NOTE / time[1])
             while measure_length >= shortest_subdivision:
                 # Add note durations to make rhythm
                 note = random.choice(note_durations)

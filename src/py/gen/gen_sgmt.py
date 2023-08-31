@@ -4,9 +4,9 @@
 
 import os
 import random
-from pydub import AudioSegment
 
-from py.constants import *
+from pydub import AudioSegment
+from ..    import constants as const
 
 class SongSegmentGen: # pylint: disable = R0903
     ''' This class is for generating song segments (excluding drum loop) '''
@@ -14,7 +14,7 @@ class SongSegmentGen: # pylint: disable = R0903
         ''' All the song's segment attributes will be kept here '''
 
         # Song structure
-        self.song_structure: tuple = random.choice(SONG_STRUCTURES)
+        self.song_structure: tuple = random.choice(const.SONG_STRUCTURES)
 
         # Pydub audio segments
         self.ambient_segment: AudioSegment = None
@@ -23,7 +23,8 @@ class SongSegmentGen: # pylint: disable = R0903
         self.chords_segment:  AudioSegment = None
         self.drum_segment:    AudioSegment = None
 
-    def gen_segment(self, track_structure: tuple, audio_path: str, volume: int = NO_VOLUME_CHANGE):
+    def gen_segment(self, track_structure: tuple, audio_path: str,
+                    volume: int = const.NO_VOLUME_CHANGE):
         ''' Builds the segments based on the track's structure '''
         if not os.path.isfile(audio_path):
             return None

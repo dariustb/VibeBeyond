@@ -2,13 +2,13 @@
 
 # pylint: disable = W0401, W0614, C0103
 
-from py.mem import teardown
-from py.constants import *
-from py.gen.gen_elem  import SongElements
-from py.gen.gen_midi  import SongMidiGen
-from py.gen.gen_loop  import SongLoopGen
-from py.gen.gen_sgmt  import SongSegmentGen
-from py.gen.combine   import SongCombine
+from ..         import constants as const
+from ..mem      import teardown
+from .gen_elem  import SongElements
+from .gen_midi  import SongMidiGen
+from .gen_loop  import SongLoopGen
+from .gen_sgmt  import SongSegmentGen
+from .combine   import SongCombine
 
 # The feast de resistance
 def create_song() -> str:
@@ -27,13 +27,17 @@ def create_song() -> str:
 
     ## 2b. Use chords to make melodic/harmonic parts
     Midi.ambient_midi_track = Midi.gen_melody(Elements.key, Elements.time,
-                                              Elements.bpm, Elements.prog, AMBIENT_COMPLEXITY)
+                                              Elements.bpm, Elements.prog,
+                                              const.AMBIENT_COMPLEXITY)
     Midi.melody_midi_track  = Midi.gen_melody(Elements.key, Elements.time,
-                                              Elements.bpm, Elements.prog, MELODY_COMPLEXITY)
+                                              Elements.bpm, Elements.prog,
+                                              const.MELODY_COMPLEXITY)
     Midi.cmelody_midi_track = Midi.gen_melody(Elements.key, Elements.time,
-                                              Elements.bpm, Elements.prog, CMELODY_COMPLEXITY)
+                                              Elements.bpm, Elements.prog,
+                                              const.CMELODY_COMPLEXITY)
     Midi.bass_midi_track    = Midi.gen_melody(Elements.key, Elements.time,
-                                              Elements.bpm, Elements.prog, BASS_COMPLEXITY)
+                                              Elements.bpm, Elements.prog,
+                                              const.BASS_COMPLEXITY)
 
     ## 2c. Export MIDI files
     Midi.export_midi_from_tracks(Midi.ambient_midi_track, Midi.ambient_midi_path)

@@ -4,9 +4,8 @@
 
 import os
 
-from py.gen.gen_midi import SongMidiGen
-from py.gen.gen_loop import SongLoopGen
-from py.constants import *
+from ..gen.gen_midi import SongMidiGen
+from ..gen.gen_loop import SongLoopGen
 
 def delete_loops(midi: SongMidiGen, loop: SongLoopGen) -> bool:
     ''' deletes audio/midi files of the song loops '''
