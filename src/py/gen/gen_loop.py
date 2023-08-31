@@ -1,6 +1,6 @@
 ''' loop_gen.py - This file will generate AudioSegment loops '''
 
-# pylint: disable = W0401, W0614, R0902
+# pylint: disable = W0401, W0614, R0902, E0611
 
 import os
 import random
@@ -8,9 +8,8 @@ import sf2_loader
 import mido
 
 from pydub import AudioSegment
-
-from py.gen import gen_util
-from py.constants import *
+from .     import gen_util
+from ..    import constants as const
 
 class SongLoopGen:
     ''' This class is for generating Audio loop files '''
@@ -18,14 +17,14 @@ class SongLoopGen:
         ''' All the song's loop attributes will be kept here '''
 
         # Instruments/Sample names
-        self.ambient_name: str = self.set_name(AMBIENT_FOLDER)
-        self.melody_name:  str = self.set_name(MELODY_FOLDER)
-        self.cmelody_name: str = self.set_name(CMELODY_FOLDER)
-        self.chords_name:  str = self.set_name(CHORDS_FOLDER)
-        self.bass_name:    str = self.set_name(BASS_FOLDER)
-        self.kick_name:    str = self.set_name(KICK_FOLDER)
-        self.hat_name:     str = self.set_name(HAT_FOLDER)
-        self.snare_name:   str = self.set_name(SNARE_FOLDER)
+        self.ambient_name: str = self.set_name(const.AMBIENT_FOLDER)
+        self.melody_name:  str = self.set_name(const.MELODY_FOLDER)
+        self.cmelody_name: str = self.set_name(const.CMELODY_FOLDER)
+        self.chords_name:  str = self.set_name(const.CHORDS_FOLDER)
+        self.bass_name:    str = self.set_name(const.BASS_FOLDER)
+        self.kick_name:    str = self.set_name(const.KICK_FOLDER)
+        self.hat_name:     str = self.set_name(const.HAT_FOLDER)
+        self.snare_name:   str = self.set_name(const.SNARE_FOLDER)
 
         # Audio file paths
         self.ambient_loop_path: str = self.set_path('ambient')
@@ -44,7 +43,7 @@ class SongLoopGen:
 
     def set_path(self, name: str) -> str:
         ''' Returns a file path based on parameters '''
-        return AUDIO_FOLDER + name + '_loop' + AUDIO_FILE_TYPE
+        return const.AUDIO_FOLDER + name + '_loop' + const.AUDIO_FILE_TYPE
 
     # GENERATION FUNCTIONS
     def gen_drum_loop(self, prog, bpm) -> AudioSegment:
@@ -53,13 +52,13 @@ class SongLoopGen:
         bpm_in_ms = int(60 / bpm * 1000) # milliseconds per beat
 
         # Load drum samples
-        kick_audio  = AudioSegment.from_file(self.kick_name)  + KICK_VOLUME
-        hat_audio   = AudioSegment.from_file(self.hat_name)   + HAT_VOLUME
-        snare_audio = AudioSegment.from_file(self.snare_name) + SNARE_VOLUME
+        kick_audio  = AudioSegment.from_file(self.kick_name)  + const.KICK_VOLUME
+        hat_audio   = AudioSegment.from_file(self.hat_name)   + const.HAT_VOLUME
+        snare_audio = AudioSegment.from_file(self.snare_name) + const.SNARE_VOLUME
 
         # Create drum pattern for midi
-        kick_pattern = [HALF_NOTE + EIGHTH_NOTE, DOT_QTR_NOTE]
-        hat_pattern  = [EIGHTH_NOTE for _ in range(8)]
+        kick_pattern = [const.HALF_NOTE + const.EIGHTH_NOTE, const.DOT_QTR_NOTE]
+        hat_pattern  = [const.EIGHTH_NOTE for _ in range(8)]
 
         # Coordinate audio samples to note values
         kick_segment  = []
@@ -101,11 +100,11 @@ class SongLoopGen:
         loader.export_midi_file(midi_path,
             decay=0.0,
             name=loop_path,
-            format=AUDIO_TYPE)
+            format=const.AUDIO_TYPE)
 
         return loop_path
 
     def export_loop_from_segment(self, segment: AudioSegment, loop_path: str) -> str:
         ''' creates an audio file with all the AudioSegments combined '''        
-        segment.export(loop_path, format=AUDIO_TYPE)
+        segment.export(loop_path, format=const.AUDIO_TYPE)
         return loop_path

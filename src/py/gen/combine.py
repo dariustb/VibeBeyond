@@ -1,14 +1,13 @@
 ''' combine.py - This file will combine song segments '''
 
-# pylint: disable = W0401, W0614, C0103
+# pylint: disable = W0401, W0614, C0103, E0611
 
 import random
 
-from string import ascii_lowercase
-from pydub import AudioSegment
-
-from py.constants import *
-from py.gen.gen_sgmt  import SongSegmentGen
+from string    import ascii_lowercase
+from pydub     import AudioSegment
+from ..        import constants as const
+from .gen_sgmt import SongSegmentGen
 
 class SongCombine:
     ''' This class is for combining all the song segments into final audio '''
@@ -23,7 +22,7 @@ class SongCombine:
         self.song_segment: AudioSegment = None
 
         # Audio file paths
-        self.song_path: str = AUDIO_FOLDER + self.title + AUDIO_FILE_TYPE
+        self.song_path: str = const.AUDIO_FOLDER + self.title + const.AUDIO_FILE_TYPE
 
     def combine_segments(self, Segments:SongSegmentGen) -> AudioSegment:
         ''' Combines segments into one whole segment '''
@@ -46,5 +45,5 @@ class SongCombine:
     # EXPORT FUNCTIONS
     def export_audio_from_segment(self) -> str:
         ''' creates an audio file with all the AudioSegments combined '''        
-        self.song_segment.export(self.song_path, format=AUDIO_TYPE)
+        self.song_segment.export(self.song_path, format=const.AUDIO_TYPE)
         return self.song_path

@@ -1,10 +1,10 @@
 ''' gen_util.py - Utility functions for gen related code '''
 
-# pylint: disable = W0401, W0614
+# pylint: disable = W0401, W0614, E0611
 
-from re import sub
+from re    import sub
 from pydub import AudioSegment
-from py.constants import *
+from ..    import constants as const
 
 def get_chord_intervals_list(chord_prog) -> list:
     ''' Returns a list of chord intervals in the progression '''
@@ -69,7 +69,7 @@ def get_root_note_list(key, chord_prog) -> list:
 def coordinate_sample(audio, segment, pattern, bpm_in_ms):
     ''' coordinates sample audio to the rhythmic pattern passed in'''
     for note in pattern:
-        note_length_in_ms = ((note + 1)/BASE_NOTE) * bpm_in_ms
+        note_length_in_ms = ((note + 1)/const.BASE_NOTE) * bpm_in_ms
         if len(audio) < note_length_in_ms:
             segment.append(audio)
             segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
@@ -79,7 +79,7 @@ def coordinate_sample(audio, segment, pattern, bpm_in_ms):
 
 def coordinate_snare(audio, segment, bpm_in_ms):
     ''' coordinates snare to the 2 and 4 of the beat '''
-    note_length_in_ms = ((HALF_NOTE + 1)/BASE_NOTE) * bpm_in_ms # half note length
+    note_length_in_ms = ((const.HALF_NOTE + 1)/const.BASE_NOTE) * bpm_in_ms # half note length
     segment.append(AudioSegment.silent(note_length_in_ms/2))
     segment.append(audio)
     segment.append(AudioSegment.silent(note_length_in_ms - len(audio)))
