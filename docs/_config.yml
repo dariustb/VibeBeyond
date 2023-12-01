@@ -1,0 +1,20 @@
+# Install Just the Docs template
+markdown: kramdown
+remote_theme: just-the-docs/just-the-docs
+
+# Site settings
+title: Vibe Beyond
+
+# Aux links for the upper right navigation
+aux_links:
+  "Vibe Beyond on GitHub":
+    - "//github.com/dariustb/VibeBeyond"
+
+# Callouts (warning and notes)
+callouts:
+  warning:
+    title: Warning
+    color: red
+
+# Set a path/url to a favicon that will be displayed by the browser
+favicon_ico: "images/favicon.ico"
