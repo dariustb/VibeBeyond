@@ -1,11 +1,14 @@
 """ gen_create - houses the create_song function """
 
+from .gen_elements import SongElements
+
 
 # The feast de resistance
 def create_song() -> str:
     """create_song - builds song and returns the song file path"""
 
     # 1. RNG Song Elements
+    Elements = SongElements()
 
     # 2. Generate MIDI Loops
 
