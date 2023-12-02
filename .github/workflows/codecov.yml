@@ -1,0 +1,28 @@
+name: CodeCov
+on:
+  pull_request:
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests and collect coverage
+        run: python -m pytest --cov tests/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4-beta
+        with:
+          flags: smart-tests
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
