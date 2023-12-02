@@ -1,6 +1,8 @@
 <!-- PROJECT SHIELDS -->
 [![PyTest][pytest]][pytest-url]
 [![PyLint][pylint]][pylint-url]
+[![Black][black]][black-url]
+[![Isort][isort]][isort-url]
 [![GPages][gpages]][gpages-url]
 
 <!-- PROJECT LOGO -->
@@ -54,9 +56,14 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 <!-- CI Test badges -->
 [pytest]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pytest.yml/badge.svg
 [pylint]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pylint.yml/badge.svg
+[black]:    https://github.com/dariustb/VibeBeyond/actions/workflows/black.yml/badge.svg
+[isort]:    https://github.com/dariustb/VibeBeyond/actions/workflows/isort.yml/badge.svg
 [gpages]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
+
 [pytest-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pytest.yml
 [pylint-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pylint.yml
+[black-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/black.yml
+[isort-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/isort.yml
 [gpages-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment
 
 <!-- Markdown Badges -->
