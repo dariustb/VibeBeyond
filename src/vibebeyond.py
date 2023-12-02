@@ -1,4 +1,4 @@
-""" Driver file """
+""" vibebeyond - driver program for the application """
 
 import pygame
 
