@@ -1,6 +1,4 @@
-""" Driver file """
-
-# pylint: disable = C0103
+""" vibebeyond - driver program for the application """
 
 import pygame
 
