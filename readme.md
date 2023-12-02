@@ -4,6 +4,7 @@
 [![Black][black]][black-url]
 [![Isort][isort]][isort-url]
 [![GPages][gpages]][gpages-url]
+![GitHub repo size][repo-size]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -68,5 +69,6 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 [gpages-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment
 
 <!-- Markdown Badges -->
+[repo-size]:    https://img.shields.io/github/repo-size/dariustb/VibeBeyond
 [python.io]:    https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [figma.io]:     https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white
