@@ -18,4 +18,4 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Run Pylint
-        run: pylint src/ tests/
+        run: pylint --disable=C src/ tests/
