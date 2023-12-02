@@ -1,7 +1,5 @@
 """ Driver file """
 
-# pylint: disable = C0103
-
 import pygame
 
 from core.generation.gen_create import create_song
