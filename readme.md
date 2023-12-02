@@ -9,7 +9,7 @@
 <br />
 <div align="center">
     <a href="https://github.com/dariustb/vibebeyond">
-        <img src="" alt="VB Logo">
+        <img src="src/assets/vb_icon.png" alt="VB Logo">
     </a>
     <h1>Vibe Beyond</h1>
     <p>Algorithmically-generated lofi hip-hop radio</p>
