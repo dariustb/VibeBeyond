@@ -42,6 +42,7 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 
 ### Built With
 * ![Python][python.io]
+* ![Figma][figma.io]
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -68,3 +69,4 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 
 <!-- Markdown Badges -->
 [python.io]:    https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
+[figma.io]:     https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white
