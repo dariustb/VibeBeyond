@@ -4,6 +4,7 @@
 [![Black][black]][black-url]
 [![Isort][isort]][isort-url]
 [![GPages][gpages]][gpages-url]
+[![Codecov][codecov]][codecov-url]
 ![GitHub repo size][repo-size]
 
 <!-- PROJECT LOGO -->
@@ -61,12 +62,14 @@ _Please [refer to the documentation][docs] for the full breakdown and logic expl
 [black]:    https://github.com/dariustb/VibeBeyond/actions/workflows/black.yml/badge.svg
 [isort]:    https://github.com/dariustb/VibeBeyond/actions/workflows/isort.yml/badge.svg
 [gpages]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
+[codecov]:  https://codecov.io/gh/dariustb/VibeBeyond/graph/badge.svg?token=APDVMI7QYQ
 
 [pytest-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pytest.yml
 [pylint-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pylint.yml
 [black-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/black.yml
 [isort-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/isort.yml
 [gpages-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment
+[codecov-url]:  https://codecov.io/gh/dariustb/VibeBeyond
 
 <!-- Markdown Badges -->
 [repo-size]:    https://img.shields.io/github/repo-size/dariustb/VibeBeyond
