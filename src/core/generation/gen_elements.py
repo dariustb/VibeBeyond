@@ -21,7 +21,7 @@ VALID_CHORD_PROGRESSIONS: tuple = (
     ("V", "I", "vi", "V"),
     ("V", "IV", "vi", "I"),
     ("V", "vi", "IV", "I"),
-    ("vi", "bVIM", "bVIIM", "I"),
+    ("vi", "bVI", "bVII", "I"),
     ("vi", "ii", "V", "I"),
     ("vi", "IV", "I", "V"),
     ("vi", "V", "IV", "V"),
