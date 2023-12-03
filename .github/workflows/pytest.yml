@@ -26,4 +26,12 @@ jobs:
           sudo apt-get install ffmpeg libavcodec-extra
 
       - name: Run Pytest
-        run: python -m pytest tests/
+        run: python -m pytest --cov tests/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4-beta
+        with:
+          flags: smart-tests
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
