@@ -23,7 +23,7 @@ MIDI_DOT_8TH_NOTE: int = int((MIDI_BASE_NOTE) * 0.75) - 1
 class SongMidiGen:
     """This class will hold the song's midi generation functions"""
 
-    def __init__(self) -> None:
+    def __init__(self, sf2_preset: int = None) -> None:
         """All the song's midi attributes will be kept here"""
 
         # Midi tracks
@@ -40,7 +40,9 @@ class SongMidiGen:
         return MIDI_FOLDER + name + "_midi" + MIDI_FILE_TYPE
 
     # Generation Functions
-    def gen_track_prefix(self, key: str, time: tuple, bpm: int) -> mido.MidiTrack:
+    def gen_track_prefix(
+        self, key: str, time: tuple, bpm: int, sf2_preset: int
+    ) -> mido.MidiTrack:
         """Add necessary info to the beginnning of midi track"""
 
         # Create track
@@ -64,7 +66,10 @@ class SongMidiGen:
         track.append(
             mido.Message("control_change", channel=0, control=121, value=0, time=0)
         )
-        track.append(mido.Message("program_change", channel=0, program=4, time=0))
+        # This program_change sets the preset num on the sf2 instrument
+        track.append(
+            mido.Message("program_change", channel=0, program=sf2_preset, time=0)
+        )
         track.append(
             mido.Message("control_change", channel=0, control=7, value=100, time=0)
         )
@@ -82,7 +87,7 @@ class SongMidiGen:
         return track
 
     def gen_chords(
-        self, key: str, time: tuple, bpm: int, prog: tuple
+        self, key: str, time: tuple, bpm: int, prog: tuple, sf2_preset: int
     ) -> mido.MidiTrack:
         """Returns a MIDI track of the chord progression"""
 
@@ -90,7 +95,7 @@ class SongMidiGen:
         chord_intervals_list = get_chord_intervals_list(prog)
         root_note_list = get_root_note_list(key, prog)
 
-        chords = self.gen_track_prefix(key, time, bpm)
+        chords = self.gen_track_prefix(key, time, bpm, sf2_preset)
 
         # Get chord intervals
         temp_list = (
@@ -128,7 +133,13 @@ class SongMidiGen:
         return chords
 
     def gen_melody(  # pylint: disable = R0913, R0914
-        self, key: str, time: tuple, bpm: int, prog: tuple, complexity: int
+        self,
+        key: str,
+        time: tuple,
+        bpm: int,
+        prog: tuple,
+        sf2_preset: int,
+        complexity: int,
     ) -> mido.MidiTrack:
         """Returns a generated melody"""
         if complexity >= 3:
@@ -152,7 +163,7 @@ class SongMidiGen:
         melody = []
 
         # Set up track
-        track: mido.MidiTrack = self.gen_track_prefix(key, time, bpm)
+        track: mido.MidiTrack = self.gen_track_prefix(key, time, bpm, sf2_preset)
 
         # Add melody notes to track
         for _ in range(len(prog)):

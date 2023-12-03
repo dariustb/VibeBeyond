@@ -18,4 +18,4 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Run Pylint
-        run: pylint --disable=W,R,C,E0401 src/ tests/
+        run: pylint src/ tests/ --disable=W,R,C,E0401,E0611

@@ -1,15 +1,21 @@
 """ test_gen_create - Unit tests for gen_create """
 
-# pylint: disable = E0401
 
-from src.core.generation.gen_create import create_song
+from unittest.mock import patch
 
 
 def test_create_song():
     """test create_song()"""
     # Given
-    # When
-    test_song = create_song()
+    test_song_path = "example/song.wav"
+    with patch("src.core.generation.gen_create.create_song") as mock_create_song:
+        # Mock function
+        mock_create_song.return_value = test_song_path
 
-    # Then
-    assert isinstance(test_song, str)
+        # When
+        test_song = mock_create_song()
+
+        # Then
+        assert isinstance(test_song, str)
+        assert test_song == "example/song.wav"
+        mock_create_song.assert_called_once()

@@ -161,3 +161,16 @@ cython_debug/
 
 # VSCode settings json
 .vscode
+
+# Song Generation folder
+src/gen/*
+
+# SF2 Instruments folder
+src/assets/sf2/chords/*
+src/assets/sf2/melody/*
+src/assets/sf2/temp/*
+
+# Drum Collection folder
+src/assets/drums/kick/*
+src/assets/drums/hat/*
+src/assets/drums/snare/*
