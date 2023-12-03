@@ -123,20 +123,40 @@ def test_SongMidiGen_gen_track_prefix():
     test_key = "C"
     test_time = (4, 4)
     test_bpm = 90
+    test_preset = 38
 
     # When
-    test_prefix = test_SMG.gen_track_prefix(test_key, test_time, test_bpm)
+    test_prefix = test_SMG.gen_track_prefix(test_key, test_time, test_bpm, test_preset)
 
     # Then
     assert isinstance(test_prefix, MidiTrack)
     assert len(test_prefix) >= 11  # the function appends 11 Messages/MetaMessages
+
+    assert test_prefix[0].type == "track_name"
     assert test_prefix.name == "song_track"
+
+    assert test_prefix[1].type == "time_signature"
     assert test_prefix[1].numerator == test_time[0]
     assert test_prefix[1].denominator == test_time[0]
     assert test_prefix[1].clocks_per_click == 24
     assert test_prefix[1].notated_32nd_notes_per_beat == 8
+
+    assert test_prefix[2].type == "key_signature"
     assert test_prefix[2].key == test_key
+
+    assert test_prefix[3].type == "set_tempo"
     assert test_prefix[3].tempo == bpm2tempo(test_bpm)
+
+    assert test_prefix[4].type == "control_change"
+
+    assert test_prefix[5].type == "program_change"
+    assert test_prefix[5].program == test_preset
+
+    assert test_prefix[6].type == "control_change"
+    assert test_prefix[7].type == "control_change"
+    assert test_prefix[8].type == "control_change"
+    assert test_prefix[9].type == "control_change"
+    assert test_prefix[10].type == "midi_port"
 
 
 def test_SongMidiGen_gen_chords():
@@ -145,6 +165,7 @@ def test_SongMidiGen_gen_chords():
     test_key = "C"
     test_time = (4, 4)
     test_bpm = 90
+    test_preset = 38
     test_prog = ("ii", "V7", "I", "IV")
     test_note_list = (
         62,  # D (Dmin)
@@ -166,7 +187,9 @@ def test_SongMidiGen_gen_chords():
     )
 
     # When
-    test_chords = test_SMG.gen_chords(test_key, test_time, test_bpm, test_prog)
+    test_chords = test_SMG.gen_chords(
+        test_key, test_time, test_bpm, test_prog, test_preset
+    )
 
     # Then
     assert isinstance(test_chords, MidiTrack)
@@ -187,6 +210,7 @@ def test_SongMidiGen_gen_melody():
     test_key = "C"
     test_time = (4, 4)
     test_bpm = 90
+    test_preset = 38
     test_prog = ("ii", "V7", "I", "IV")
     test_complexity = 2
 
@@ -205,7 +229,7 @@ def test_SongMidiGen_gen_melody():
 
     # When
     test_melody = test_SMG.gen_melody(
-        test_key, test_time, test_bpm, test_prog, test_complexity
+        test_key, test_time, test_bpm, test_prog, test_preset, test_complexity
     )
 
     # Then
