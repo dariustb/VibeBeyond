@@ -1,8 +1,10 @@
 """ gen_create - houses the create_song function """
 
+from .gen_combine import SongCombine
 from .gen_elements import SongElements
 from .gen_loop import DrumLoopGen, SongLoopGen
 from .gen_midi import SongMidiGen
+from .gen_segment import SongSegmentGen
 
 
 # The feast de resistance
@@ -50,8 +52,19 @@ def create_song() -> str:
     Drums.export_loop_from_segment(drum_loop_segment, Drums.drum_loop_path)
 
     # 4. Generate Song Segments
+    Segments = SongSegmentGen()
+
+    Segments.chords_segment = Segments.gen_segment(
+        Segments.song_structure["chords"], Loop.chords_loop_path
+    )
+    Segments.melody_segment = Segments.gen_segment(
+        Segments.song_structure["melody"], Loop.melody_loop_path
+    )
 
     # 5. Combine Segments into Final Audio
+    Combine = SongCombine()
+    Combine.combine_segments(Segments)
+    Combine.export_audio_from_segment()
 
     # 6. Clean up
 
