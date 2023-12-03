@@ -15,6 +15,14 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+      
+      - name: Install fluidsynth
+        run: |
+          sudo apt-get install fluidsynth
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get install ffmpeg libavcodec-extra
 
       - name: Run tests and collect coverage
         run: python -m pytest --cov tests/
