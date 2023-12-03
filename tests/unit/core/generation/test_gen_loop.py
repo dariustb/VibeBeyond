@@ -1,11 +1,11 @@
 """ test_gen_loop_inst - Unit tests for test_gen_loop_inst """
 
-from src.core.generation.gen_loop_inst import DrumLoopGen, SongLoopGen
+from src.core.generation import gen_loop
 
 
 def test_SongLoopGen_set_name():
     # Given
-    test_SLG = SongLoopGen()
+    test_SLG = gen_loop.SongLoopGen()
     test_folder = "tests/test_files/sf2/"
 
     # When
@@ -18,7 +18,7 @@ def test_SongLoopGen_set_name():
 
 def test_SongLoopGen_set_path():
     # Given
-    test_SLG = SongLoopGen()
+    test_SLG = gen_loop.SongLoopGen()
     test_name = "chords"
 
     # When
@@ -31,7 +31,7 @@ def test_SongLoopGen_set_path():
 
 def test_SongLoopGen_export_loop_from_midi():
     # Given
-    test_SLG = SongLoopGen()
+    test_SLG = gen_loop.SongLoopGen()
     test_midi_path = "example/midi.mid"
     test_midi_track = None
     test_loop_path = "example/loop.wav"
@@ -48,7 +48,7 @@ def test_SongLoopGen_export_loop_from_midi():
 
 def test_DrumLoopGen_export_loop_from_segment():
     # Given
-    test_DLG = DrumLoopGen()
+    test_DLG = gen_loop.DrumLoopGen()
     test_segment = None
     test_loop_path = "example/loop.wav"
 
