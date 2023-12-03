@@ -167,3 +167,8 @@ src/gen/*
 
 # SF2 Instruments folder
 src/assets/sf2/*
+
+# Drum Collection folder
+src/assets/drums/kick/*
+src/assets/drums/hat/*
+src/assets/drums/snare/*
