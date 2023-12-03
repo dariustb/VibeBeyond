@@ -20,3 +20,19 @@ def test_SongSegmentGen_gen_segment():
     # Then
     assert isinstance(test_segment, AudioSegment)
     assert len(test_segment) > 0
+
+
+def test_SongSegmentGen_gen_segment_with_invalid_audio_path():
+    # Given
+    test_SSG = gen_segment.SongSegmentGen()
+    test_track_structure = (1, 1, 1, 1)
+    test_bad_audio_path = "this/path/does/not/exist"
+    test_volume = 0
+
+    # When
+    test_segment = test_SSG.gen_segment(
+        test_track_structure, test_bad_audio_path, test_volume
+    )
+
+    # Then
+    assert test_segment is None
