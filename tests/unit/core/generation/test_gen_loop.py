@@ -1,5 +1,7 @@
 """ test_gen_loop_inst - Unit tests for test_gen_loop_inst """
 
+from pydub import AudioSegment
+
 from src.core.generation import gen_loop
 
 
@@ -44,6 +46,19 @@ def test_SongLoopGen_export_loop_from_midi():
 
     # Then
     assert test_export is None
+
+
+def test_DrumLoopGen_gen_drum_loop():
+    # Given
+    test_DLG = gen_loop.DrumLoopGen()
+    test_prog = ("ii", "V7", "I", "IV")
+    test_bpm = 80
+
+    # When
+    # test_loop = test_DLG.gen_drum_loop(test_prog, test_bpm)
+
+    # Then
+    # assert isinstance(test_loop, AudioSegment)
 
 
 def test_DrumLoopGen_export_loop_from_segment():
