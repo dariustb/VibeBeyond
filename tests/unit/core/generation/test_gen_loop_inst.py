@@ -1,6 +1,6 @@
 """ test_gen_loop_inst - Unit tests for test_gen_loop_inst """
 
-from src.core.generation.gen_loop_inst import SongLoopGen
+from src.core.generation.gen_loop_inst import DrumLoopGen, SongLoopGen
 
 
 def test_SongLoopGen_set_name():
@@ -41,6 +41,19 @@ def test_SongLoopGen_export_loop_from_midi():
     test_export = test_SLG.export_loop_from_midi(
         test_midi_path, test_midi_track, test_loop_path, test_sf2_name
     )
+
+    # Then
+    assert test_export is None
+
+
+def test_DrumLoopGen_export_loop_from_segment():
+    # Given
+    test_DLG = DrumLoopGen()
+    test_segment = None
+    test_loop_path = "example/loop.wav"
+
+    # When
+    test_export = test_DLG.export_loop_from_segment(test_segment, test_loop_path)
 
     # Then
     assert test_export is None

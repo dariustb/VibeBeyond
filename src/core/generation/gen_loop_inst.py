@@ -5,11 +5,17 @@ import random
 
 import sf2_loader
 from mido import MidiTrack
+from pydub import AudioSegment
 
 # Constant variables
+AUDIO_TYPE: str = "wav"
+AUDIO_FOLDER: str = "src/gen/audio/"
 CHORDS_FOLDER: str = "src/assets/sf2/chords/"
 MELODY_FOLDER: str = "src/assets/sf2/melody/"
-AUDIO_FOLDER: str = "src/gen/audio/"
+
+KICK_FOLDER: str = "src/assets/drums/kicks/"
+HAT_FOLDER: str = "src/assets/drums/hats/"
+SNARE_FOLDER: str = "src/assets/drums/snare/"
 
 
 class SongLoopGen:
@@ -52,6 +58,31 @@ class SongLoopGen:
         loader = sf2_loader.sf2_loader(sf2_name)
         if loader.all_instruments():
             loader < loader.get_current_instrument()  # < changes instrument in loader
-        loader.export_midi_file(midi_path, decay=0.0, name=loop_path, format="wav")
+        loader.export_midi_file(midi_path, decay=0.0, name=loop_path, format=AUDIO_TYPE)
 
+        return loop_path
+
+
+class DrumLoopGen(SongLoopGen):
+    """This class is for generation audio loop files"""
+
+    def __init__(self) -> None:
+        """All the Drum's loop attributes will be kept here"""
+        SongLoopGen.__init__(self)
+
+        # Drum Samples names
+        self.kick_name: str = self.set_name(KICK_FOLDER)
+        self.hat_name: str = self.set_name(HAT_FOLDER)
+        self.snare_name: str = self.set_name(SNARE_FOLDER)
+
+        # Audio file paths
+        self.drum_loop_path: str = self.set_path("drums")
+
+    # Export Functions
+    def export_loop_from_segment(self, segment: AudioSegment, loop_path: str) -> str:
+        """creates an audio file with all the AudioSegments combined"""
+        if segment is None:
+            return None
+
+        segment.export(loop_path, format=AUDIO_TYPE)
         return loop_path
