@@ -3,8 +3,6 @@
 
 from unittest.mock import patch
 
-from src.core.generation.gen_create import create_song
-
 
 def test_create_song():
     """test create_song()"""
