@@ -2,9 +2,8 @@
 
 from mido import MidiTrack, bpm2tempo
 
-from src.core.generation.gen_midi import (SongMidiGen,
-                                          get_chord_intervals_list,
-                                          get_root_note_list)
+from src.core.generation import gen_midi
+from src.core.generation.gen_midi import SongMidiGen
 
 
 def test_get_chord_intervals_list_with_major_and_minor_chords():
@@ -12,7 +11,7 @@ def test_get_chord_intervals_list_with_major_and_minor_chords():
     test_prog = ("ii", "V", "I", "IV")
 
     # When
-    test_intervals = get_chord_intervals_list(test_prog)
+    test_intervals = gen_midi.get_chord_intervals_list(test_prog)
 
     # Then
     assert isinstance(test_intervals, list)
@@ -29,7 +28,7 @@ def test_get_chord_intervals_list_with_dominant_and_minor7_chords():
     test_prog = ("ii7", "V", "I7", "I7")
 
     # When
-    test_intervals = get_chord_intervals_list(test_prog)
+    test_intervals = gen_midi.get_chord_intervals_list(test_prog)
 
     # Then
     assert isinstance(test_intervals, list)
@@ -46,7 +45,7 @@ def test_get_chord_intervals_list_with_accidentals():
     test_prog = ("vi", "bVI", "bVII", "I")
 
     # When
-    test_intervals = get_chord_intervals_list(test_prog)
+    test_intervals = gen_midi.get_chord_intervals_list(test_prog)
 
     # Then
     assert isinstance(test_intervals, list)
@@ -63,7 +62,7 @@ def test_get_chord_intervals_list_with_diminished_chord():
     test_prog = ("#viidim", "i", "VI", "III")
 
     # When
-    test_intervals = get_chord_intervals_list(test_prog)
+    test_intervals = gen_midi.get_chord_intervals_list(test_prog)
 
     # Then
     assert isinstance(test_intervals, list)
@@ -80,7 +79,7 @@ def test_get_chord_intervals_list_with_augmented_chord():
     test_prog = ("I", "Iaug", "vi", "Iaug")
 
     # When
-    test_intervals = get_chord_intervals_list(test_prog)
+    test_intervals = gen_midi.get_chord_intervals_list(test_prog)
 
     # Then
     assert isinstance(test_intervals, list)
@@ -98,7 +97,7 @@ def test_get_root_note_list():
     test_prog = ("ii", "V", "I", "IV")  # D, G, C, F -> 62, 55, 60, 53
 
     # When
-    test_roots = get_root_note_list(test_key, test_prog)
+    test_roots = gen_midi.get_root_note_list(test_key, test_prog)
 
     # Then
     assert isinstance(test_roots, list)
