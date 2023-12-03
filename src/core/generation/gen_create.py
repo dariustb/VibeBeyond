@@ -1,5 +1,6 @@
 """ gen_create - houses the create_song function """
 
+from .gen_combine import SongCombine
 from .gen_elements import SongElements
 from .gen_loop import DrumLoopGen, SongLoopGen
 from .gen_midi import SongMidiGen
@@ -61,6 +62,9 @@ def create_song() -> str:
     )
 
     # 5. Combine Segments into Final Audio
+    Combine = SongCombine()
+    Combine.combine_segments(Segments)
+    Combine.export_audio_from_segment()
 
     # 6. Clean up
 
