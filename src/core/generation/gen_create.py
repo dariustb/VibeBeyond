@@ -53,8 +53,12 @@ def create_song() -> str:
     # 4. Generate Song Segments
     Segments = SongSegmentGen()
 
-    Segments.chords_segment = Segments.gen_segment(Segments.song_structure["chords"], Loop.chords_loop_path)
-    Segments.melody_segment = Segments.gen_segment(Segments.song_structure["melody"], Loop.melody_loop_path)
+    Segments.chords_segment = Segments.gen_segment(
+        Segments.song_structure["chords"], Loop.chords_loop_path
+    )
+    Segments.melody_segment = Segments.gen_segment(
+        Segments.song_structure["melody"], Loop.melody_loop_path
+    )
 
     # 5. Combine Segments into Final Audio
 
