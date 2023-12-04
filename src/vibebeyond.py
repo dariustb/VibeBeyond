@@ -9,10 +9,10 @@ APP_NAME: str = "Vibe Beyond"
 APP_VERSION: str = "1.0.0"
 APP_ICON: str = "src/assets/vb_icon.png"
 
-DEFAULT_SCREEN_WIDTH: int = 800
-DEFAULT_SCREEN_HEIGHT: int = 600
+DEFAULT_SCREEN_WIDTH: int = 600
+DEFAULT_SCREEN_HEIGHT: int = 150
 DEFAULT_SCREEN_SIZE: tuple = (DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT)
-DEFAULT_SCREEN_BKGD: tuple = (40, 40, 43)  # Matte black
+DEFAULT_SCREEN_BKGD: tuple = (242, 218, 201)  # Champagne Pink
 DEFAULT_MIXER_VOLUME: float = 0.7
 
 EVENT_SONG_ENDED: int = pygame.USEREVENT + 616  # pylint: disable = E1101
