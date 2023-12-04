@@ -11,9 +11,12 @@
 <br />
 <div align="center">
     <a href="https://github.com/dariustb/vibebeyond">
-        <img src="src/assets/vb_icon.png" alt="VB Logo">
+        <img src="src/assets/_readme/vb_dots.svg" alt="VB Logo">
+        <br><br>
+        <img src="src/assets/_readme/vb_name.svg" height="50" alt="VB Name">
     </a>
-    <h1>Vibe Beyond</h1>
+    <hr>
+    <!-- <h1>Vibe Beyond</h1> -->
     <p>Algorithmically-generated lofi hip-hop radio</p>
     <p>
         <a href="https://dariustb.github.io/VibeBeyond/">
@@ -31,6 +34,9 @@
 </div>
 
 <!-- DEMO VIDEO / SCREENSHOTS -->
+## Screenshots
+### Media Player UI
+![Player UI](src/assets/_readme/vb_player.svg)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
