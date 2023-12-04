@@ -60,12 +60,15 @@ def create_song() -> str:
     Segments.melody_segment = Segments.gen_segment(
         Segments.song_structure["melody"], Loop.melody_loop_path
     )
+    Segments.drum_segment = Segments.gen_segment(
+        Segments.song_structure["drums"], Drums.drum_loop_path
+    )
 
     # 5. Combine Segments into Final Audio
     Combine = SongCombine()
     Combine.combine_segments(Segments)
-    Combine.export_audio_from_segment()
+    song_path = Combine.export_audio_from_segment()
 
     # 6. Clean up
 
-    return "src/assets/vb_example_song.wav"
+    return song_path
