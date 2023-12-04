@@ -7,13 +7,6 @@ has_toc: true
 nav_order: 1
 ---
 
-<div align="center">
-    <img src="../../src/assets/_readme/vb_name.svg" height="50" alt="VB Name">
-    <br>
-    <img src="../../src/assets/_readme/vb_dots.svg" alt="VB Logo">
-    <br><br>
-</div>
-
 # Listen to music created in real-time!
 {: .fs-9 }
 
