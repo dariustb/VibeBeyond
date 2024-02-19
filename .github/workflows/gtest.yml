@@ -4,9 +4,9 @@ name: Gtest
 
 on:
   push:
-    branches: [ "main-cpp" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main-cpp" ]
+    branches: [ "main" ]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
