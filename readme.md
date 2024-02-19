@@ -1,5 +1,5 @@
 <!-- PROJECT SHIELDS -->
-[![gtest][gtest]][gtest-url]
+[![Gtest][gtest]][gtest-url]
 ![GitHub repo size][repo-size]
 [![GPages][gpages]][gpages-url]
 [![Codecov][codecov]][codecov-url]
@@ -30,9 +30,9 @@
 * ![CMake][cmake.io]
 
 <!-- CI Test badges -->
-[gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/
-[gpages]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
-[codecov]:  https://codecov.io/gh/dariustb/VibeBeyond/graph/badge.svg?token=APDVMI7QYQ
+[gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/badge.svg
+[gpages]:       https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
+[codecov]:      https://codecov.io/gh/dariustb/VibeBeyond/graph/badge.svg?token=APDVMI7QYQ
 badge.svg
 
 [gtest-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml
