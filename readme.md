@@ -1,6 +1,8 @@
 <!-- PROJECT SHIELDS -->
 [![gtest][gtest]][gtest-url]
 ![GitHub repo size][repo-size]
+[![GPages][gpages]][gpages-url]
+[![Codecov][codecov]][codecov-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -24,11 +26,20 @@
 </div>
 
 ### Built With
-* ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-* ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
+* ![C++][cpp.io]
+* ![CMake][cmake.io]
 
 <!-- CI Test badges -->
-[gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/badge.svg
-[gtest-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml
+[gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/
+[gpages]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
+[codecov]:  https://codecov.io/gh/dariustb/VibeBeyond/graph/badge.svg?token=APDVMI7QYQ
+badge.svg
 
+[gtest-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml
+[gpages-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment
+[codecov-url]:  https://codecov.io/gh/dariustb/VibeBeyond
+
+<!-- Markdown Badges -->
 [repo-size]:    https://img.shields.io/github/repo-size/dariustb/VibeBeyond
+[cpp.io]:       https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white
+[cmake.io]:     https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white
