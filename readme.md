@@ -25,5 +25,4 @@
 
 <!-- CI Test badges -->
 [gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/badge.svg
-
 [gtest-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml
