@@ -1,5 +1,6 @@
 <!-- PROJECT SHIELDS -->
 [![gtest][gtest]][gtest-url]
+![GitHub repo size][repo-size]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -22,7 +23,12 @@
   </p>
 </div>
 
+### Built With
+* ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+* ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
 
 <!-- CI Test badges -->
 [gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/badge.svg
 [gtest-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml
+
+[repo-size]:    https://img.shields.io/github/repo-size/dariustb/VibeBeyond
