@@ -33,7 +33,6 @@
 [gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/badge.svg
 [gpages]:       https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment/badge.svg
 [codecov]:      https://codecov.io/gh/dariustb/VibeBeyond/graph/badge.svg?token=APDVMI7QYQ
-badge.svg
 
 [gtest-url]:    https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml
 [gpages-url]:   https://github.com/dariustb/VibeBeyond/actions/workflows/pages/pages-build-deployment
