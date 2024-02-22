@@ -16,9 +16,12 @@ TEST(GrooveGenElements, DefaultConstructorHasValidVariableValues) {
     EXPECT_GE(t_bpm, MIN_BPM);
     EXPECT_LE(t_bpm, MAX_BPM);
 
-    EXPECT_FALSE(t_key.empty());
+    ASSERT_FALSE(t_key.empty());
+    ASSERT_LE(t_key.size(), 2);
+    EXPECT_LE(t_key[0], 'G');
+    EXPECT_GE(t_key[0], 'A');
 
-    EXPECT_EQ(4, t_prog.size());
+    ASSERT_EQ(4, t_prog.size());
     EXPECT_FALSE(t_prog[0].empty());
     EXPECT_FALSE(t_prog[1].empty());
     EXPECT_FALSE(t_prog[2].empty());
