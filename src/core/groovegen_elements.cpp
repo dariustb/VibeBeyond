@@ -1,6 +1,5 @@
 #include <groovegen_elements.h>
 #include <cstdlib>
-#include <iostream>
 
 // Constructors
 Elements::Elements()
