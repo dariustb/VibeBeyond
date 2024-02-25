@@ -7,4 +7,8 @@ add_executable(
 
 add_library(groovegen_core)
 add_subdirectory(core)
-target_link_libraries(groovegen PUBLIC groovegen_core)
+
+target_link_libraries(groovegen PUBLIC 
+    rtmidi
+    groovegen_core
+)
