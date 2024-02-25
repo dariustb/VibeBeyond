@@ -1,6 +1,5 @@
 #include <groovegen_elements.h>
 #include <iostream>
-#include <RtMidi.h>
 
 using namespace std;
 
@@ -21,7 +20,7 @@ int main() {
 
     // 7. Clean up
 
-    cout << "Code's executed!" << endl;
+    cout << "Hello world!" << endl;
 
     return 0;
 }
