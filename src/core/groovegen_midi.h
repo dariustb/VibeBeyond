@@ -1,0 +1,4 @@
+#ifndef INCLUDED_GROOVEGEN_MIDI
+#define INCLUDED_GROOVEGEN_MIDI
+
+#endif
