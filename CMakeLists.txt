@@ -12,7 +12,7 @@ include(FetchContent)
 # Fetch rtmidi
 FetchContent_Declare(
   rtmidi
-  GIT_REPOSITORY git@github.com:thestk/rtmidi.git
+  GIT_REPOSITORY https://github.com/thestk/rtmidi.git
   GIT_TAG        master
 )
 FetchContent_MakeAvailable(rtmidi)
