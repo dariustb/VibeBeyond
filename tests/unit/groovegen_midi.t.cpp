@@ -13,10 +13,11 @@ TEST(GrooveGenMidi, DefaultConstructorHasValidVariableValues) {
 
 TEST(GrooveGenMidi, BuildChordsReturnsValidMidiTrackOfChordProgression) {
     // Given
-    MidiGen Test;
+    Elements T_Elements;
+    MidiGen T_Midi;
 
     // When
-    const bool t_chords = Test.build_chords();
+    const bool t_chords = T_Midi.buildChords(T_Elements);
 
     // Then
     EXPECT_TRUE(t_chords);
