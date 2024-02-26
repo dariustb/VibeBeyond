@@ -6,6 +6,7 @@ target_link_libraries(test_groovegen PUBLIC
 
 target_sources(test_groovegen PRIVATE
   groovegen_elements.t.cpp
+  groovegen_midi.t.cpp
 )
 
 include(GoogleTest)
