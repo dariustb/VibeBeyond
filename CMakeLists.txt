@@ -9,6 +9,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(FetchContent)
 
+# Find ALSA
+find_package(ALSA REQUIRED)
+include_directories(${ALSA_INCLUDE_DIRS})
+
 # Fetch rtmidi
 FetchContent_Declare(
   rtmidi
