@@ -29,7 +29,7 @@ namespace {
 class MidiGen {
     public:
         // Midi Generators
-        bool build_chords(const Elements& elements);
+        bool buildChords(const Elements& elements);
     private:
 };
 

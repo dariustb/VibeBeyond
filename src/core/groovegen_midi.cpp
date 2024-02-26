@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool MidiGen::build_chords(const Elements& elements)
+bool MidiGen::buildChords(const Elements& elements)
 {
     return true;
 }
