@@ -2,6 +2,7 @@ add_executable(test_groovegen)
 target_link_libraries(test_groovegen PUBLIC
   GTest::gtest_main
   groovegen_core
+  rtmidi
 )
 
 target_sources(test_groovegen PRIVATE
