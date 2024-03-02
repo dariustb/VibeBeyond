@@ -13,7 +13,7 @@ include(FetchContent)
 find_package(ALSA REQUIRED)
 include_directories(${ALSA_INCLUDE_DIRS})
 
-# Fetch rtmidi
+# Fetch RtMidi
 FetchContent_Declare(
   rtmidi
   GIT_REPOSITORY https://github.com/thestk/rtmidi.git
