@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install ALSA & Jack
+    - name: Install RtMidi Dependencies
       run: sudo apt-get install alsa-base jackd libasound2-dev
 
     - name: Configure CMake
