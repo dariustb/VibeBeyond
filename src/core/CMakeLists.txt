@@ -7,4 +7,5 @@ target_link_libraries(groovegen_core PRIVATE
 target_sources(groovegen_core PRIVATE
     groovegen_elements.cpp
     groovegen_midi.cpp
+    groovegen_vst.cpp
 )
