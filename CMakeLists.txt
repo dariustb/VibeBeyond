@@ -21,6 +21,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(rtmidi)
 
+# Fetch VST3 SDK
+FetchContent_Declare(
+  vst3sdk
+  GIT_REPOSITORY https://github.com/steinbergmedia/vst3sdk.git
+  GIT_TAG        master
+)
+FetchContent_MakeAvailable(vst3sdk)
+include_directories(${vst3sdk_SOURCE_DIR}/pluginterfaces)
+include_directories(${vst3sdk_SOURCE_DIR}/public.sdk/source)
+
 # Fetch gtests
 # https://google.github.io/googletest/quickstart-cmake.html
 FetchContent_Declare(
