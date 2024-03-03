@@ -3,7 +3,7 @@
 
 // Constructors
 Elements::Elements()
-: Elements(gen_bpm(), gen_key(), gen_prog())
+: Elements(genBPM(), genKey(), genProg())
 {
 }
 
@@ -13,17 +13,17 @@ Elements::Elements(const int bpm, const std::string key, const ProgType prog)
 }
 
 // Generators
-int Elements::gen_bpm()
+int Elements::genBPM()
 {
     return MIN_BPM + (rand() % (MAX_BPM - MIN_BPM)); 
 }
 
-std::string Elements::gen_key()
+std::string Elements::genKey()
 {
     return VALID_KEYS[rand() % VALID_KEYS.size()];
 }
 
-ProgType Elements::gen_prog()
+ProgType Elements::genProg()
 {
     return VALID_CHORD_PROGRESSIONS[rand() % VALID_CHORD_PROGRESSIONS.size()];
 }

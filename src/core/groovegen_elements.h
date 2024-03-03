@@ -54,9 +54,9 @@ class Elements {
         ProgType    d_prog;
 
         // RNG Gens
-        int         gen_bpm();
-        std::string gen_key();
-        ProgType    gen_prog();
+        int         genBPM();
+        std::string genKey();
+        ProgType    genProg();
 
 };
 
