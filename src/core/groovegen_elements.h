@@ -4,7 +4,9 @@
 #include <string>
 #include <array>
 
-typedef std::array<std::string, 4> ProgType;
+const int PROG_SIZE = 4;
+
+typedef std::array<std::string, PROG_SIZE> ProgType;
 
 namespace
 {
