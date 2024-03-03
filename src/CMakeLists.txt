@@ -10,3 +10,4 @@ target_link_libraries(groovegen PRIVATE
     groovegen_core
 )
 target_include_directories(groovegen PRIVATE ${vst3sdk_SOURCE_DIR})
+target_include_directories(groovegen PRIVATE ${iplug2_SOURCE_DIR})

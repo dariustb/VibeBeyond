@@ -31,7 +31,16 @@ FetchContent_MakeAvailable(vst3sdk)
 include_directories(${vst3sdk_SOURCE_DIR}/pluginterfaces)
 include_directories(${vst3sdk_SOURCE_DIR}/public.sdk/source)
 
-# Fetch gtests
+# Fetch iPlug2
+FetchContent_Declare(
+  iplug2
+  GIT_REPOSITORY https://github.com/iPlug2/iPlug2.git
+  GIT_TAG        master
+)
+FetchContent_MakeAvailable(iplug2)
+include_directories(${iplug2_SOURCE_DIR})
+
+# Fetch gtest
 # https://google.github.io/googletest/quickstart-cmake.html
 FetchContent_Declare(
   googletest
