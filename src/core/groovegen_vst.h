@@ -1,0 +1,4 @@
+#ifndef INCLUDED_GROOVEGEN_VST
+#define INCLUDED_GROOVEGEN_VST
+
+#endif
