@@ -15,24 +15,24 @@ namespace
     
     const std::array<std::string, 12> VALID_KEYS = {"A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"};
     const std::array<ProgType, 18>    VALID_CHORD_PROGRESSIONS = {{
-        {"ii", "V", "I", "IV"},
-        {"ii7", "V", "I7", "I7"},
-        {"ii", "V7", "iii", "vi"},
-        {"iii", "vi", "IV", "I"},
-        {"IV", "I", "ii", "vi"},
-        {"IV", "I", "iii", "IV"},
-        {"IV", "I", "V", "vi"},
-        {"IV", "IV", "I", "V"},
-        {"IV", "vi", "I", "V"},
-        {"IV", "vi", "iii", "I"},
-        {"V", "I", "vi", "V"},
-        {"V", "IV", "vi", "I"},
-        {"V", "vi", "IV", "I"},
-        {"vi", "bVI", "bVII", "I"},
-        {"vi", "ii", "V", "I"},
-        {"vi", "IV", "I", "V"},
-        {"vi", "V", "IV", "V"},
-        {"vi", "vii", "V", "vi"}
+        {"ii",  "V",   "I",    "IV"},
+        {"ii",  "V",   "I7",   "I7"},
+        {"ii",  "V7",  "iii",  "vi"},
+        {"iii", "vi",  "IV",   "I"},
+        {"IV",  "I",   "ii",   "vi"},
+        {"IV",  "I",   "iii",  "IV"},
+        {"IV",  "I",   "V",    "vi"},
+        {"IV",  "IV",  "I",    "V"},
+        {"IV",  "vi",  "I",    "V"},
+        {"IV",  "vi",  "iii",  "I"},
+        {"V",   "I",   "vi",   "V"},
+        {"V",   "IV",  "vi",   "I"},
+        {"V",   "vi",  "IV",   "I"},
+        {"vi",  "bVI", "bVII", "I"},
+        {"vi",  "ii",  "V",    "I"},
+        {"vi",  "IV",  "I",    "V"},
+        {"vi",  "V",   "IV",   "V"},
+        {"vi",  "vii", "V",    "vi"}
     }};
 }
 
