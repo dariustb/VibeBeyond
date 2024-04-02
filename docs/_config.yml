@@ -1,0 +1,29 @@
+# Install Just the Docs template
+markdown: kramdown
+remote_theme: just-the-docs/just-the-docs
+
+# Site Settings
+title: Vibe Beyond
+
+# Aux links (for the upper right navigation)
+aux_links:
+  "Vibe Beyond on Github":
+    - "//github.com/dariustb/VibeBeyond"
+
+# Callouts (warning and notes)
+callouts_level: quiet # or loud
+callouts:
+  highlights:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red

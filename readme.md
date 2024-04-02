@@ -28,6 +28,7 @@
 ### Built With
 * ![C++][cpp.io]
 * ![CMake][cmake.io]
+* ![Lubuntu][lubuntu.io]
 
 <!-- CI Test badges -->
 [gtest]:        https://github.com/dariustb/VibeBeyond/actions/workflows/gtest.yml/badge.svg
@@ -42,3 +43,4 @@
 [repo-size]:    https://img.shields.io/github/repo-size/dariustb/VibeBeyond
 [cpp.io]:       https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white
 [cmake.io]:     https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white
+[lubuntu.io]:   https://img.shields.io/badge/-Lubuntu-%230065C2?style=for-the-badge&logo=lubuntu&logoColor=white
