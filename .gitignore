@@ -11,5 +11,13 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+# Distribution / packaging
 build/
+dist/
+
+# VSCode settings json
 .vscode/
+
+# Audio Gen assets
+src/assets/vst/
+src/assets/wav/
